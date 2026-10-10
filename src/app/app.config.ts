@@ -8,5 +8,5 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(),
     { provide: API_CONFIG, useValue: { baseUrl: null, localeMap: {} } },
-  ]
+  ],
 };

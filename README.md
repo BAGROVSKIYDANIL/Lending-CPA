@@ -16,13 +16,13 @@ npm start
 Приложение доступно на `http://localhost:4200/`. Пустая страница ожидаема:
 страницы, секции, бизнес-компоненты и демонстрационный контент не создавались.
 
-| Команда | Назначение |
-| --- | --- |
-| `npm start` | Разработка на исходной локали |
-| `npm run start:ru` | Разработка на русской локали |
-| `npm run build` | Production-сборка всех локалей |
-| `npm run build:source` | Production-сборка исходной локали |
-| `npm run typecheck` | Проверка типов TypeScript |
+| Команда                | Назначение                                        |
+| ---------------------- | ------------------------------------------------- |
+| `npm start`            | Разработка на исходной локали                     |
+| `npm run start:ru`     | Разработка на русской локали                      |
+| `npm run build`        | Production-сборка всех локалей                    |
+| `npm run build:source` | Production-сборка исходной локали                 |
+| `npm run typecheck`    | Проверка типов TypeScript                         |
 | `npm run i18n:extract` | Извлечение сообщений в `src/locales/messages.xlf` |
 
 Локали для начальной конфигурации: `en-US` и `ru`. Детали в
@@ -94,3 +94,7 @@ npm run i18n:extract
 npm run build
 npm start
 ```
+
+## Linter & Prettier
+
+Для VSCode требуется установка плагинов `ESLint` и `Prettier - Code formatter`.

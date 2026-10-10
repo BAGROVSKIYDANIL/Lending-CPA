@@ -15,8 +15,11 @@ export class ApiClient {
       throw new Error('API is disabled: configure API_CONFIG.baseUrl before making requests.');
     }
     const segments = path.split('/');
-    if (!path || segments.some((segment) => !segment || segment === '.' || segment === '..') ||
-        /[\\?#:]/.test(path)) {
+    if (
+      !path ||
+      segments.some((segment) => !segment || segment === '.' || segment === '..') ||
+      /[\\?#:]/.test(path)
+    ) {
       throw new Error('API path must be a relative path without query parameters or traversal.');
     }
     const locale = this.config.localeMap[this.locale] ?? this.locale;
