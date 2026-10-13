@@ -3,7 +3,11 @@ import { fileURLToPath } from 'node:url';
 import { defineConfig, type Plugin } from 'vite';
 import angular from '@analogjs/vite-plugin-angular';
 import { transformAsync } from '@babel/core';
-import { Diagnostics, Xliff1TranslationParser, makeEs2015TranslatePlugin } from '@angular/localize/tools';
+import {
+  Diagnostics,
+  Xliff1TranslationParser,
+  makeEs2015TranslatePlugin,
+} from '@angular/localize/tools';
 
 const path = (relative: string) => fileURLToPath(new URL(relative, import.meta.url));
 
@@ -17,7 +21,8 @@ export default defineConfig(({ mode }) => {
     const analysis = parser.analyze(file, contents);
     if (!analysis.canParse) throw new Error(`Invalid XLIFF: ${file}`);
     const bundle = parser.parse(file, contents, analysis.hint);
-    if (bundle.diagnostics.hasErrors) throw new Error(bundle.diagnostics.formatDiagnostics('Invalid translations'));
+    if (bundle.diagnostics.hasErrors)
+      throw new Error(bundle.diagnostics.formatDiagnostics('Invalid translations'));
     translations = bundle.translations;
   }
 
@@ -35,9 +40,11 @@ export default defineConfig(({ mode }) => {
         configFile: false,
         babelrc: false,
         sourceMaps: true,
-        plugins: [makeEs2015TranslatePlugin(diagnostics, translations, {
-          missingTranslation: locale === 'ru' ? 'error' : 'ignore',
-        })],
+        plugins: [
+          makeEs2015TranslatePlugin(diagnostics, translations, {
+            missingTranslation: locale === 'ru' ? 'error' : 'ignore',
+          }),
+        ],
       });
       if (diagnostics.hasErrors) this.error(diagnostics.formatDiagnostics('Missing translations'));
       if (result?.code) return { code: result.code, map: result.map };
@@ -49,8 +56,10 @@ export default defineConfig(({ mode }) => {
     resolve: {
       mainFields: ['module'],
       alias: Object.fromEntries(
-        ['app', 'pages', 'widgets', 'features', 'entities', 'shared']
-          .map((layer) => [`@${layer}`, path(`./src/${layer}`)]),
+        ['app', 'pages', 'widgets', 'features', 'entities', 'shared'].map((layer) => [
+          `@${layer}`,
+          path(`./src/${layer}`),
+        ]),
       ),
     },
     define: { __APP_LOCALE__: JSON.stringify(locale) },

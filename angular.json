@@ -3,7 +3,8 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": ["angular-eslint"]
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -47,9 +48,7 @@
           "options": {
             "index": "index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "@angular/localize/init"
-            ],
+            "polyfills": ["@angular/localize/init"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -58,9 +57,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "i18nMissingTranslation": "error"
           },
           "configurations": {
@@ -85,14 +82,10 @@
               "sourceMap": true
             },
             "en-US": {
-              "localize": [
-                "en-US"
-              ]
+              "localize": ["en-US"]
             },
             "ru": {
-              "localize": [
-                "ru"
-              ]
+              "localize": ["ru"]
             }
           },
           "defaultConfiguration": "production"
@@ -117,6 +110,12 @@
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
         }
       },
       "i18n": {
