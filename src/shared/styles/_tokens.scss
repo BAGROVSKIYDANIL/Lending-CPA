@@ -1,0 +1,68 @@
+// Palette and named text styles extracted from CPA F (Copy).fig.
+:root {
+  // Figma fill styles: W, Dark, Yell, main / purp, #0C090E.
+  --color-white: #ffffff;
+  м: #14091a;
+  --color-yellow: #fee97d;
+  --color-purple: #9e13e0;
+  --color-near-black: #0c090e;
+
+  // Additional fills used in the design.
+  --color-black: #000000;
+  --color-gray-900: #1e1e1e;
+  --color-gray-700: #3d3a3a;
+  --color-gray-600: #444444;
+  --color-gray-300: #d9d9d9;
+  --color-gray-500: #737373;
+  --color-gray-400: #929292;
+  --color-gray-350: #a6a6a6;
+  --color-purple-950: #1a0822;
+  --color-purple-900: #210031;
+  --color-purple-800: #2a043d;
+  --color-purple-700: #3f015d;
+  --color-violet: #8a38f5;
+  --color-violet-light: #9747ff;
+
+  // Additional gradient stops in the design.
+  --color-gradient-purple-900: #34004d;
+  --color-gradient-purple-800: #55007d;
+  --color-gradient-purple-700: #8a00cc;
+  --color-gradient-purple-600: #9500dc;
+  --color-gradient-purple-500: #9700df;
+  --color-gradient-purple-400: #a30ee9;
+
+  // Stops from the hero background in Figma, rounded to 8-bit RGB.
+  --color-hero-gold: #dc8400;
+  --color-hero-purple: #560080;
+  --color-hero-dark: #220032;
+
+  // Semantic aliases for application styles.
+  --color-background: var(--color-dark);
+  --color-surface: var(--color-near-black);
+  --color-text: var(--color-white);
+  --color-text-inverse: var(--color-near-black);
+  --color-primary: var(--color-purple);
+  --color-accent: var(--color-yellow);
+  --background-hero-mobile: linear-gradient(var(--color-hero-purple), var(--color-hero-purple));
+  --background-hero-desktop: linear-gradient(
+    111.06deg,
+    var(--color-hero-gold) -3.49%,
+    var(--color-hero-purple) 49.69%,
+    var(--color-hero-dark) 91.86%
+  );
+
+  --font-family-display: 'Halvar Breitschrift', Arial, sans-serif;
+  --font-family-body: 'Stolzl', Arial, sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  // Named Figma text styles: p, menu button, button.
+  --font-size-p: 20px;
+  --line-height-p: 24px;
+  --font-size-menu-button: 20px;
+  --line-height-menu-button: 1;
+  --font-size-button: 23px;
+  --line-height-button: 1;
+}
