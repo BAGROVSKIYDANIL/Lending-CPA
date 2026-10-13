@@ -1,0 +1,20 @@
+@mixin bg-grid {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    content: '';
+    inset: 0;
+    background-image:  url('assets/images/bg-grid-mob.webp');
+    background-repeat: no-repeat;
+    background-size: auto 107vh;
+    background-position: -70px center;
+    mask-image: var(--bg-mask);
+
+    @media (min-width: 768px) {
+      background-image: url('assets/images/bg-grid-desk.webp');
+      background-size: cover;
+      background-position: center;
+    }
+  }
+}
