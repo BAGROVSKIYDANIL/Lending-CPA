@@ -1,0 +1,53 @@
+<div class="select" [class.select--expanded]="expanded()" [class.select--invalid]="invalid()">
+  <button
+    #trigger
+    class="select__trigger"
+    type="button"
+    role="combobox"
+    [id]="controlId()"
+    [disabled]="disabled()"
+    [attr.aria-label]="label()"
+    aria-haspopup="listbox"
+    [attr.aria-expanded]="expanded()"
+    [attr.aria-controls]="controlId() + '-listbox'"
+    [attr.aria-activedescendant]="expanded() && options().length ? controlId() + '-option-' + activeIndex() : null"
+    [attr.aria-required]="required()"
+    [attr.aria-invalid]="invalid()"
+    [attr.aria-describedby]="describedBy()"
+    (click)="toggle()"
+    (keydown)="onKeydown($event)"
+  >
+    <span
+      >{{ value() || placeholder() }}@if (required() && !value()) {<span
+        class="select__required"
+        aria-hidden="true"
+        >*</span
+      >}</span
+    >
+    <span class="select__arrow" aria-hidden="true"></span>
+  </button>
+  @if (expanded()) {
+  <ul
+    class="select__list"
+    role="listbox"
+    [id]="controlId() + '-listbox'"
+    [attr.aria-label]="label()"
+  >
+    @for (option of options(); track option; let index = $index) {
+    <li
+      class="select__option"
+      role="option"
+      tabindex="-1"
+      [id]="controlId() + '-option-' + index"
+      [attr.aria-selected]="value() === option"
+      [class.select__option--active]="activeIndex() === index"
+      (click)="choose(index)"
+      (keydown.enter)="choose(index)"
+      (keydown.space)="$event.preventDefault(); choose(index)"
+    >
+      {{ option }}
+    </li>
+    }
+  </ul>
+  }
+</div>
