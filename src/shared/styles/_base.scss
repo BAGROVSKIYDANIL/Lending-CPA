@@ -10,26 +10,4 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font-family-body);
-  font-weight: var(--font-weight-regular);
-  color: var(--color-text);
-  line-height: 120%;
-  background-color: var(--color-background);
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-family-display);
-  font-weight: var(--font-weight-bold);
 }
