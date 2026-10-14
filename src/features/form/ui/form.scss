@@ -14,8 +14,8 @@
   border-radius: 16px;
   background: #fff;
   color: #111015;
-  font-family: 'Century Gothic', 'Trebuchet MS', sans-serif;
-
+  font-family: var(--font-family-secondary), sans-serif;
+  font-weight: 300;
   &::backdrop {
     background: rgb(20 0 32 / 55%);
     -webkit-backdrop-filter: blur(8px);
@@ -105,6 +105,7 @@
     font-weight: 500;
     font-size: 14px;
     cursor: pointer;
+    font-family: var(--font-family-primary), sans-serif;
     &:hover {
       background: #ffe34b;
     }
@@ -160,19 +161,19 @@
     &__logo {
       width: 58px;
       height: 54px;
-      margin-bottom: 39px;
+      margin-bottom: 40px;
     }
     &__hint {
-      font-size: 15px;
-      margin-bottom: 18px;
+      font-size: 14px;
+      margin-bottom: 20px;
     }
     &__row {
-      grid-template-columns: minmax(0, 158fr) minmax(0, 328fr);
+      grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
     &__input {
-      height: 33px;
-      padding: 5px 11px;
+      height: 32px;
+      padding: 6px 12px;
       border-radius: 8px;
       font-size: 14px;
     }
@@ -187,19 +188,18 @@
       margin-top: 28px;
       padding: 7px 16px;
       border-radius: 8px;
-      font-size: 15px;
     }
     &__title {
       font-size: 20px;
     }
     &__message {
-      font-size: 20px;
+      font-size: 16px;
     }
     &__button--done {
-      margin-top: 55px;
+      margin-top: 64px;
     }
   }
-  @media (max-width: 380px) {
+  @media (max-width: 450px) {
     padding-inline: 18px;
     &__row {
       grid-template-columns: 1fr;
