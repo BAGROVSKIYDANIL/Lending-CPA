@@ -2,7 +2,7 @@
 :root {
   // Figma fill styles: W, Dark, Yell, main / purp, #0C090E.
   --color-white: #ffffff;
-  м: #14091a;
+  --color-dark: #14091a;
   --color-yellow: #fee97d;
   --color-purple: #9e13e0;
   --color-near-black: #0c090e;
@@ -39,10 +39,10 @@
   // Semantic aliases for application styles.
   --color-background: var(--color-dark);
   --color-surface: var(--color-near-black);
-  --color-text: var(--color-white);
+  --color-text-primary: var(--color-white);
   --color-text-inverse: var(--color-near-black);
   --color-primary: var(--color-purple);
-  --color-accent: var(--color-yellow);
+  --color-text-secondary: var(--color-yellow);
   --background-hero-mobile: linear-gradient(var(--color-hero-purple), var(--color-hero-purple));
   --background-hero-desktop: linear-gradient(
     111.06deg,
@@ -51,18 +51,15 @@
     var(--color-hero-dark) 91.86%
   );
 
-  --font-family-display: 'Halvar Breitschrift', Arial, sans-serif;
-  --font-family-body: 'Stolzl', Arial, sans-serif;
+  --font-family-primary: 'Halvar Breitschrift', Arial, sans-serif;
+  --font-family-secondary: 'Stolzl', Arial, sans-serif;
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
 
-  // Named Figma text styles: p, menu button, button.
-  --font-size-p: 20px;
-  --line-height-p: 24px;
-  --font-size-menu-button: 20px;
-  --line-height-menu-button: 1;
-  --font-size-button: 23px;
-  --line-height-button: 1;
+  // Named Figma text styles: p, menu link, link.
+  --font-size-primary: 20px;
+  --font-size-small: 16px;
+  --font-size-link: 23px;
 }
