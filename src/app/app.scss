@@ -1,9 +1,9 @@
 // Application shell. Future classes follow block__element--modifier (BEM).
 .hero {
   height: 100vh;
-  background-image: var(--background-hero-mobile);
+  background-image: linear-gradient(rgb(86, 0, 128), rgb(86, 0, 128));
 
   @media (min-width: 768px) {
-    background-image: var(--background-hero-desktop);
+    background-image: linear-gradient(111.06deg, rgb(220, 132, 0) -3.49%, rgb(86, 0, 128) 49.69%, rgb(34, 0, 50) 91.86%);
   }
 }
