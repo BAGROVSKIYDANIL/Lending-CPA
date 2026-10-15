@@ -1,19 +1,24 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable, LOCALE_ID } from '@angular/core';
+import { Observable } from 'rxjs';
 import { API_CONFIG } from './api.config';
+
+export type ApiLanguage = 'en' | 'ru' | 'ua';
+
+export interface ApiRequestOptions {
+  readonly locale?: string;
+  readonly params?: HttpParams;
+}
 
 @Injectable({ providedIn: 'root' })
 export class ApiClient {
   private readonly http = inject(HttpClient);
   private readonly config = inject(API_CONFIG);
   private readonly locale = inject(LOCALE_ID);
+  private readonly headers = new HttpHeaders(this.config.headers);
 
-  /** Endpoint contract: {baseUrl}/{locale}/{relativePath}. No request is sent here. */
-  endpoint(path: string): string {
-    const baseUrl = this.config.baseUrl;
-    if (!baseUrl) {
-      throw new Error('API is disabled: configure API_CONFIG.baseUrl before making requests.');
-    }
+  /** Endpoint contract: {baseUrl}/{locale}/{relativePath}. */
+  endpoint(path: string, locale = this.locale): string {
     const segments = path.split('/');
     if (
       !path ||
@@ -22,18 +27,28 @@ export class ApiClient {
     ) {
       throw new Error('API path must be a relative path without query parameters or traversal.');
     }
-    const locale = this.config.localeMap[this.locale] ?? this.locale;
-    if (!locale) {
+    const endpointLocale = this.config.localeMap[locale] ?? locale;
+    if (!endpointLocale) {
       throw new Error('API locale must not be empty.');
     }
-    return `${baseUrl.replace(/\/+$/, '')}/${encodeURIComponent(locale)}/${segments.map(encodeURIComponent).join('/')}`;
+    return `${this.config.baseUrl.replace(/\/+$/, '')}/${encodeURIComponent(endpointLocale)}/${segments.map(encodeURIComponent).join('/')}`;
   }
 
-  get<T>(path: string, params?: HttpParams) {
-    return this.http.get<T>(this.endpoint(path), { params });
+  get<TResponse>(path: string, options: ApiRequestOptions = {}): Observable<TResponse> {
+    return this.http.get<TResponse>(this.endpoint(path, options.locale), {
+      headers: this.headers,
+      params: options.params,
+    });
   }
 
-  post<T>(path: string, body: unknown) {
-    return this.http.post<T>(this.endpoint(path), body);
+  post<TResponse, TRequest>(
+    path: string,
+    body: TRequest,
+    options: ApiRequestOptions = {},
+  ): Observable<TResponse> {
+    return this.http.post<TResponse>(this.endpoint(path, options.locale), body, {
+      headers: this.headers,
+      params: options.params,
+    });
   }
 }

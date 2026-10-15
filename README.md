@@ -20,14 +20,15 @@ npm start
 | ---------------------- | ------------------------------------------------- |
 | `npm start`            | Разработка на исходной локали                     |
 | `npm run start:ru`     | Разработка на русской локали                      |
+| `npm run start:ua`     | Разработка на украинской локали                   |
 | `npm run build`        | Production-сборка всех локалей                    |
 | `npm run build:source` | Production-сборка исходной локали                 |
 | `npm run typecheck`    | Проверка типов TypeScript                         |
 | `npm run i18n:extract` | Извлечение сообщений в `src/locales/messages.xlf` |
 
-Локали для начальной конфигурации: `en-US` и `ru`. Детали в
+Локали для начальной конфигурации: `en-US`, `ru` и `ua`. Детали в
 [src/locales/README.md](src/locales/README.md). Артефакты сборки находятся в
-`dist/cpa-landing/en-US` и `dist/cpa-landing/ru`. `npm run preview` открывает
+`dist/cpa-landing/en-US`, `dist/cpa-landing/ru` и `dist/cpa-landing/ua`. `npm run preview` открывает
 production-сборку исходной локали. Настройки Vite находятся в `vite.config.ts`.
 Angular CLI и `angular.json` сохранены для извлечения i18n-сообщений;
 команды запуска и сборки используют Vite.
@@ -98,3 +99,7 @@ npm start
 ## Linter & Prettier
 
 Для VSCode требуется установка плагинов `ESLint` и `Prettier - Code formatter`.
+
+## API
+контракт лежит в 'https://cpa-server-vtel.onrender.com/api-docs'
+авторизация через заголовок 'x-api-key': 'prodcpakey333' 
