@@ -1,0 +1,115 @@
+.button {
+  --bg-color: var(--color-yellow);
+  --bg-color-btn-arrow: var(--color-yellow);
+  --text-color: var(--color-near-black);
+  --border-color: var(--color-black);
+  --border-btn: 2px;
+
+  color: var(--text-color);
+  border: var(--border-btn) solid var(--border-color);
+  background-color: var(--bg-color);
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  font-weight: 700;
+
+  &--3d {
+    --right-3d-dept: 12px;
+    --top-3d-dept: 9px;
+
+    font-family: var(--font-family-primary);
+    font-size: 18px;
+    letter-spacing: 0.2em;
+    text-align: center;
+    text-transform: uppercase;
+    padding: calc(16px + var(--top-3d-dept)) calc(35px + var(--top-3d-dept)) 16px 35px;
+    clip-path: polygon(28px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 12px) 100%, 0 100%, 0 10px);
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      background-repeat: no-repeat;
+      inset: 0;
+      top: 0;
+      background-image:
+              linear-gradient(to top, var(--3d-border-color), var(--3d-border-color) 2px, transparent 2px),
+              linear-gradient(135deg, transparent 7px, var(--3d-border-color) 7px, var(--3d-border-color) 9px, transparent 9px),
+              linear-gradient(160deg, var(--3d-border-color), var(--3d-border-color) 9px, transparent 9px, transparent 100%),
+              linear-gradient(to right, var(--3d-border-color), var(--3d-border-color) 2px, transparent 2px),
+              linear-gradient(150deg, transparent 6px, var(--3d-border-color) 6px, var(--3d-border-color) 9px, transparent 9px);
+      background-size: calc(100% - var(--right-3d-dept) + var(--border-btn)) 2px, calc(var(--right-3d-dept) - 1px) 100%, 100% 100%, 2px calc(100% - var(--top-3d-dept)), var(--right-3d-dept) 6px;
+      background-position: left var(--top-3d-dept), right center, center center, calc(100% - var(--top-3d-dept)) bottom, right bottom;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    &::before {
+      --3d-border-color: var(--color-black);
+
+      opacity: 1;
+    }
+
+    &::after {
+      --3d-border-color: var(--color-yellow);
+
+      opacity: 0;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 23px;
+      padding: calc(27px + var(--top-3d-dept)) calc(24px + var(--top-3d-dept)) 27px 24px;
+    }
+  }
+
+  &--arrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 36px;
+    width: 314px;
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-primary);
+    text-transform: capitalize;
+    border-radius: 100px;
+    background-color: var(--bg-color-btn-arrow);
+
+    &::after {
+      display: block;
+      content: '';
+      width: 32px;
+      aspect-ratio: 2 / 1;
+      mask-image: url('../../public/assets/images/arrow.svg');
+      mask-repeat: no-repeat;
+      mask-size: contain;
+      mask-position: center;
+      background-color: var(--text-color);
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    @media (min-width: 768px) {
+      width: unset;
+      gap: 40px;
+      padding: 30px 52px;
+      font-size: 32px;
+      line-height: 0.75;
+
+      &::after {
+        width: 53px;
+      }
+    }
+  }
+
+  &:hover, &:active {
+    --text-color: var(--color-yellow);
+    --bg-color: var(--color-black);
+    --border-color: var(--color-yellow);
+    --bg-color-btn-arrow: transparent;
+
+    &::before {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}
