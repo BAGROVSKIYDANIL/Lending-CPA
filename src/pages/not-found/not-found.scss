@@ -23,11 +23,8 @@
     position: absolute;
     z-index: -1;
     top: calc(-72 * var(--page-scale));
-    //left: calc(421 * var(--page-scale));
     width: calc(1013.61 * var(--page-scale));
     height: calc(909 * var(--page-scale));
-    //transform: rotate(90deg);
-    //transform-origin: top left;
     background: url('public/assets/images/bg-grid-desk.webp') center / 100% 100% no-repeat;
     pointer-events: none;
     opacity: 0.5;
