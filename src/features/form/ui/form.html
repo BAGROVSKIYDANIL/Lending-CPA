@@ -2,104 +2,100 @@
   #dialog
   class="application-form"
   aria-label="Application form"
-  (cancel)="$event.preventDefault(); close()"
->
-  <button class="application-form__close" type="button" aria-label="Close" (click)="close()">
-    ×
-  </button>
-  <img
-    class="application-form__logo"
-    src="/assets/icons/snake-logo.svg"
-    alt=""
-    width="84"
-    height="78"
-  />
-  @if (success()) {
-  <div class="application-form__success" role="status">
-    <h2 class="application-form__title">WE HAVE RECEIVED YOUR APPLICATION!</h2>
-    <p class="application-form__message">
-      We will process your request<br />and get in touch with you
-    </p>
-  </div>
-  <button
-    class="application-form__button"
-    type="button"
-    (click)="close()"
-  >
-    Done
-  </button>
-  } @else {
-  <form class="application-form__form" novalidate (submit)="submit($event)">
-    <p class="application-form__hint">Fields with an asterisk (<span>*</span>) are mandatory</p>
-    <label class="application-form__field">
-      <span class="application-form__sr-only">Your Name (optional)</span>
-      <input
-        #nameInput
-        class="application-form__input"
-        name="name"
-        autocomplete="name"
-        placeholder="Your Name"
-        maxlength="100"
-        [value]="name()"
-        (input)="name.set(nameInput.value)"
-        [disabled]="pending()"
-      />
-    </label>
-    <div class="application-form__row">
-      <div class="application-form__field">
-        <app-select
-          class="application-form__select"
-          controlId="contact-method"
-          label="Contact Method (required)"
-          placeholder="Contact Method"
-          [required]="true"
-          [options]="methods"
-          [value]="method()"
-          (valueChange)="selectMethod($event)"
-          [disabled]="pending()"
-          [invalid]="attempted() && !method()"
-          [describedBy]="attempted() && !method() ? 'method-error' : null"
-        />
-        @if (attempted() && !method()) {
-        <p id="method-error" class="application-form__error" role="alert">
-          Please choose a contact method.
-        </p>
-        }
-      </div>
-      <label class="application-form__field">
-        <span class="application-form__sr-only">Your Contact (required)</span>
-        <span class="application-form__contact-wrap">
-          @let config = contactInputConfig();
-          <input
-            #contactInput
-            class="application-form__input"
-            name="contact"
-            required
-            [type]="config.type"
-            [attr.autocomplete]="config.autocomplete"
-            [placeholder]="config.placeholder"
-            maxlength="254"
-            [value]="contact()"
-            (input)="contact.set(contactInput.value)"
-            (blur)="touched.set(true)"
-            [disabled]="pending()"
-            [attr.aria-invalid]="!!contactError()"
-            [attr.aria-describedby]="contactError() ? 'contact-error' : null"
-          />
-        </span>
-        @if (contactError()) {
-        <span id="contact-error" class="application-form__error" role="alert"
-          >{{ contactError() }}</span
-        >
-        }
-      </label>
-    </div>
-    @if (serverError()) {
-    <p class="application-form__error" role="alert">{{ serverError() }}</p>
-    }
-    <button class="application-form__button" type="submit" [disabled]="pending()">
-      {{ pending() ? 'Sending…' : 'Submit' }}
+  (cancel)="$event.preventDefault(); close()">
+    <button
+        class="application-form__close"
+        type="button"
+        aria-label="Close"
+        (click)="close()">x
     </button>
-  </form>
-  }
+    <div class="application-form__logo" role="img" aria-label="Logo"></div>
+      @if (success()) {
+      <div class="application-form__success" role="status">
+        <h2 class="application-form__title">WE HAVE RECEIVED YOUR APPLICATION!</h2>
+        <p class="application-form__message">
+          We will process your request<br />and get in touch with you
+        </p>
+      </div>
+      <button
+        class="application-form__button"
+        type="button"
+        (click)="close()"
+      >
+        Done
+      </button>
+      } @else {
+      <form class="application-form__form" novalidate (submit)="submit($event)">
+        <p class="application-form__hint">Fields with an asterisk (<span>*</span>) are mandatory</p>
+        <label class="application-form__field">
+          <span class="application-form__sr-only">Your Name (optional)</span>
+          <input
+            #nameInput
+            class="application-form__input"
+            name="name"
+            autocomplete="name"
+            placeholder="Your Name"
+            maxlength="100"
+            [value]="name()"
+            (input)="name.set(nameInput.value)"
+            [disabled]="pending()"
+          />
+        </label>
+        <div class="application-form__row">
+          <div class="application-form__field">
+            <app-select
+              class="application-form__select"
+              controlId="contact-method"
+              label="Contact Method (required)"
+              placeholder="Contact Method"
+              [required]="true"
+              [options]="methods"
+              [value]="method()"
+              (valueChange)="selectMethod($event)"
+              [disabled]="pending()"
+              [invalid]="attempted() && !method()"
+              [describedBy]="attempted() && !method() ? 'method-error' : null"
+            />
+            @if (attempted() && !method()) {
+            <p id="method-error" class="application-form__error" role="alert">
+              Please choose a contact method.
+            </p>
+            }
+          </div>
+          <label class="application-form__field">
+            <span class="application-form__sr-only">Your Contact (required)</span>
+            <span class="application-form__contact-wrap">
+              @let config = contactInputConfig();
+              <input
+                #contactInput
+                class="application-form__input"
+                name="contact"
+                required
+                [type]="config.type"
+                [attr.autocomplete]="config.autocomplete"
+                [placeholder]="config.placeholder"
+                maxlength="254"
+                [value]="contact()"
+                (input)="contact.set(contactInput.value)"
+                (blur)="touched.set(true)"
+                [disabled]="pending()"
+                [attr.aria-invalid]="!!contactError()"
+                [attr.aria-describedby]="contactError() ? 'contact-error' : null"
+              />
+            </span>
+            @if (contactError()) {
+            <span id="contact-error" class="application-form__error" role="alert"
+              >{{ contactError() }}</span
+            >
+            }
+          </label>
+        </div>
+        @if (serverError()) {
+        <p class="application-form__error" role="alert">{{ serverError() }}</p>
+        }
+        <button class="application-form__button" type="submit" [disabled]="pending()">
+          {{ pending() ? 'Sending…' : 'Submit' }}
+        </button>
+      </form>
+      }
 </dialog>
