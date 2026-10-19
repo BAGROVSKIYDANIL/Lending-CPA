@@ -1,0 +1,157 @@
+:host {
+  display: block;
+}
+
+.not-found {
+  --page-scale: min(100vw / 393, 1.5px);
+  padding-top: 90px;
+  position: relative;
+  isolation: isolate;
+  min-height: max(100svh, calc(852 * var(--page-scale)));
+  overflow: hidden;
+  color: var(--color-white);
+  font-family: var(--font-family-primary), sans-serif;
+  background: linear-gradient(
+    111.06deg,
+    #9500dc -3.49%,
+    var(--color-hero-purple) 49.69%,
+    var(--color-hero-dark) 91.86%
+  );
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: calc(-72 * var(--page-scale));
+    //left: calc(421 * var(--page-scale));
+    width: calc(1013.61 * var(--page-scale));
+    height: calc(909 * var(--page-scale));
+    //transform: rotate(90deg);
+    //transform-origin: top left;
+    background: url('public/assets/images/bg-grid-desk.webp') center / 100% 100% no-repeat;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(1px);
+  }
+  &__code {
+    img {
+      display: flex;
+      margin: 0 auto;
+    }
+  }
+
+  &__back {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(245 * var(--page-scale));
+    height: calc(55 * var(--page-scale));
+    margin: calc(39 * var(--page-scale)) auto 0;
+    border: 2px solid var(--color-black);
+    background: var(--color-yellow);
+    color: var(--color-black);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: calc(18 * var(--page-scale));
+    letter-spacing: calc(3.6 * var(--page-scale));
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      background: var(--color-yellow);
+      border: 2px solid var(--color-black);
+    }
+    &::before {
+      height: 7px;
+      left: -2px;
+      right: 0;
+      top: -7px;
+      transform: skewX(-48deg);
+      transform-origin: bottom;
+    }
+    &::after {
+      width: 8px;
+      top: -1px;
+      bottom: -2px;
+      right: -8px;
+      transform: skewY(-38deg);
+      transform-origin: left;
+    }
+    &:hover {
+      background: var(--color-black);
+      color: var(--color-yellow);
+      border-color: var(--color-yellow);
+      &::before,
+      &::after {
+        background: var(--color-black);
+        border-color: var(--color-yellow);
+      }
+    }
+    &:active {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  &__snake {
+    position: absolute;
+    z-index: 0;
+    top: calc(595 * var(--page-scale));
+    left: calc(50% - 140.5 * var(--page-scale));
+    width: calc(386 * var(--page-scale));
+    height: calc(396 * var(--page-scale));
+    pointer-events: none;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  a:focus-visible,
+  summary:focus-visible {
+    outline: 3px solid var(--color-white);
+    outline-offset: 6px;
+  }
+
+  @media (min-width: 768px) {
+    --page-scale: min(100vw / 1440, 1.5px);
+    background: var(--background-hero-desktop);
+
+    &::before {
+      inset: 0;
+      width: auto;
+      height: auto;
+      transform: none;
+      background: url('public/assets/images/bg-grid-desk.webp') center / cover no-repeat;
+      opacity: 0.1;
+    }
+    &__back {
+      width: calc(410 * var(--page-scale));
+      height: calc(76 * var(--page-scale));
+      margin-top: calc(64 * var(--page-scale));
+      font-size: calc(28 * var(--page-scale));
+      letter-spacing: calc(5.6 * var(--page-scale));
+    }
+    &__snake {
+      top: auto;
+      bottom: calc(-40 * var(--page-scale));
+      left: calc(-10 * var(--page-scale));
+      width: calc(592 * var(--page-scale));
+      height: calc(494 * var(--page-scale));
+      transform: scaleX(-1);
+    }
+    &__code {
+      img {
+        content:  url(public/assets/images/404-gorizontal.png);
+        width: calc(972 * var(--page-scale));
+        height: calc(341 * var(--page-scale));
+      }
+    }
+  }
+}
