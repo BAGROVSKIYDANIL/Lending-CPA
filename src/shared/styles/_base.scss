@@ -22,6 +22,10 @@ input,
 select,
 textarea {
   font: inherit;
+  margin: unset;
+  padding: unset;
+  border: unset;
+  background-color: transparent;
 }
 
 ul {

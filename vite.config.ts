@@ -11,11 +11,24 @@ import {
 
 const path = (relative: string) => fileURLToPath(new URL(relative, import.meta.url));
 
+const mainLocale = 'en-US';
+const additionalLocales = {
+  ru: { translationFile: './src/locales/messages.ru.xlf' },
+  ua: { translationFile: './src/locales/messages.ua.xlf' },
+} as const;
+
+type AdditionalLocale = keyof typeof additionalLocales;
+
+const isAdditionalLocale = (locale: string): locale is AdditionalLocale =>
+  Object.hasOwn(additionalLocales, locale);
+
 export default defineConfig(({ mode }) => {
-  const locale = mode === 'ru' ? 'ru' : 'en-US';
+  const additionalLocale = isAdditionalLocale(mode) ? mode : null;
+  const locale = additionalLocale ?? mainLocale;
+  const translationFile = additionalLocale && additionalLocales[additionalLocale].translationFile;
   let translations = {};
-  if (locale === 'ru') {
-    const file = path('./src/locales/messages.ru.xlf');
+  if (translationFile) {
+    const file = path(translationFile);
     const contents = readFileSync(file, 'utf8');
     const parser = new Xliff1TranslationParser();
     const analysis = parser.analyze(file, contents);
@@ -32,8 +45,11 @@ export default defineConfig(({ mode }) => {
     transformIndexHtml(html) {
       return html.replace('lang="en"', `lang="${locale}"`);
     },
-    async transform(code, id) {
-      if (!/\.[cm]?[jt]s(?:\?|$)/.test(id) || !/\$localize\s*`/.test(code)) return;
+    async transform (code, id) {
+      if (!/\.[cm]?[jt]s(?:\?|$)/.test(id) || !/\$localize\s*`/.test(code))
+
+        return undefined;
+
       const diagnostics = new Diagnostics();
       const result = await transformAsync(code, {
         filename: id.split('?')[0],
@@ -42,12 +58,14 @@ export default defineConfig(({ mode }) => {
         sourceMaps: true,
         plugins: [
           makeEs2015TranslatePlugin(diagnostics, translations, {
-            missingTranslation: locale === 'ru' ? 'error' : 'ignore',
+            missingTranslation: translationFile ? 'error' : 'ignore',
           }),
         ],
       });
       if (diagnostics.hasErrors) this.error(diagnostics.formatDiagnostics('Missing translations'));
       if (result?.code) return { code: result.code, map: result.map };
+
+      return undefined;
     },
   };
 
