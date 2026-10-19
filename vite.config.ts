@@ -14,7 +14,7 @@ const path = (relative: string) => fileURLToPath(new URL(relative, import.meta.u
 const mainLocale = 'en-US';
 const additionalLocales = {
   ru: { translationFile: './src/locales/messages.ru.xlf' },
-  ua: { translationFile: null },
+  ua: { translationFile: './src/locales/messages.ua.xlf' },
 } as const;
 
 type AdditionalLocale = keyof typeof additionalLocales;

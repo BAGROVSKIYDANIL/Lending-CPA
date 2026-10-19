@@ -101,5 +101,4 @@ npm start
 Для VSCode требуется установка плагинов `ESLint` и `Prettier - Code formatter`.
 
 ## API
-контракт лежит в 'https://cpa-server-vtel.onrender.com/api-docs'
-авторизация через заголовок 'x-api-key': 'prodcpakey333' 
+контракт лежит в 'https://cpa-server-vtel.onrender.com/api-docs' 
