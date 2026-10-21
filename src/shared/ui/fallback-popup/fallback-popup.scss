@@ -1,0 +1,159 @@
+:host {
+  display: contents;
+}
+
+.fallback-popup {
+  width: min(520px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 54px 42px 40px;
+  overflow-y: auto;
+  border: 1px solid var(--color-purple);
+  border-radius: 16px;
+  background: var(--color-white);
+  color: var(--color-near-black);
+  font-family: var(--font-family-secondary), sans-serif;
+  text-align: center;
+
+  &::backdrop {
+    background: rgb(20 0 32 / 55%);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  &__close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    display: grid;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    color: var(--color-purple);
+    font-size: 34px;
+    font-weight: 700;
+    font-family: var(--font-family-secondary), sans-serif;
+    cursor: pointer;
+  }
+
+  &__icon {
+    display: grid;
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 28px;
+    place-items: center;
+    border: 3px solid var(--color-purple-main);
+    border-radius: 50%;
+    color: var(--color-purple-main);
+    font-size: 42px;
+    font-weight: 700;
+    font-family: var(--font-family-primary), sans-serif;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &__message {
+    margin: 18px 0 0;
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  &__code,
+  &__retry-note {
+    margin: 14px 0 0;
+    color: var(--color-gray-600);
+    font-size: 14px;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 30px;
+  }
+
+  &__button {
+    min-width: 138px;
+    min-height: 46px;
+    padding: 10px 22px;
+    border: 1px solid var(--color-purple);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: var(--font-family-primary), sans-serif;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      opacity 0.2s ease;
+
+    &--primary {
+      border-color: var(--color-yellow);
+      background: var(--color-yellow);
+      color: var(--color-near-black);
+    }
+
+    &--secondary {
+      background: var(--color-white);
+      color: var(--color-purple);
+    }
+
+    &:hover:not(:disabled) {
+      background: var(--color-near-black);
+      border-color: var(--color-near-black);
+      color: var(--color-yellow);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+  }
+
+  button:focus-visible {
+    outline: 3px solid var(--color-purple);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 520px) {
+    padding: 52px 22px 30px;
+    border-radius: 12px;
+
+    &__icon {
+      width: 58px;
+      height: 58px;
+      margin-bottom: 22px;
+      font-size: 36px;
+    }
+
+    &__title {
+      font-size: 20px;
+    }
+
+    &__message {
+      font-size: 16px;
+    }
+
+    &__actions {
+      flex-direction: column-reverse;
+    }
+
+    &__button {
+      width: 100%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fallback-popup__button {
+    transition: none;
+  }
+}

@@ -1,4 +1,8 @@
 // Application shell. Future classes follow block__element--modifier (BEM).
+.app-shell {
+  display: contents;
+}
+
 .hero {
   height: 100vh;
   background-image: linear-gradient(rgb(86, 0, 128), rgb(86, 0, 128));
