@@ -7,3 +7,9 @@
 Имена классов: `block`, `block__element`, `block--modifier`, `block__element--modifier`.
 Имена блоков и элементов — kebab-case. Модификатор применяется вместе с базовым классом.
 Избегать селекторов по ID и вложенности, привязанной к структуре страницы.
+
+# Buttons
+
+Для применения стилей необходимого типа кнопки нужно добавить соответствующий класс на тег  `<button>`:
+    `<button class="button button--3d">title text</button>`
+    `<button class="button button--arrow">title text</button>`

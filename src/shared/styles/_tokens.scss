@@ -4,7 +4,10 @@
   --color-white: #ffffff;
   --color-dark: #14091a;
   --color-yellow: #fee97d;
-  --color-purple: #9e13e0;
+  --color-purple-main: #9e13e0;
+  --color-purple: #a900ef;
+  --color-neon-lavendr: #dfa5ff;
+  --color-garnet-red: #b3261e;
   --color-near-black: #0c090e;
 
   // Additional fills used in the design.
@@ -41,7 +44,7 @@
   --color-surface: var(--color-near-black);
   --color-text-primary: var(--color-white);
   --color-text-inverse: var(--color-near-black);
-  --color-primary: var(--color-purple);
+  --color-primary: var(--color-purple-main);
   --color-text-secondary: var(--color-yellow);
   --background-hero-mobile: linear-gradient(var(--color-hero-purple), var(--color-hero-purple));
   --background-hero-desktop: linear-gradient(
