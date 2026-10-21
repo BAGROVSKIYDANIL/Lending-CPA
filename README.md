@@ -78,6 +78,10 @@ src/
 слеша, query-параметры — через `HttpParams`. В `app.config.ts` адрес `baseUrl: null`:
 клиент блокирует запросы, пока API не настроен. Реальные API не подключены.
 
+**Fallback popup:** единое окно для клиентских и HTTP-ошибок подключено в корневом shell.
+Примеры вызова, безопасного retry, обработки ошибок полей и интеграции с формой описаны в
+[документации fallback popup](src/shared/lib/fallback-popup/README.md).
+
 ## Статус проверки в текущей среде
 
 Конфигурация переведена на Vite; синтаксис JSON проверен. Установка зависимостей заблокирована средой:
@@ -101,4 +105,5 @@ npm start
 Для VSCode требуется установка плагинов `ESLint` и `Prettier - Code formatter`.
 
 ## API
-контракт лежит в 'https://cpa-server-vtel.onrender.com/api-docs' 
+
+контракт лежит в 'https://cpa-server-vtel.onrender.com/api-docs'
