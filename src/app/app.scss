@@ -1,9 +1,64 @@
 // Application shell. Future classes follow block__element--modifier (BEM).
 .hero {
+  --header-height: 39px;
+  --page-padding-top: 16px;
+  --page-pading-inline: 16px;
+  --grid-width: auto;
+  --grid-height: 107vh;
+  --page-background: var(--background-hero-mobile);
+  --bg-grid-mask: url('public/assets/masks/bg-grid-mob-mask.png');
+
+
   height: 100vh;
-  background-image: linear-gradient(rgb(86, 0, 128), rgb(86, 0, 128));
+  position: relative;
+  overflow: hidden;
+  background-image: var(--page-background);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -78px;
+    top: -4vh;
+    height: var(--grid-height);
+    width: var(--grid-width);
+    aspect-ratio: 1013/909;
+    background-image: url('public/assets/images/bg-grid-mob.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    mask-image: var(--bg-grid-mask);
+    mask-repeat: no-repeat;
+    mask-size: auto 120vh;
+    mask-position: -38vw -10vh;
+    opacity: 0.2;
+    pointer-events: none;
+  }
 
   @media (min-width: 768px) {
-    background-image: linear-gradient(111.06deg, rgb(220, 132, 0) -3.49%, rgb(86, 0, 128) 49.69%, rgb(34, 0, 50) 91.86%);
+    --header-height: 43px;
+    --grid-width: 100vw;
+    --grid-height: auto;
+    --page-background: var(--background-hero-desktop);
+    --bg-grid-mask: url('public/assets/masks/grid-mask-desk-static.webp');
+
+    &::before {
+      left: 0;
+      background-position: -1vw -1vh;
+      mask-position: unset;
+    }
   }
 }
+
+.container {
+  padding-inline: var(--page-pading-inline);
+  padding-top: var(--page-padding-top);
+
+  @media (min-width: 768px) {
+    --page-pading-inline: 50px;
+    --page-padding-top: 30px;
+  }
+}
+

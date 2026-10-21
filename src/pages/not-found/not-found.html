@@ -5,20 +5,10 @@
     <picture class="not-found__code">
         <source media="(min-width: 450px)" srcset="/assets/images/404-vertical.png">
         <source media="(min-width: 768px)" srcset="/assets/images/404-gorizontal.png">
-        <img src="/assets/images/404-vertical.png" alt="404">
+        <img src="/assets/images/404-vertical.png" alt="404 - Page not found">
     </picture>
   <a class="not-found__back" routerLink="/">
     <span>TAKE ME BACK</span>
   </a>
-
-  <picture class="not-found__snake" aria-hidden="true">
-    <source media="(min-width: 768px)" srcset="/assets/images/snake-main-mob.webp" />
-    <img
-        ngSrc="/assets/images/snake-main-mob.webp"
-        width="393"
-        height="448"
-        alt="snake"
-        fetchpriority="high"
-    />
-  </picture>
+  <div class="not-found__snake"></div>
 </main>
