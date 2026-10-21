@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {MultiBenefits} from "@widgets/multi-benefits";
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,7 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [
-    RouterOutlet
+    RouterOutlet, MultiBenefits
   ]
 })
 export class App {}
