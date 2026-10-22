@@ -1,4 +1,8 @@
 // Application shell. Future classes follow block__element--modifier (BEM).
+.app-shell {
+  display: contents;
+}
+
 .hero {
   --header-height: 39px;
   --page-padding-top: 16px;
