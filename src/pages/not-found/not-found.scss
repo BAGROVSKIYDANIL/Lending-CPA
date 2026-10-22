@@ -1,0 +1,120 @@
+:host {
+  height: 100%;
+  display: grid;
+  align-content: center;
+  margin-top: calc(var(--header-height) * -1 - var(--page-padding-top));
+}
+
+.not-found {
+  overflow: hidden;
+  color: var(--color-white);
+  font-family: var(--font-family-primary), sans-serif;
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  place-items: center;
+  gap: 32px;
+
+  &__code {
+    img {
+      display: flex;
+      margin: 0 auto;
+    }
+  }
+
+  &__back {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(245 * var(--page-scale));
+    height: calc(55 * var(--page-scale));
+    margin: calc(39 * var(--page-scale)) auto 0;
+    border: 2px solid var(--color-black);
+    background: var(--color-yellow);
+    color: var(--color-black);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: calc(18 * var(--page-scale));
+    letter-spacing: calc(3.6 * var(--page-scale));
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      background: var(--color-yellow);
+      border: 2px solid var(--color-black);
+    }
+    &::before {
+      height: 7px;
+      left: -2px;
+      right: 0;
+      top: -7px;
+      transform: skewX(-48deg);
+      transform-origin: bottom;
+    }
+    &::after {
+      width: 8px;
+      top: -1px;
+      bottom: -2px;
+      right: -8px;
+      transform: skewY(-38deg);
+      transform-origin: left;
+    }
+    &:hover {
+      background: var(--color-black);
+      color: var(--color-yellow);
+      border-color: var(--color-yellow);
+      &::before,
+      &::after {
+        background: var(--color-black);
+        border-color: var(--color-yellow);
+      }
+    }
+    &:active {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  &__snake {
+    position: absolute;
+    bottom: -108px;
+    right: -72px;
+    width: 386px;
+    aspect-ratio: 386 / 320;
+    pointer-events: none;
+    background: url('public/assets/images/snake-main-mob.webp') center / cover no-repeat;
+  }
+
+  a:focus-visible,
+  summary:focus-visible {
+    outline: 3px solid var(--color-white);
+    outline-offset: 6px;
+  }
+
+  @media (min-width: 768px) {
+    gap: min(5vw, 68px);
+
+    &__back {
+      width: 410px;
+      height: 76px;
+      font-size: 28px;
+    }
+    &__snake {
+      bottom: -20px;
+      right: unset;
+      left: 0;
+      width: clamp(390px, 50vw, 541px);
+      aspect-ratio: 541 / 428;
+      background: url('public/assets/images/snake-404-desk.webp') center / cover no-repeat;
+    }
+    &__code {
+      img {
+        content:  url(public/assets/images/404-gorizontal.png);
+        width: clamp(600px, 78vw, 972px);
+        aspect-ratio: 972 / 341;
+      }
+    }
+  }
+}
