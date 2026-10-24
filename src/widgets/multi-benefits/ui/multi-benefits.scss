@@ -67,7 +67,7 @@
 
   &__description {
     margin: 22px 0 0;
-    font-family: var(--font-family-secondary), sans-serif;
+    font-family: var(--font-family-primary), sans-serif;
     font-size: 16px;
     font-weight: var(--font-weight-regular);
     line-height: 1.34;
@@ -76,7 +76,6 @@
 
   &__snake {
     position: absolute;
-    z-index: 1;
     top: 50%;
     right: -105px;
     display: block;
@@ -95,7 +94,6 @@
 
   &__cards {
     position: relative;
-    z-index: 2;
     display: grid;
     gap: 20px;
     margin-top: 44px;
@@ -112,7 +110,7 @@
   &__card {
     padding: 16px;
     border-radius: 11px;
-    font-family: var(--font-family-secondary), sans-serif;
+    font-family: var(--font-family-primary), sans-serif;
     font-size: 20px;
     font-weight: var(--font-weight-medium);
     letter-spacing: -0.02em;
@@ -216,9 +214,9 @@
 
     &__snake {
       position: absolute;
-      z-index: 1;
       left: 50%;
-      width: min(38vw, 690px);
+      //width: min(38vw, 560px);
+      width: calc(292px + (100vw - 768px) * 0.102);
       margin: 0;
       opacity: 1;
     }
