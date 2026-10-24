@@ -1,6 +1,8 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideRouter } from '@angular/router';
 import { API_CONFIG } from '@shared/api';
+import { routes } from './app.routes';
 import { environment } from '../environments/environment';
 
 const apiHeaderSeparator = environment.apiHeader.indexOf(':');
@@ -16,6 +18,7 @@ if (!apiHeaderName || !apiHeaderValue) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideRouter(routes),
     { provide: LOCALE_ID, useValue: __APP_LOCALE__ },
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(),
