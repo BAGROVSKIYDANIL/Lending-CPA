@@ -1,12 +1,25 @@
-.nav {
-  font-weight: 700;
-  font-family: var(--font-family-primary), sans-serif;
-  font-size: var(--font-size-small);
-  text-decoration: underline;
-  text-transform: uppercase;
-  color: var(--color-yellow);
+@use '../../styles/base-mixins' as mixins;
 
-  &__wrapper {
-    display: contents;
+:host {
+  align-content: end;
+}
+
+.nav {
+  display: grid;
+  grid-gap: 40px;
+  justify-items: center;
+
+  &__item {
+    line-height: 1.78;
+  }
+
+  &__link {
+    @include mixins.navigation-link;
+
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 20px;
   }
 }

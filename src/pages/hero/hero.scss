@@ -1,2 +1,153 @@
+@use '../../shared/styles/base-mixins' as mixins;
+
 .hero {
+
+  --header-height: 39px;
+  --page-padding-top: 10px;
+  --page-padding-bottom: 50px;
+  --page-pading-inline: 16px;
+
+  display: grid;
+  grid-template-rows: var(--header-height) 1fr 1fr;
+  gap: 100px;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  color: var(--color-text-primary);
+  text-align: left;
+  padding: var(--page-padding-top) var(--page-pading-inline) var(--page-padding-bottom);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/images/snake-main-mob.webp');
+    background-position: right bottom;
+    background-size: 393px auto;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  &__wrapper {
+    max-width: 756px;
+  }
+
+  @media (min-width: 768px) {
+    --page-padding-top: 30px;
+    --page-pading-inline: 50px;
+    --header-height: 46px;
+
+    &::before {
+      left: 0;
+      background-position: -1vw -1vh;
+      mask-position: unset;
+    }
+  }
+
+  @media (min-width: 1280px) {
+      &::after {
+        background-image: url('/assets/images/snake-main-desk.webp');
+        background-size: auto calc(100vh - var(--header-height) - var(--page-padding-top) *2);
+    }
+  }
+
+  &__title {
+    margin-bottom: 12px;
+  }
+
+  &__text {
+    font-family: var(--font-family-secondary), sans-serif;
+    font-size: var(--font-size-small);
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    max-width: 540px;
+  }
+}
+
+.title {
+  font-family: var(--font-family-primary), sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+
+  &__first-row {
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+
+    font-size: 56px;
+
+    &__wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3em;
+    }
+
+    &__viewport {
+      overflow: hidden;
+      height: 1.2em;
+    }
+
+    &__words {
+      display: flex;
+      flex-direction: column;
+      animation: word-scroll 4s linear infinite;
+
+      >span {
+        display: block;
+        line-height: 1.2;
+        height: 1.2em;
+        white-space: nowrap;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      font-size: 80px;
+
+      &__wrapper {
+      }
+    }
+  }
+
+  &__word {
+    color: var(--color-text-secondary);
+  }
+}
+
+@keyframes word-scroll {
+  0%, 30% {
+    transform: translateY(0);
+  }
+
+  31%, 33% {
+    transform: translateY(-35%);
+  }
+
+  34%, 63% {
+    transform: translateY(-33%);
+  }
+
+  64%, 66% {
+    transform: translateY(-68%);
+  }
+
+  67%, 96% {
+    transform: translateY(-66%);
+  }
+
+  97% {
+    transform: translateY(2%);
+  }
+
+  98% {
+    transform: translateY(-2%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }

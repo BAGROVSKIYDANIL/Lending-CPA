@@ -42,4 +42,14 @@ h5,
 h6 {
   font-family: var(--font-family-secondary) sans-serif;
   font-weight: var(--font-weight-bold);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

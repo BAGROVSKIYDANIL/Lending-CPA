@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {RouterLink} from "@angular/router";
+import {ViewportService} from "@shared/services/viewport.service";
 
 @Component({
   imports: [RouterLink],
@@ -7,4 +8,6 @@ import {RouterLink} from "@angular/router";
   styleUrl: './navigation.scss',
   templateUrl: './navigation.html',
 })
-export class Navigation {}
+export class Navigation {
+  readonly viewport = inject(ViewportService);
+}

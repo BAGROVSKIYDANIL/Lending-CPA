@@ -6,7 +6,7 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadComponent: () => import('@pages/home/home').then((m) => m.Home),
+    loadComponent: () => import('@pages/hero/hero').then((m) => m.Hero),
   },
   {
     path: '404',

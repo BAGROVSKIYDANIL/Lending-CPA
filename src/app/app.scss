@@ -1,59 +1,10 @@
 // Application shell. Future classes follow block__element--modifier (BEM).
+@use '../shared/styles/base-mixins' as mixins;
+
 .app-shell {
-  display: contents;
-}
+  @include mixins.page-background;
 
-.hero {
-  --header-height: 39px;
-  --page-padding-top: 16px;
-  --page-pading-inline: 16px;
-  --grid-width: auto;
-  --grid-height: 107vh;
-  --page-background: var(--background-hero-mobile);
-  --bg-grid-mask: url('/assets/masks/bg-grid-mob-mask.png');
-
-
-  height: 100vh;
-  position: relative;
   overflow: hidden;
-  background-image: var(--page-background);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: -78px;
-    top: -4vh;
-    height: var(--grid-height);
-    width: var(--grid-width);
-    aspect-ratio: 1013/909;
-    background-image: url('/assets/images/bg-grid-mob.webp');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    mask-image: var(--bg-grid-mask);
-    mask-repeat: no-repeat;
-    mask-size: auto 120vh;
-    mask-position: -38vw -10vh;
-    opacity: 0.2;
-    pointer-events: none;
-  }
-
-  @media (min-width: 768px) {
-    --header-height: 43px;
-    --grid-width: 100vw;
-    --grid-height: auto;
-    --page-background: var(--background-hero-desktop);
-    --bg-grid-mask: url('public/assets/masks/grid-mask-desk-static.webp');
-
-    &::before {
-      left: 0;
-      background-position: -1vw -1vh;
-      mask-position: unset;
-    }
-  }
 }
 
 .container {
