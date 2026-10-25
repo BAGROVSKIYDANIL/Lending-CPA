@@ -5,24 +5,19 @@
 .multiply {
   position: relative;
   min-height: 100svh;
-  padding-block-start: 60px;
-  padding-block-end: 70px;
+  padding-block-start: 74px;
+  padding-block-end: 20px;
   color: var(--color-text-primary);
-
-  &__layout,
-  &__footer {
-    position: relative;
-    z-index: 1;
-  }
 
   &__layout {
     display: flex;
     flex-direction: column;
     row-gap: 30px;
   }
-
-  &__visual {
-    display: contents;
+  &__body {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
   }
 
   &__tabs {
@@ -58,15 +53,14 @@
   }
 
   &__title {
-    position: fixed;
-    right: 0;
-    left: 0;
-    bottom: 20px;
+    display: grid;
+    grid-row: 2;
     order: 1;
     margin-block-start: 0;
     margin-block-end: 0;
     color: var(--color-yellow);
     font-family: var(--font-family-primary), sans-serif;
+    letter-spacing: -0.04em;
     font-size: clamp(26px, 8vw, 36px);
     line-height: 1;
     text-align: center;
@@ -98,9 +92,9 @@
     margin-block-start: 0;
     margin-block-end: 0;
     font-family: var(--font-family-primary), sans-serif;
-    font-size: var(--font-size-primary);
+    font-size: var(--font-size-small);
     font-weight: var(--font-weight-bold);
-    line-height: 1.12;
+    line-height: 1.25;
     text-align: center;
   }
 
@@ -175,7 +169,7 @@
   &__link {
     color: var(--color-yellow);
     font-family: var(--font-family-primary), sans-serif;
-    font-size: var(--font-size-primary);
+    font-size: clamp(10px, 1.2vw, 20px);
     font-weight: var(--font-weight-bold);
     line-height: 1;
     text-underline-offset: 3px;
@@ -238,17 +232,30 @@
 
     &__layout {
       display: grid;
-      min-height: calc(100svh - 130px);
-      grid-template-columns: minmax(300px, 357px) minmax(355px, 518px);
-      column-gap: clamp(30px, 4vw, 70px);
+      grid-template-rows: auto 1fr;
+      row-gap: 60px;
+      min-height: calc(100svh - 102px);
+    }
+    &__title {
+      grid-row: 1;
+      text-align: right;
+    }
+    &__body,
+    &__footer {
+      display: grid;
+      grid-template-columns: minmax(300px, 457px) minmax(355px, 618px);
+      column-gap: clamp(14px, 2vw, 70px);
       justify-content: space-between;
     }
-
+    &__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
     &__visual {
       position: relative;
       display: block;
       min-width: 0;
-      padding-block-start: 98px;
     }
 
     &__tabs {
@@ -260,10 +267,9 @@
       min-height: 61px;
       padding-block-start: 14px;
       padding-block-end: 14px;
-      padding-inline-start: 36px;
-      padding-inline-end: 36px;
+      padding-inline: 30px ;
       column-gap: 24px;
-      font-size: 23px;
+      font-size: var(--font-family-primary);
       line-height: 1.2;
       &:nth-child(2) {width: 90%;}
       &:nth-child(3) {width: 80%;}
@@ -275,23 +281,18 @@
     }
 
     &__title {
-      position: absolute;
       font-size: clamp(27px, 2.6vw, 38px);
-      right: 0;
-      left: inherit;
-      bottom: initial;
       white-space: nowrap;
     }
 
     &__card {
       min-height: min(421px, calc(100svh - 179px));
-      margin-block-start: 98px;
       padding: clamp(50px, 12vh, 80px) 50px;
     }
 
     &__copy {
       font-size: 16px;
-      line-height: 1.08;
+      line-height: 1.12;
     }
 
     &__down-arrow {
@@ -311,7 +312,7 @@
 
     &__snake {
       position: absolute;
-      bottom: -136px;
+      bottom: -124px;
       width: min(42vw, 630px);
       left: -50px;
       pointer-events: none;
@@ -319,33 +320,30 @@
       background: url("public/assets/images/snake-join-desk.webp") center / cover no-repeat;
     }
 
-    &__footer {
-      display: flex;
-      flex-direction: column-reverse;
-      gap: 20px;
-      align-items: end;
-    }
-
     &__socials {
-      column-gap: 24px;
+      column-gap: 12px;
     }
   }
 
   @media (min-width: 1200px) {
     &__layout {
-      grid-template-columns: minmax(330px, 34vw) minmax(500px, 52vw);
+
       min-height: calc(100svh - 102px)
     }
-    &__footer {
-      gap: 100px;
-      flex-direction: row;
-      justify-content: end;
+    &__tab.button--arrow {
+      font-size: clamp(28px, 2vh, 32px);
     }
+    &__body,
+    &__footer{
+      grid-template-columns: minmax(330px, 34vw) minmax(500px, 52vw);
+    }
+
     &__card {
       width: 100%;
     }
-    &__snake {
-      bottom: -124px;
+
+    &__socials {
+      column-gap: 24px;
     }
   }
 
