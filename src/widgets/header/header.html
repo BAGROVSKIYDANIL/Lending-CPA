@@ -1,0 +1,16 @@
+<header class="header">
+    <a href="/main" class="header__logo" aria-label="Main page">
+        <img class="header__img" src="/assets/icons/logo.svg" width="26" height="24" aria-hidden="true" alt="logo">
+    </a>
+    <button type="button"
+            class="header__menu header__menu--mob"
+            aria-haspopup="dialog"
+            aria-controls="mobile-menu"
+            (click)="open()">menu</button>
+    <div class="header__menu header__menu--desk">
+        <app-navigation />
+        <app-languages />
+    </div>
+</header>
+
+<app-mobile-menu />

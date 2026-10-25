@@ -1,0 +1,9 @@
+<dialog #menu aria-label="Navigation menu" class="mobile-menu">
+    <a href="/main" class="header__logo" aria-label="Main page">
+        <img class="header__img" src="/assets/icons/logo.svg" width="26" height="24" aria-hidden="true" alt="logo">
+    </a>
+    <button type="button" (click)="close()" class="header__btn" aria-label="close popup">x</button>
+    <app-navigation />
+    <app-socials />
+    <app-languages />
+</dialog>

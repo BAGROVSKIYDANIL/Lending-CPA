@@ -1,0 +1,17 @@
+@use '../../shared/styles/base-mixins';
+
+.mobile-menu {
+  @include base-mixins.bg-grid;
+  --bg-mask: url('/assets/masks/bg-grid-mob-mask.png');
+
+  position: fixed;
+  inset: 0;
+  max-width: none;
+  max-height: none;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  background-image:  var(--background-hero-mobile);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

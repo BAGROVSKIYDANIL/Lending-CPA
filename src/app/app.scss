@@ -10,7 +10,7 @@
   --grid-width: auto;
   --grid-height: 107vh;
   --page-background: var(--background-hero-mobile);
-  --bg-grid-mask: url('public/assets/masks/bg-grid-mob-mask.png');
+  --bg-grid-mask: url('/assets/masks/bg-grid-mob-mask.png');
 
 
   height: 100vh;
@@ -29,7 +29,7 @@
     height: var(--grid-height);
     width: var(--grid-width);
     aspect-ratio: 1013/909;
-    background-image: url('public/assets/images/bg-grid-mob.webp');
+    background-image: url('/assets/images/bg-grid-mob.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

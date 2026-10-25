@@ -7,6 +7,6 @@ import { FallbackPopup } from '@shared/ui/fallback-popup';
   standalone: true,
   templateUrl: './app.html',
   styleUrl: './app.scss',
-  imports: [RouterOutlet, FallbackPopup],
+  imports: [RouterOutlet, FallbackPopup ],
 })
 export class App {}

@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--header-height);
+
+  &__logo {
+    display: block;
+    width: 26px;
+    color: var(--color-white);
+  }
+
+  &__menu {
+    font-family: var(--font-family-primary), sans-serif;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    text-decoration: underline;
+    color: var(--color-text-secondary);
+
+    &--desk {
+      display: none;
+    }
+
+    @media (min-width: 767px) {
+
+      &--desk {
+       display: flex;
+      }
+
+      &--mob {
+       display: none;
+      }
+    }
+  }
+
+  &__img {
+    width: 100%;
+    height: auto;
+    filter: invert(1);
+  }
+}
