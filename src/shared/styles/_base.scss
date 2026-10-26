@@ -53,3 +53,18 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.container {
+  padding-inline: var(--page-pading-inline, 16px);
+  padding-top: var(--page-padding-top, 10px);
+
+  @media (min-width: 768px) {
+    --page-pading-inline: 50px;
+    --page-padding-top: 30px;
+  }
+
+  @media (min-width: 1280px) {
+    --page-padding-top: 60px;
+  }
+}
+

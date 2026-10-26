@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import {MultiBenefits} from "@widgets/multi-benefits";
-import {MultiplyWithUs} from "@widgets/multiply-with-us";
 
 const notFound = () => import('@pages/not-found/not-found').then((m) => m.NotFound);
 
@@ -9,6 +7,11 @@ export const routes: Routes = [
     path: '',
     pathMatch: 'full',
     loadComponent: () => import('@pages/hero/hero').then((m) => m.Hero),
+  },
+  {
+    path:'tasks',
+    pathMatch: 'full',
+    loadComponent: () => import('@pages/multi-tasks/multi-tasks').then((m) => m.MultiTasks),
   },
   {
     path: 'benefits',
