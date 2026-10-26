@@ -12,7 +12,8 @@
       <p>{{ copy.error }}</p>
       <button class="multi-tasks__retry" type="button" (click)="load()">{{ copy.retry }}</button>
     </div>
-    } @case ('ready') { @if (content(); as tasks) {
+    }
+        @case ('ready') { @if (content(); as tasks) {
     <div class="multi-tasks__intro">
       <p class="multi-tasks__text">
           @for (part of  descriptionPart(); track $index) {
