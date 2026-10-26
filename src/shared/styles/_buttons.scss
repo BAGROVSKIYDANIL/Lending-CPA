@@ -67,7 +67,7 @@
     justify-content: space-between;
     padding: 18px 36px;
     width: 314px;
-    font-family: var(--font-family-secondary);
+    font-family: var(--font-family-primary), sans-serif;
     font-size: var(--font-size-primary);
     text-transform: capitalize;
     border-radius: 100px;
@@ -94,7 +94,7 @@
       line-height: 0.75;
 
       &::after {
-        width: 53px;
+        width: 30px;
       }
     }
   }
