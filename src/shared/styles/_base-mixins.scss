@@ -1,15 +1,21 @@
 @mixin bg-grid {}
 
 @mixin navigation-link {
+  --link-color: var(--color-text-secondary);
+
   font-weight: 700;
   font-family: var(--font-family-primary), sans-serif;
   font-size: 32px;
   text-decoration: underline;
   text-transform: uppercase;
-  color: var(--color-yellow);
+  color: var(--link-color);
 
   @media (min-width: 768px) {
     font-size: var(--font-size-primary);
+  }
+
+  &:hover {
+    --link-color: var(--color-text-primary);
   }
 }
 

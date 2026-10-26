@@ -1,7 +1,8 @@
-import {Component, ElementRef, input, output, viewChild} from '@angular/core';
+import {Component, effect, ElementRef, inject, viewChild} from '@angular/core';
 import { Navigation } from '@shared/ui/navigation/navigation';
 import {Socials} from "@shared/ui/socials/socials";
 import {Languages} from "@shared/ui/languages/languages";
+import {ViewportService} from "@shared/services/viewport.service";
 
 @Component({
   selector: 'app-mobile-menu',
@@ -11,6 +12,15 @@ import {Languages} from "@shared/ui/languages/languages";
 })
 export class MobileMenu {
   readonly menu = viewChild.required<ElementRef<HTMLDialogElement>>('menu');
+  readonly viewport = inject(ViewportService);
+
+  constructor() {
+    effect(() => {
+      if (!this.viewport.isMobile()) {
+        this.close();
+      }
+    });
+  }
 
   open(): void {
     this.menu().nativeElement.showModal();
