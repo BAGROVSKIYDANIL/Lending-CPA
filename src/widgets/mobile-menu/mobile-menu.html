@@ -1,0 +1,13 @@
+<dialog #menu aria-label="Navigation menu" class="mobile-menu">
+    <div class="mobile-menu__wrapper">
+        <div class="mobile-menu__header">
+            <a href="/main" class="mobile-menu__logo" aria-label="Hero page">
+                <img class="header__img" src="/assets/icons/logo.svg" width="26" height="24" aria-hidden="true" alt="logo">
+            </a>
+            <button type="button" (click)="close()" class="mobile-menu__btn" aria-label="close popup">x</button>
+        </div>
+        <app-navigation />
+        <app-socials />
+        <app-languages />
+    </div>
+</dialog>
