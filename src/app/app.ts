@@ -1,6 +1,7 @@
 import {Component, inject} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FallbackPopup } from '@shared/ui/fallback-popup';
+import {MultiplyWithUs} from "@widgets/multiply-with-us";
 import {Header} from "@widgets/header/header";
 import {ViewportService} from "@shared/services/viewport.service";
 

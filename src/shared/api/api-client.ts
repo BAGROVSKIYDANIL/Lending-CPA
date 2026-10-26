@@ -7,6 +7,7 @@ export type ApiLanguage = 'en' | 'ru' | 'ua';
 
 export interface ApiRequestOptions {
   readonly locale?: string;
+  readonly localized?: boolean;
   readonly params?: HttpParams;
 }
 
@@ -18,7 +19,7 @@ export class ApiClient {
   private readonly headers = new HttpHeaders(this.config.headers);
 
   /** Endpoint contract: {baseUrl}/{locale}/{relativePath}. */
-  endpoint(path: string, locale = this.locale): string {
+  endpoint(path: string, locale = this.locale, localized = true): string {
     const segments = path.split('/');
     if (
       !path ||
@@ -27,6 +28,10 @@ export class ApiClient {
     ) {
       throw new Error('API path must be a relative path without query parameters or traversal.');
     }
+    if (!localized) {
+      return `${this.config.baseUrl.replace(/\/+$/, '')}/${segments.map(encodeURIComponent).join('/')}`;
+    }
+
     const endpointLocale = this.config.localeMap[locale] ?? locale;
     if (!endpointLocale) {
       throw new Error('API locale must not be empty.');
@@ -35,7 +40,7 @@ export class ApiClient {
   }
 
   get<TResponse>(path: string, options: ApiRequestOptions = {}): Observable<TResponse> {
-    return this.http.get<TResponse>(this.endpoint(path, options.locale), {
+    return this.http.get<TResponse>(this.endpoint(path, options.locale, options.localized), {
       headers: this.headers,
       params: options.params,
     });
@@ -46,7 +51,7 @@ export class ApiClient {
     body: TRequest,
     options: ApiRequestOptions = {},
   ): Observable<TResponse> {
-    return this.http.post<TResponse>(this.endpoint(path, options.locale), body, {
+    return this.http.post<TResponse>(this.endpoint(path, options.locale, options.localized), body, {
       headers: this.headers,
       params: options.params,
     });

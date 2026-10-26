@@ -1,9 +1,11 @@
 @use '../../shared/styles/base-mixins' as mixins;
 
 .hero {
+  --header-height: 39px;
   --page-padding-top: 10px;
   --page-padding-bottom: 50px;
   --page-pading-inline: 16px;
+  --snake-background-size: 393px auto;
 
   display: grid;
   grid-template-rows: var(--header-height) 1fr 1fr;
@@ -15,13 +17,13 @@
   text-align: left;
   padding: var(--page-padding-top) var(--page-pading-inline) var(--page-padding-bottom);
 
-  &::after {
+  &::before {
     content: '';
     position: absolute;
     inset: 0;
     background-image: url('/assets/images/snake-main-mob.webp');
     background-position: right bottom;
-    background-size: 393px auto;
+    background-size: var(--snake-background-size);
     background-repeat: no-repeat;
     pointer-events: none;
   }
@@ -34,16 +36,11 @@
     --page-padding-top: 30px;
     --page-pading-inline: 50px;
     --header-height: 46px;
-
-    &::before {
-      left: 0;
-      background-position: -1vw -1vh;
-      mask-position: unset;
-    }
+    --snake-background-size: calc(393 * 0.13vw) auto;
   }
 
   @media (min-width: 1280px) {
-      &::after {
+      &::before {
         background-image: url('/assets/images/snake-main-desk.webp');
         background-size: auto calc(100vh - var(--header-height) - var(--page-padding-top) *2);
     }
