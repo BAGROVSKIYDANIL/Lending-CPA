@@ -14,6 +14,16 @@ export const routes: Routes = [
     loadComponent: () => import('@pages/multi-tasks/multi-tasks').then((m) => m.MultiTasks),
   },
   {
+    path: 'benefits',
+    pathMatch: 'full',
+    loadComponent: () => import('@widgets/multi-benefits/ui/multi-benefits').then((m) => m.MultiBenefits),
+  },
+  {
+    path: 'with-us',
+    pathMatch: 'full',
+    loadComponent: () => import('@widgets/multiply-with-us/multiply-with-us').then((m) => m.MultiplyWithUs),
+  },
+  {
     path: '404',
     loadComponent: notFound,
     title: __APP_LOCALE__ === 'ru' ? '404 — Страница не найдена' : '404 — Page not found',
