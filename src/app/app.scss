@@ -4,16 +4,8 @@
 .app-shell {
   @include mixins.page-background;
 
+  --header-height: 39px;
+
   overflow: hidden;
-}
-
-.container {
-  padding-inline: var(--page-pading-inline);
-  padding-top: var(--page-padding-top);
-
-  @media (min-width: 768px) {
-    --page-pading-inline: 50px;
-    --page-padding-top: 30px;
-  }
 }
 

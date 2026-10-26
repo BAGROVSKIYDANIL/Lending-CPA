@@ -9,6 +9,11 @@ export const routes: Routes = [
     loadComponent: () => import('@pages/hero/hero').then((m) => m.Hero),
   },
   {
+    path:'tasks',
+    pathMatch: 'full',
+    loadComponent: () => import('@pages/multi-tasks/multi-tasks').then((m) => m.MultiTasks),
+  },
+  {
     path: '404',
     loadComponent: notFound,
     title: __APP_LOCALE__ === 'ru' ? '404 — Страница не найдена' : '404 — Page not found',

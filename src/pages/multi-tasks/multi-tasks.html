@@ -1,0 +1,33 @@
+<section class="multi-tasks" [attr.aria-label]="copy.heading">
+      @if (!viewport.isMobile()) {
+          <h1 class="multi-tasks__heading">{{ copy.heading }}</h1>
+      }
+    @switch (state()) { @case ('loading') {
+    <div class="multi-tasks__status" role="status">
+      <span class="multi-tasks__loader" aria-hidden="true"></span>
+      <span>{{ copy.loading }}</span>
+    </div>
+    } @case ('error') {
+    <div class="multi-tasks__status multi-tasks__status--error" role="alert">
+      <p>{{ copy.error }}</p>
+      <button class="multi-tasks__retry" type="button" (click)="load()">{{ copy.retry }}</button>
+    </div>
+    } @case ('ready') { @if (content(); as tasks) {
+    <div class="multi-tasks__intro">
+      <p class="multi-tasks__text">
+          @for (part of  descriptionPart(); track $index) {
+              <span [class.multi-tasks__text--accent]="part.highlighted">{{ part.text}}</span>
+          }
+          {{ tasks.description }}</p>
+      <img class="multi-tasks__img" src="/assets/images/snake-tasks.webp" alt="" width="360" height="360"/>
+    </div>
+    <ul class="multi-tasks__cards">
+    @for (tile of tasks.tiles; track $index) {
+    <li class="multi-tasks__card">
+      <h2 class="multi-tasks__card-title">{{ tile.title }}</h2>
+      <p class="multi-tasks__card-text">{{ tile.text }}</p>
+    </li>
+    }
+    </ul>
+    } } }
+</section>
