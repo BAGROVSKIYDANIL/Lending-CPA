@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, output} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {ViewportService} from "@shared/services/viewport.service";
 
@@ -10,4 +10,5 @@ import {ViewportService} from "@shared/services/viewport.service";
 })
 export class Navigation {
   readonly viewport = inject(ViewportService);
+  readonly linkClick = output<void>();
 }

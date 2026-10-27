@@ -1,8 +1,9 @@
-<section class="multi-benefits" [attr.aria-label]="copy.eyebrow">
-  <div class="multi-benefits__grid" aria-hidden="true"></div>
+<section class="multi-benefits container" [attr.aria-label]="copy.eyebrow">
 
   <div class="multi-benefits__container">
-    <p class="multi-benefits__eyebrow">{{ copy.eyebrow }}</p>
+      @if (!viewport.isMobile()) {
+          <p class="multi-benefits__eyebrow">{{ copy.eyebrow }}</p>
+      }
       @switch (state()) {
           @case ('loading') {
               <div class="multi-benefits__status" role="status">
@@ -19,17 +20,13 @@
           @case ('ready') {
               @if (content(); as benefits) {
                   <div class="multi-benefits__intro">
-                      <h1 class="multi-benefits__title" id="multi-benefits-title">
+                      <h2 class="multi-benefits__title" id="multi-benefits-title">
                           @for (part of titleParts(); track $index) {
                               <span [class.multi-benefits__title-accent]="part.highlighted">{{ part.text }}</span>
                           }
-                      </h1>
+                      </h2>
                       <p class="multi-benefits__description">{{ benefits.description }}</p>
                   </div>
-                  <picture class="multi-benefits__snake" aria-hidden="true">
-                      <source media="(min-width: 768px)" srcset="/assets/images/snake-benefits-desk.webp" />
-                      <img src="/assets/images/snake-benefits-mob.webp" alt="" />
-                  </picture>
                   <app-benefits-marquee />
 
                   <ul class="multi-benefits__cards">

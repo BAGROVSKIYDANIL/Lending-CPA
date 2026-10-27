@@ -4,7 +4,7 @@
 
 .multiply {
   position: relative;
-  min-height: 100svh;
+  height: calc(100vh - var(--header-height));
   padding-block-start: 74px;
   padding-block-end: 20px;
   color: var(--color-text-primary);
@@ -229,6 +229,7 @@
 
   @media (min-width: 768px) {
     padding-top: 30px;
+    height: 100vh;
 
     &__layout {
       display: grid;

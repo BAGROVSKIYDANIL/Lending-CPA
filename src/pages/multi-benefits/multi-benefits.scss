@@ -1,42 +1,18 @@
 
-@use '../../../shared/styles/base-mixins';
+@use '../../shared/styles/base-mixins';
 
 :host {
   display: block;
 }
 
 .multi-benefits {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  min-height: 100svh;
-  flex-direction: column;
-  overflow: hidden;
+  --section-padding-top: 32px;
+
+  height: var(--section-height);
   color: var(--color-white);
-  background: var(--color-hero-purple);
-
-  &__grid {
-    position: absolute;
-    z-index: -2;
-    inset: 0;
-    @include base-mixins.bg-grid;
-    opacity: 0.1;
-  }
-
-  &__container {
-    position: relative;
-    display: grid;
-    width: min(100%, 1600px);
-    min-width: 0;
-    flex: 1;
-    grid-template-columns: minmax(0, 1fr);
-    align-content: start;
-    margin-inline: auto;
-    padding: clamp(82px, 20vw, 112px) clamp(16px, 4.5vw, 40px) 62px;
-  }
+  overflow: hidden;
 
   &__eyebrow {
-    display: none;
     margin: 0;
     color: var(--color-yellow);
     font-size: clamp(30px, 2.4vw, 44px);
@@ -46,9 +22,7 @@
   }
 
   &__intro {
-    position: relative;
-    z-index: 2;
-    min-width: 0;
+    z-index: 1;
   }
 
   &__title {
@@ -169,39 +143,35 @@
   }
 }
 
-// ==========================================
-// Responsive — Mobile First
-// ==========================================
-
-@media (min-width: 480px) {
-  .multi-benefits {
-    &__cards {
-      gap: 24px;
-    }
-  }
-}
-
 @media (min-width: 768px) {
   .multi-benefits {
+    --section-padding-top: 60px;
+
+    height: 100vh;
     background: var(--background-hero-desktop);
+    overflow: hidden;
 
     &__container {
-      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.8fr);
-      grid-template-rows: auto minmax(0, 1fr) auto;
-      gap: 36px 52px;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 42%;
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas: 'eyebrow eyebrow'
+                         'intro cards'
+                         'status status';
+      gap: 60px 32px;
       align-content: stretch;
-      padding-block: 76px 64px;
+      padding-bottom: 45px;
     }
 
     &__eyebrow {
-      display: block;
-      grid-column: 2;
       justify-self: end;
+      grid-area: eyebrow;
+      line-height: 0.9;
     }
 
     &__intro {
-      grid-column: 1;
-      grid-row: 2;
+      grid-area: intro;
     }
 
     &__title {
@@ -210,22 +180,34 @@
 
     &__description {
       font-size: var(--font-size-primary);
-    }
-
-    &__snake {
-      position: absolute;
-      left: 50%;
-      //width: min(38vw, 560px);
-      width: calc(292px + (100vw - 768px) * 0.102);
-      margin: 0;
-      opacity: 1;
+      max-width: 75%;
     }
 
     &__cards {
-      grid-column: 2;
-      grid-row: 2;
-      align-self: center;
+      grid-area: cards;
+      align-self: end;
       margin-top: 0;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 10%;
+        right: 99%;
+        width: calc(292px + (100vw - 768px) * 0.102);
+        aspect-ratio: 1 / 1;
+        background-image: url('/assets/images/snake-benefits-desk.webp');
+        background-size: cover;
+        background-position: center;
+        transform: rotateY(180deg);
+      }
+    }
+
+    &__card {
+      padding: 22px 25px 25px;
+      font-size: clamp(20px, 2.25vw, 30px);
+      line-height: 1.1;
+      z-index: 1;
     }
 
     app-benefits-marquee {
@@ -235,52 +217,8 @@
       margin-top: 0;
     }
 
-    &__card {
-      padding: 22px 25px 25px;
-      font-size: clamp(20px, 2.25vw, 30px);
-      line-height: 1.1;
-    }
-
     &__status {
       grid-column: 1 / -1;
-    }
-  }
-}
-
-@media (min-width: 1200px) {
-  .multi-benefits {
-    height: 100svh;
-    min-height: 720px;
-
-    &__container {
-      grid-template-columns: minmax(0, 1.08fr) minmax(430px, 0.72fr);
-      gap: 24px clamp(90px, 9vw, 170px);
-    }
-
-    &__description {
-      max-width: 34ch;
-      margin-top: clamp(20px, 3vh, 36px);
-      font-size: clamp(20px, 1.55vw, 28px);
-    }
-
-    &__snake {
-      width: min(28vw, 560px);
-    }
-
-    &__cards {
-      gap: clamp(18px, 2.5vh, 30px);
-    }
-
-    &__card {
-      font-size: clamp(20px, 1.3vw, 29px);
-    }
-  }
-}
-
-@media (min-width: 1800px) {
-  .multi-benefits {
-    &__container {
-      padding-inline: 0;
     }
   }
 }

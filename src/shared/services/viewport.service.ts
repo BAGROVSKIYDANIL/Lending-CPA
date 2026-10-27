@@ -10,7 +10,7 @@ export class ViewportService {
     private readonly breakpointObserver = inject(BreakpointObserver);
 
     readonly isMobile = toSignal(this.breakpointObserver
-        .observe('(max-width: 768px)')
+        .observe('(max-width: 767px)')
         .pipe(map(result => result.matches)),
         { initialValue: false}
     );
