@@ -228,7 +228,7 @@
   }
 
   @media (min-width: 768px) {
-    padding-top: 30px;
+    padding-top: 60px;
     height: 100vh;
 
     &__layout {
@@ -254,7 +254,6 @@
       justify-content: space-between;
     }
     &__visual {
-      position: relative;
       display: block;
       min-width: 0;
     }
@@ -313,12 +312,13 @@
 
     &__snake {
       position: absolute;
-      bottom: -124px;
+      bottom: 0;
+
       width: min(42vw, 630px);
-      left: -50px;
+      left: 0;
       pointer-events: none;
       aspect-ratio: 630 / 430;
-      background: url("public/assets/images/snake-join-desk.webp") center / cover no-repeat;
+      background: url("public/assets/images/snake-join-desk.webp") top / cover no-repeat;
     }
 
     &__socials {
@@ -331,6 +331,7 @@
 
       min-height: calc(100svh - 102px)
     }
+
     &__tab.button--arrow {
       font-size: clamp(28px, 2vh, 32px);
     }
