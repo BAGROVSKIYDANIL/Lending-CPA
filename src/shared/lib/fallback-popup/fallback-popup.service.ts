@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { DestroyRef, Injectable, signal } from '@angular/core';
 import { mapHttpError, type HttpErrorMappingOptions } from '@shared/model/error';
+import { translate } from '@shared/lib/i18n';
 
 export interface FallbackPopupData {
   readonly title: string;
@@ -53,8 +54,11 @@ export class FallbackPopupService {
   ): () => void {
     return this.show(
       {
-        title: $localize`:@@fallbackError.client.title:Something went wrong`,
-        message: $localize`:@@fallbackError.client.message:The operation couldn't be completed. Please try again.`,
+        title: translate({ en: 'Something went wrong', ru: 'Что-то пошло не так' }),
+        message: translate({
+          en: "The operation couldn't be completed. Please try again.",
+          ru: 'Не удалось завершить операцию. Попробуйте ещё раз.',
+        }),
         retry: options.retry,
       },
       { owner: options.owner },
@@ -114,8 +118,11 @@ export class FallbackPopupService {
           id: current.id,
           status: 'open',
           data: {
-            title: $localize`:@@fallbackError.client.title:Something went wrong`,
-            message: $localize`:@@fallbackError.client.message:The operation couldn't be completed. Please try again.`,
+            title: translate({ en: 'Something went wrong', ru: 'Что-то пошло не так' }),
+            message: translate({
+              en: "The operation couldn't be completed. Please try again.",
+              ru: 'Не удалось завершить операцию. Попробуйте ещё раз.',
+            }),
             retry: current.data.retry,
           },
         });

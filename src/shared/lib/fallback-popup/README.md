@@ -32,9 +32,14 @@ export class Report {
 Для собственного понятного пользователю текста используйте `show()`:
 
 ```ts
+import { translate } from '@shared/lib/i18n';
+
 this.fallbackPopup.show({
-  title: $localize`:@@report.exportError.title:Export failed`,
-  message: $localize`:@@report.exportError.message:We couldn't create the report.`,
+  title: translate({ en: 'Export failed', ru: 'Не удалось экспортировать' }),
+  message: translate({
+    en: "We couldn't create the report.",
+    ru: 'Не удалось сформировать отчёт.',
+  }),
   code: 'EXPORT_FAILED',
 });
 ```
@@ -183,9 +188,9 @@ const mapped = mapHttpError(error, { fieldErrors });
 
 ## Локализация
 
-Английские строки являются исходными `$localize`/template i18n-сообщениями. Русские
-переводы находятся в `src/locales/messages.ru.xlf`. Для нового собственного текста
-добавляйте стабильный `@@id`, выполняйте извлечение i18n и добавляйте русский перевод.
+Пользовательские строки выбираются через типизированную функцию `translate` из
+`@shared/lib/i18n`. Английский текст обязателен и используется как fallback для локали,
+у которой нет собственного перевода.
 
 ## Где находятся части реализации
 
