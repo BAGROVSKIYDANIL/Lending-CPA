@@ -27,8 +27,7 @@
   }
 
   @media (min-width: 768px) {
-    --page-padding-top: 30px;
-    --page-pading-inline: 50px;
+    --section-padding-bottom: 50px;
     --header-height: 46px;
     --section-height: 100vh;
 
@@ -39,7 +38,6 @@
     display: grid;
     grid-template-rows: var(--header-height) 1fr  auto;
     align-items: center;
-    padding-bottom: 50px;
   }
 
   @media (min-width: 1280px) {

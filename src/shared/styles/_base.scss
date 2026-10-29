@@ -57,6 +57,7 @@ a {
 .container {
   padding-inline: var(--section-pading-inline, 16px);
   padding-top: var(--section-padding-top, 10px);
+  padding-bottom: var(--section-padding-bottom, 0);
 
   @media (min-width: 768px) {
     --section-pading-inline: 50px;

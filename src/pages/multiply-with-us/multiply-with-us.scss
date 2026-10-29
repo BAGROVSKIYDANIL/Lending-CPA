@@ -3,10 +3,10 @@
 }
 
 .multiply {
+  --section-padding-top: 30px;
+
   position: relative;
   height: calc(100vh - var(--header-height));
-  padding-block-start: 74px;
-  padding-block-end: 20px;
   color: var(--color-text-primary);
 
   &__layout {
@@ -228,7 +228,8 @@
   }
 
   @media (min-width: 768px) {
-    padding-top: 60px;
+    --section-padding-top: 60px;
+
     height: 100vh;
 
     &__layout {

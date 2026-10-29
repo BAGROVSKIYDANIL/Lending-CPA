@@ -2,10 +2,11 @@
 
 :host {
   display: block;
-  --page-padding-top: 30px;
 }
 
 .multi-tasks {
+  --section-padding-top: 30px;
+
   color: var(--color-text-primary);
   position: relative;
   z-index: 1;
@@ -112,13 +113,14 @@
   }
 
   @media (min-width: 768px) {
+    --section-padding-bottom: 50px;
+
     display: grid;
     grid-template-columns: 40% 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas: "heading heading" "intro cards";
     column-gap: 24px;
     height: 100vh;
-    padding: 60px 50px 50px 50px;
     &__heading {
       grid-area: heading;
       margin-bottom: 30px;
@@ -149,6 +151,7 @@
   }
 
   @media (min-width: 1280px) {
+    --section-padding-top: 60px;
 
     &__cards {
       grid-template-columns: repeat(2, minmax(0, 1fr));
