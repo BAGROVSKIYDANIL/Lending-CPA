@@ -10,4 +10,62 @@ html {
 
 body {
   margin: 0;
+  font-family: var(--font-family-primary) sans-serif;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text);
+  line-height: 120%;
+  background-color: var(--color-background);
 }
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  margin: unset;
+  padding: unset;
+  border: unset;
+  background-color: transparent;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-secondary) sans-serif;
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  padding-inline: var(--section-pading-inline, 16px);
+  padding-top: var(--section-padding-top, 10px);
+  padding-bottom: var(--section-padding-bottom, 0);
+
+  @media (min-width: 768px) {
+    --section-pading-inline: 50px;
+    --section-padding-top: 30px;
+  }
+
+  @media (min-width: 1280px) {
+    --section-padding-top: 60px;
+  }
+}
+

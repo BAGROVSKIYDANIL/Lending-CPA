@@ -1,0 +1,73 @@
+<section class="multiply container" aria-labelledby="multiply-title">
+  <div class="multiply__layout">
+      <h2 id="multiply-title" class="multiply__title">MULTIPLY WITH US</h2>
+      <div class="multiply__body">
+          <div class="multiply__visual">
+              <div class="multiply__tabs" aria-label="Collaboration type">
+                  @for (category of categories; track category.id) {
+                      <button
+                              class="multiply__tab button button--arrow"
+                              [class.multiply__tab--active]="activeCategory() === category.id"
+                              type="button"
+                              [attr.aria-pressed]="activeCategory() === category.id"
+                              (click)="selectCategory(category.id)"
+                      >
+                          {{ category.label }}
+                      </button>
+                  }
+              </div>
+              <div class="multiply__snake"></div>
+          </div>
+          <div class="multiply__content">
+              <div class="multiply__card" aria-live="polite" [attr.aria-busy]="status() === 'loading'">
+                  @switch (status()) {
+                      @case ('loading') {
+                          <p class="multiply__state" role="status">Loading…</p>
+                      }
+                      @case ('error') {
+                          <div class="multiply__state">
+                              <p class="multiply__state-message">Content is temporarily unavailable.</p>
+                              <button class="multiply__retry" type="button" (click)="retry()">Try again</button>
+                          </div>
+                      }
+                      @case ('loaded') {
+                          @let content = activeContent();
+                          <div class="multiply__card-content">
+                              <p class="multiply__copy">{{ content?.steps?.step_1 }}</p>
+                              <span class="multiply__down-arrow" aria-hidden="true"></span>
+                              <p class="multiply__copy">{{ content?.steps?.step_2 }}</p>
+                              <span class="multiply__down-arrow" aria-hidden="true"></span>
+                              <button
+                                      class="multiply__cta button button--3d button-3d"
+                                      type="button"
+                                      (click)="openForm()"
+                              >
+                                  {{ activeOption().cta }}
+                              </button>
+                          </div>
+                      }
+                  }
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <footer class="multiply__footer">
+      <div></div>
+      <div class="multiply__wrapper">
+          <nav class="multiply__socials" aria-label="Social media">
+              <a class="multiply__link" href="#">INSTAGRAM</a>
+              <a class="multiply__link" href="#">TELEGRAM</a>
+              <a class="multiply__link" href="#">LINKEDIN</a>
+          </nav>
+          <a class="multiply__link multiply__top-link" href="#top">
+              SCROLL TO TOP
+              <span class="multiply__up-arrow" aria-hidden="true"></span>
+          </a>
+      </div>
+  </footer>
+
+  @if (formOpen()) {
+    <app-application-form (closed)="closeForm()" (submitted)="submitApplication($event)" />
+  }
+</section>

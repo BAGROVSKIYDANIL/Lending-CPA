@@ -1,20 +1,62 @@
-@mixin bg-grid {
+@mixin navigation-link {
+  --link-color: var(--color-text-secondary);
+
+  font-weight: 700;
+  font-family: var(--font-family-primary), sans-serif;
+  font-size: 32px;
+  text-decoration: underline;
+  text-transform: uppercase;
+  color: var(--link-color);
+
+  @media (min-width: 768px) {
+    font-size: var(--font-size-primary);
+  }
+
+  &:hover {
+    --link-color: var(--color-text-primary);
+  }
+}
+
+@mixin page-background {
+  --page-background: var(--background-hero-mobile);
+  --bg-grid-mask: url('/assets/masks/bg-grid-mob-mask.webp');
+  --grid-width: auto;
+  --grid-height: 107vh;
+
   position: relative;
+  background-image: var(--page-background);
+  background-repeat: no-repeat;
 
   &::before {
-    position: absolute;
     content: '';
-    inset: 0;
-    background-image:  url('assets/images/bg-grid-mob.webp');
+    position: fixed;
+    left: -78px;
+    top: -4vh;
+    height: var(--grid-height);
+    width: var(--grid-width);
+    aspect-ratio: 1013/909;
+    background-image: url('/assets/images/bg-grid.webp');
     background-repeat: no-repeat;
-    background-size: auto 107vh;
-    background-position: -70px center;
-    mask-image: var(--bg-mask);
+    background-size: cover;
+    background-position: center;
+    mask-image: var(--bg-grid-mask);
+    mask-repeat: no-repeat;
+    mask-size: auto 107vh;
+    mask-position: -72px center;
+    opacity: 0.2;
+    pointer-events: none;
+  }
 
-    @media (min-width: 768px) {
-      background-image: url('assets/images/bg-grid-desk.webp');
+  @media (min-width: 768px) {
+    --bg-grid-mask: url('public/assets/masks/bg-grid-desk-mask.webp');
+    --page-background: var(--background-hero-desktop);
+    --grid-width: 107vw;
+    --grid-height: auto;
+
+    &::before {
       background-size: cover;
       background-position: center;
+      left: -15px;
     }
   }
 }

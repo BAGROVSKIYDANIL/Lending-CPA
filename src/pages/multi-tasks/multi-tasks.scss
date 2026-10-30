@@ -1,0 +1,214 @@
+@use '../../shared/styles/base-mixins' as mixins;
+
+:host {
+  display: block;
+}
+
+.multi-tasks {
+  --section-padding-top: 30px;
+
+  color: var(--color-text-primary);
+  position: relative;
+  z-index: 1;
+
+  &__heading {
+    color: var(--color-text-secondary);
+    font-family: var(--font-family-primary), sans-serif;
+    font-size: 40px;
+    font-weight: var(--font-weight-bold);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    text-align: right;
+  }
+
+  &__intro,
+  &__card {
+    border-radius: 8px;
+    background: var(--color-purple-main);
+  }
+
+  &__intro {
+    background: linear-gradient(
+            -124.6deg,
+            var(--color-gradient-purple-600) 1.29%,
+            var(--color-hero-purple) 55.28%,
+            var(--color-hero-dark) 98.11%);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  &__text {
+    font-family: var(--font-family-primary), sans-serif;
+    font-size: var(--font-size-primary);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    padding: 20px 12px 34px;
+
+    &--accent {
+      color: var(--color-text-secondary);
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  &__cards {
+    display: grid;
+    gap: 20px;
+  }
+
+  &__card {
+    padding: 10px 10px 20px;
+  }
+
+  &__card-title {
+    color: var(--color-text-secondary);
+    font-family: var(--font-family-primary), sans-serif;
+    font-size: 28px;
+    line-height: 1;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  &__card-text {
+    font-family: var(--font-family-primary), sans-serif;
+    font-size: var(--font-size-primary);
+    line-height: 1.2;
+    opacity: 0.9;
+  }
+
+  &__status {
+    display: grid;
+    min-height: 400px;
+    place-content: center;
+    justify-items: center;
+    gap: 16px;
+    font-family: var(--font-family-secondary), sans-serif;
+    text-align: center;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__loader {
+    width: 40px;
+    aspect-ratio: 1;
+    border: 3px solid rgb(254 233 125 / 25%);
+    border-top-color: var(--color-yellow);
+    border-radius: 50%;
+    animation: multi-tasks-loader 0.8s linear infinite;
+  }
+
+  &__retry {
+    padding: 10px 18px;
+    border: 2px solid var(--color-yellow);
+    border-radius: 999px;
+    color: var(--color-dark);
+    background: var(--color-yellow);
+    cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    --section-padding-bottom: 50px;
+
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "heading heading" "intro cards";
+    column-gap: 24px;
+    height: 100vh;
+    &__heading {
+      grid-area: heading;
+      margin-bottom: 30px;
+    }
+
+    &__intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      grid-area: intro;
+      margin-bottom: 0;
+    }
+    &__text {
+      padding-bottom: 0;
+    }
+    &__cards {
+      grid-area: cards;
+      grid-template-columns: 1fr;
+    }
+
+    &__card-title {
+      font-size: var(--font-size-primary);
+    }
+
+    &__card-text {
+      font-size: var(--font-size-small);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    --section-padding-top: 60px;
+
+    &__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(6, minmax(0, 1fr));
+    }
+
+    &__card {
+      &:nth-child(1) {
+        grid-column: 1;
+        grid-row: 1 / span 3;
+      }
+
+      &:nth-child(2) {
+        grid-column: 1;
+        grid-row: 4 / span 3;
+      }
+
+      &:nth-child(3) {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+      }
+
+      &:nth-child(4) {
+        grid-column: 2;
+        grid-row: 3 / span 2;
+      }
+
+      &:nth-child(5) {
+        grid-column: 2;
+        grid-row: 5 / span 2;
+      }
+    }
+
+    &__card-title {
+      font-size: 28px;
+    }
+
+    &__card-text {
+      font-size: var(--font-size-primary);
+    }
+  }
+  @media (min-width: 1280px) {
+    &__heading {
+      margin-bottom: 60px;
+    }
+  }
+}
+
+
+@keyframes multi-tasks-loader {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .multi-tasks__loader {
+    animation: none;
+  }
+}

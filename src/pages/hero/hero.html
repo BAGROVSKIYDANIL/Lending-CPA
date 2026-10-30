@@ -1,0 +1,26 @@
+<section class="hero container">
+    @if (!viewport.isMobile()) {
+         <app-header />
+    }
+    <div class="hero__wrapper">
+        <h1 class="hero__title title"><span class="title__first-row">practice</span>
+            <span class="title__wrapper">makes
+            @if (!viewport.isMobile()) { <span class="title__viewport">
+                <span class="title__words">
+                <span class="title__word">profit</span>
+                <span class="title__word">growth</span>
+                <span class="title__word">skills</span>
+                </span>
+                </span> } @else {
+                <span class="title__word">profit</span>
+            }
+            </span>
+        </h1>
+        <p class="hero__text">We provide effective solutions, tested and refined on our own products and ad budgets</p>
+        <button class="button button--3d">get in touch</button>
+    </div>
+    @if (!viewport.isMobile()) {
+        <app-socials />
+    }
+<!--    <img class="hero__img" src="/assets/images/snake-main-mob.webp" alt="">-->
+</section>

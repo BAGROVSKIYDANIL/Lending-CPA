@@ -1,0 +1,29 @@
+@use '../../styles/base-mixins' as mixins;
+
+:host {
+  align-self: start;
+
+  @media (min-width: 768px) {
+    align-self: center;
+  }
+}
+
+.languages {
+  display: flex;
+  justify-content: center;
+
+  &__link {
+  @include mixins.navigation-link;
+
+    }
+
+  &__divider {
+    @include mixins.navigation-link;
+
+    text-decoration: none;
+  }
+
+  &__active {
+    color: var(--color-text-primary);
+  }
+}

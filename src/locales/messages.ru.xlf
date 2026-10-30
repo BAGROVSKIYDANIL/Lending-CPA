@@ -1,6 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" target-language="ru" datatype="plaintext" original="ng2.template">
-    <body/>
+    <body>
+      <trans-unit id="fallbackError.request.title" datatype="html">
+        <source>We couldn't process the request</source>
+        <target>Не удалось обработать запрос</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.request.message" datatype="html">
+        <source>Check the entered data and try again.</source>
+        <target>Проверьте введённые данные и попробуйте ещё раз.</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.access.title" datatype="html">
+        <source>Access denied</source>
+        <target>Доступ запрещён</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.access.message" datatype="html">
+        <source>You don't have permission to perform this action.</source>
+        <target>У вас нет разрешения на выполнение этого действия.</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.notFound.title" datatype="html">
+        <source>Resource not found</source>
+        <target>Ресурс не найден</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.notFound.message" datatype="html">
+        <source>The requested resource is unavailable.</source>
+        <target>Запрошенный ресурс недоступен.</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.timeout.title" datatype="html">
+        <source>The request took too long</source>
+        <target>Запрос занял слишком много времени</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.timeout.message" datatype="html">
+        <source>The service didn't respond in time. Please try again.</source>
+        <target>Сервис не ответил вовремя. Попробуйте ещё раз.</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.rateLimit.title" datatype="html">
+        <source>Too many requests</source>
+        <target>Слишком много запросов</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.rateLimit.message" datatype="html">
+        <source>Please wait a little before trying again.</source>
+        <target>Подождите немного перед повторной попыткой.</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.server.title" datatype="html">
+        <source>Service temporarily unavailable</source>
+        <target>Сервис временно недоступен</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.server.message" datatype="html">
+        <source>Something went wrong on our side. Please try again.</source>
+        <target>На нашей стороне произошла ошибка. Попробуйте ещё раз.</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.network.title" datatype="html">
+        <source>Connection problem</source>
+        <target>Проблема с подключением</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.network.message" datatype="html">
+        <source>We couldn't reach the service. Check your connection and try again.</source>
+        <target>Не удалось связаться с сервисом. Проверьте подключение и попробуйте ещё раз.</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.unknown.title" datatype="html">
+        <source>Something went wrong</source>
+        <target>Что-то пошло не так</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.unknown.message" datatype="html">
+        <source>We couldn't complete the operation. Please try again later.</source>
+        <target>Не удалось завершить операцию. Попробуйте позже.</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.client.title" datatype="html">
+        <source>Something went wrong</source>
+        <target>Что-то пошло не так</target>
+      </trans-unit>
+      <trans-unit id="fallbackError.client.message" datatype="html">
+        <source>The operation couldn't be completed. Please try again.</source>
+        <target>Не удалось завершить операцию. Попробуйте ещё раз.</target>
+      </trans-unit>
+      <trans-unit id="fallbackPopup.closeAria" datatype="html">
+        <source>Close</source>
+        <target>Закрыть</target>
+      </trans-unit>
+      <trans-unit id="fallbackPopup.errorCode" datatype="html">
+        <source>Error code</source>
+        <target>Код ошибки</target>
+      </trans-unit>
+      <trans-unit id="fallbackPopup.retryAfter" datatype="html">
+        <source>Retry available in <x id="INTERPOLATION" equiv-text="{{ retrySeconds() }}"/> seconds.</source>
+        <target>Повтор будет доступен через <x id="INTERPOLATION" equiv-text="{{ retrySeconds() }}"/> сек.</target>
+      </trans-unit>
+      <trans-unit id="fallbackPopup.close" datatype="html">
+        <source>Close</source>
+        <target>Закрыть</target>
+      </trans-unit>
+      <trans-unit id="fallbackPopup.retrying" datatype="html">
+        <source>Trying…</source>
+        <target>Повторяем…</target>
+      </trans-unit>
+      <trans-unit id="fallbackPopup.retry" datatype="html">
+        <source>Retry</source>
+        <target>Повторить</target>
+      </trans-unit>
+    </body>
   </file>
 </xliff>

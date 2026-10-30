@@ -1,0 +1,41 @@
+<section class="multi-benefits container" [attr.aria-label]="copy.eyebrow">
+
+  <div class="multi-benefits__container">
+      @if (!viewport.isMobile()) {
+          <p class="multi-benefits__eyebrow">{{ copy.eyebrow }}</p>
+      }
+      @switch (state()) {
+          @case ('loading') {
+              <div class="multi-benefits__status" role="status">
+                  <span class="multi-benefits__loader" aria-hidden="true"></span>
+                  <span>{{ copy.loading }}</span>
+              </div>
+          }
+          @case ('error') {
+              <div class="multi-benefits__status multi-benefits__status--error" role="alert">
+                  <p>{{ copy.error }}</p>
+                  <button class="multi-benefits__retry" type="button" (click)="load()">{{ copy.retry }}</button>
+              </div>
+          }
+          @case ('ready') {
+              @if (content(); as benefits) {
+                  <div class="multi-benefits__intro">
+                      <h2 class="multi-benefits__title" id="multi-benefits-title">
+                          @for (part of titleParts(); track $index) {
+                              <span [class.multi-benefits__title-accent]="part.highlighted">{{ part.text }}</span>
+                          }
+                      </h2>
+                      <p class="multi-benefits__description">{{ benefits.description }}</p>
+                  </div>
+                  <app-benefits-marquee />
+
+                  <ul class="multi-benefits__cards">
+                      @for (benefit of benefits.benefits; track $index) {
+                          <li class="multi-benefits__card">{{ benefit }}</li>
+                      }
+                  </ul>
+              }
+          }
+      }
+  </div>
+</section>

@@ -1,0 +1,18 @@
+<div class="benefits-marquee" role="group" aria-label="DREAM BIG EARN BIGGER!">
+  <div class="benefits-marquee__track" aria-hidden="true">
+    @for (copy of [0, 1]; track copy) {
+    <div class="benefits-marquee__group">
+      @for (item of [0, 1]; track item) {
+      <span class="benefits-marquee__text">DREAM BIG EARN BIGGER!</span>
+      <img
+        class="benefits-marquee__icon"
+        src="/assets/icons/snake-logo.svg"
+        width="54"
+        height="43"
+        alt=""
+      />
+      }
+    </div>
+    }
+  </div>
+</div>
