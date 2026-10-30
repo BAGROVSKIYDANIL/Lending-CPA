@@ -1,8 +1,18 @@
 import { provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners } from '@angular/core';
+import {
+    ApplicationConfig,
+    LOCALE_ID,
+    provideBrowserGlobalErrorListeners,
+    provideAppInitializer,
+    inject
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { API_CONFIG } from '@shared/api';
 import { routes } from './app.routes';
+import { provideTranslateService, TranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageService } from '@shared/i18n';
+import { firstValueFrom } from 'rxjs';
 import { environment } from '../environments/environment';
 
 const apiHeaderSeparator = environment.apiHeader.indexOf(':');
@@ -30,5 +40,23 @@ export const appConfig: ApplicationConfig = {
         localeMap: { 'en-US': 'en' },
       },
     },
+      provideTranslateService({
+          loader: provideTranslateHttpLoader({
+              prefix: '/i18n/',
+              suffix: '.json',
+          }),
+          fallbackLang: 'en',
+          lang: 'en',
+      }),
+      provideAppInitializer(() => {
+          const translate = inject(TranslateService);
+          const languageService = inject(LanguageService);
+
+          translate.addLangs(['en', 'ru', 'uk']);
+
+          return firstValueFrom(
+              translate.use(languageService.getInitialLanguage())
+          ).then(() => undefined);
+      }),
   ],
 };
