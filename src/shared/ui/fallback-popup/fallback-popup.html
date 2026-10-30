@@ -10,7 +10,6 @@
     <button
       class="fallback-popup__close"
       type="button"
-      [attr.aria-label]="closeLabel"
       (click)="close()"
     >
       <span aria-hidden="true">x</span>
@@ -22,12 +21,12 @@
 
     @if (state.data.code) {
       <p class="fallback-popup__code">
-        <span>{{ errorCodeLabel }}</span
+<!--        <span>{{ errorCodeLabel }}</span-->
         >: {{ state.data.code }}
       </p>
     }
     @if (retrySeconds() > 0) {
-      <p class="fallback-popup__retry-note" aria-live="polite">{{ retryNote() }}</p>
+<!--      <p class="fallback-popup__retry-note" aria-live="polite">{{ retryNote() }}</p>-->
     }
 
     <div class="fallback-popup__actions">
@@ -36,7 +35,7 @@
         type="button"
         (click)="close()"
       >
-        <span>{{ closeLabel }}</span>
+<!--        <span>{{ closeLabel }}</span>-->
       </button>
       @if (state.data.retry) {
         <button
@@ -46,9 +45,9 @@
           (click)="retry()"
         >
           @if (state.status === 'retrying') {
-            <span>{{ retryingLabel }}</span>
+<!--            <span>{{ retryingLabel }}</span>-->
           } @else {
-            <span>{{ retryLabel }}</span>
+<!--            <span>{{ retryLabel }}</span>-->
           }
         </button>
       }

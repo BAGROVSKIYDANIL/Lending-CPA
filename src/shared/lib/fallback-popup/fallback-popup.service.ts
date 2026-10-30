@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { DestroyRef, Injectable, signal } from '@angular/core';
-import { mapHttpError, type HttpErrorMappingOptions } from '@shared/model/error';
-import { translate } from '@shared/lib/i18n';
+import { type HttpErrorMappingOptions } from '@shared/model/error';
 
 export interface FallbackPopupData {
   readonly title: string;
@@ -46,24 +45,24 @@ export class FallbackPopupService {
     return () => this.close(id);
   }
 
-  showClientError(
-    options: {
-      readonly retry?: () => void | Promise<void>;
-      readonly owner?: DestroyRef;
-    } = {},
-  ): () => void {
-    return this.show(
-      {
-        title: translate({ en: 'Something went wrong', ru: 'Что-то пошло не так' }),
-        message: translate({
-          en: "The operation couldn't be completed. Please try again.",
-          ru: 'Не удалось завершить операцию. Попробуйте ещё раз.',
-        }),
-        retry: options.retry,
-      },
-      { owner: options.owner },
-    );
-  }
+  // showClientError(
+  //   options: {
+  //     readonly retry?: () => void | Promise<void>;
+  //     readonly owner?: DestroyRef;
+  //   } = {},
+  // ): () => void {
+  //   return this.show(
+  //     {
+  //       title: translate({ en: 'Something went wrong', ru: 'Что-то пошло не так' }),
+  //       message: translate({
+  //         en: "The operation couldn't be completed. Please try again.",
+  //         ru: 'Не удалось завершить операцию. Попробуйте ещё раз.',
+  //       }),
+  //       retry: options.retry,
+  //     },
+  //     { owner: options.owner },
+  //   );
+  // }
 
   showHttpError(error: HttpErrorResponse, options: ShowHttpErrorOptions = {}): () => void {
     const mapped = mapHttpError(error, { fieldErrors: options.fieldErrors });
@@ -86,47 +85,47 @@ export class FallbackPopupService {
     this.popupState.set(null);
   }
 
-  async retry(): Promise<void> {
-    const current = this.popupState();
-    if (!current?.data.retry || current.status === 'retrying') return;
-
-    this.popupState.set({ ...current, status: 'retrying' });
-    try {
-      await current.data.retry();
-      this.close(current.id);
-    } catch (error: unknown) {
-      if (this.popupState()?.id !== current.id) return;
-      if (error instanceof HttpErrorResponse) {
-        const mapped = mapHttpError(error);
-        if (!mapped.showPopup) {
-          this.close(current.id);
-          return;
-        }
-        this.popupState.set({
-          id: current.id,
-          status: 'open',
-          data: {
-            title: mapped.title,
-            message: mapped.message,
-            code: mapped.code,
-            retry: mapped.retryable ? current.data.retry : undefined,
-            retryAfterSeconds: mapped.retryAfterSeconds,
-          },
-        });
-      } else {
-        this.popupState.set({
-          id: current.id,
-          status: 'open',
-          data: {
-            title: translate({ en: 'Something went wrong', ru: 'Что-то пошло не так' }),
-            message: translate({
-              en: "The operation couldn't be completed. Please try again.",
-              ru: 'Не удалось завершить операцию. Попробуйте ещё раз.',
-            }),
-            retry: current.data.retry,
-          },
-        });
-      }
-    }
-  }
+  // async retry(): Promise<void> {
+  //   const current = this.popupState();
+  //   if (!current?.data.retry || current.status === 'retrying') return;
+  //
+  //   this.popupState.set({ ...current, status: 'retrying' });
+  //   try {
+  //     await current.data.retry();
+  //     this.close(current.id);
+  //   } catch (error: unknown) {
+  //     if (this.popupState()?.id !== current.id) return;
+  //     if (error instanceof HttpErrorResponse) {
+  //       const mapped = mapHttpError(error);
+  //       if (!mapped.showPopup) {
+  //         this.close(current.id);
+  //         return;
+  //       }
+  //       this.popupState.set({
+  //         id: current.id,
+  //         status: 'open',
+  //         data: {
+  //           title: mapped.title,
+  //           message: mapped.message,
+  //           code: mapped.code,
+  //           retry: mapped.retryable ? current.data.retry : undefined,
+  //           retryAfterSeconds: mapped.retryAfterSeconds,
+  //         },
+  //       });
+  //     } else {
+  //       this.popupState.set({
+  //         id: current.id,
+  //         status: 'open',
+  //         data: {
+  //           title: translate({ en: 'Something went wrong', ru: 'Что-то пошло не так' }),
+  //           message: translate({
+  //             en: "The operation couldn't be completed. Please try again.",
+  //             ru: 'Не удалось завершить операцию. Попробуйте ещё раз.',
+  //           }),
+  //           retry: current.data.retry,
+  //         },
+  //       });
+  //     }
+  //   }
+  // }
 }

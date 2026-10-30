@@ -1,5 +1,5 @@
 export {
-  mapHttpError,
+  // mapHttpError,
   type FallbackError,
   type FallbackErrorKind,
   type HttpErrorMappingOptions,
