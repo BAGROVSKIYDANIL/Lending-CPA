@@ -142,7 +142,18 @@
     transform: rotate(1turn);
   }
 }
-
+@media (max-width: 767px) and (max-height: 800px) {
+  .multi-benefits {
+    &__cards {
+      gap: 10px;
+      margin-top: 14px;
+    }
+    &__card {
+      padding: 8px;
+      font-size: var(--font-size-small);
+    }
+  }
+}
 @media (min-width: 768px) {
   .multi-benefits {
     --section-padding-top: 60px;
