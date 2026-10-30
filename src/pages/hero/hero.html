@@ -1,5 +1,7 @@
-<section class="hero">
-    <app-header />
+<section class="hero container">
+    @if (!viewport.isMobile()) {
+         <app-header />
+    }
     <div class="hero__wrapper">
         <h1 class="hero__title title"><span class="title__first-row">practice</span>
             <span class="title__wrapper">makes
@@ -20,4 +22,5 @@
     @if (!viewport.isMobile()) {
         <app-socials />
     }
+<!--    <img class="hero__img" src="/assets/images/snake-main-mob.webp" alt="">-->
 </section>

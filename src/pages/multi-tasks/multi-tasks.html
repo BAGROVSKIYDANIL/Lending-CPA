@@ -1,6 +1,6 @@
-<section class="multi-tasks" [attr.aria-label]="copy.heading">
+<section class="multi-tasks container" [attr.aria-label]="copy.heading">
       @if (!viewport.isMobile()) {
-          <h1 class="multi-tasks__heading">{{ copy.heading }}</h1>
+          <h2 class="multi-tasks__heading">{{ copy.heading }}</h2>
       }
     @switch (state()) { @case ('loading') {
     <div class="multi-tasks__status" role="status">

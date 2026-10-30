@@ -16,12 +16,12 @@ export const routes: Routes = [
   {
     path: 'benefits',
     pathMatch: 'full',
-    loadComponent: () => import('@widgets/multi-benefits/ui/multi-benefits').then((m) => m.MultiBenefits),
+    loadComponent: () => import('@pages/multi-benefits/multi-benefits').then((m) => m.MultiBenefits),
   },
   {
     path: 'with-us',
     pathMatch: 'full',
-    loadComponent: () => import('@widgets/multiply-with-us/multiply-with-us').then((m) => m.MultiplyWithUs),
+    loadComponent: () => import('@pages/multiply-with-us/multiply-with-us').then((m) => m.MultiplyWithUs),
   },
   {
     path: '404',
