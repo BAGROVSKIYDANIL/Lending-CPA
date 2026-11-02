@@ -6,6 +6,8 @@
 
   --header-height: 39px;
   --section-height: calc(100vh - var(--header-height));
-
 }
 
+:root.is-preloading .app-shell > app-header {
+  visibility: hidden;
+}

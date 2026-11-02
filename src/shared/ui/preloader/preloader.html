@@ -1,0 +1,17 @@
+@if (isVisible()) {
+<div class="preloader" [class.preloader--leaving]="isLeaving()">
+  <div class="preloader__content">
+    <span class="preloader__percentage">{{ progress() }}%</span>
+    <div
+      class="preloader__bar"
+      aria-label="Page loading progress: {{ progress() }}%"
+      role="progressbar"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      [attr.aria-valuenow]="progress()"
+    >
+      <span class="preloader__fill" [style.width.%]="progress()"></span>
+    </div>
+  </div>
+</div>
+}
