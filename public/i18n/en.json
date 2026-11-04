@@ -1,8 +1,39 @@
 {
   "header": {
-
+    "menu": "menu",
+    "links": {
+      "main": "Main",
+      "team": "Team",
+      "benefits": "Benefits",
+      "join-us": "Join us"
+    }
   },
   "hero": {
+    "title": {
+      "first": "practice",
+      "second": "makes"
+    },
+    "description": "We provide effective solutions, tested and refined on our own products and ad budgets",
     "button": "Get in Touch"
+  },
+  "join": {
+    "button": "Join the team",
+    "groupButtons": {
+      "mediaBuyers": "For Media Buyers",
+      "businesses": "For Businesses",
+      "partners": "For Partners"
+    }
+  },
+  "notFound": {
+    "button": "Take me back"
+  },
+  "form": {
+    "title": "Fields with an asterisk (*) are mandatory",
+    "placeholder": {
+      "name": "Your Name",
+      "contactMethod": "Contact Method",
+      "contact": "Your Contact*"
+    },
+    "button": "Submit"
   }
 }

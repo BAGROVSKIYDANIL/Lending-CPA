@@ -40,7 +40,7 @@
     height: 78px;
     margin: 0 auto 40px;
     background-color: var(--color-purple-main);
-    mask: url('public/assets/icons/snake-logo.svg') center / contain no-repeat;
+    mask: url('/assets/icons/snake-logo.svg') center / contain no-repeat;
   }
   &__hint {
     margin-bottom: 20px;
