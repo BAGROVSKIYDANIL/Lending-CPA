@@ -52,7 +52,7 @@ export const appConfig: ApplicationConfig = {
           const translate = inject(TranslateService);
           const languageService = inject(LanguageService);
 
-          translate.addLangs(['en', 'ru', 'uk']);
+          translate.addLangs(['en', 'ru', 'ua']);
 
           return firstValueFrom(
               translate.use(languageService.getInitialLanguage())
