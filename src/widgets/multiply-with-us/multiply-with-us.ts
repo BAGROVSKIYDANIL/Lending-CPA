@@ -5,6 +5,8 @@ import { MultiplyService, type MultiplyItem } from '@entities/multiply';
 import { ApplicationForm, ContactFormService, type ApplicationData } from '@features/form';
 import { FallbackPopupService } from '@shared/lib/fallback-popup';
 import { firstValueFrom } from 'rxjs';
+import {LanguageService} from "@shared/i18n";
+import {TranslatePipe} from "@ngx-translate/core";
 
 type MultiplyCategory = 'mediaBuyers' | 'businesses' | 'partners';
 type LoadingStatus = 'loading' | 'loaded' | 'error';
@@ -24,7 +26,7 @@ const CATEGORY_INDEX: Readonly<Record<MultiplyCategory, number>> = {
 @Component({
   selector: 'app-multiply-with-us',
   standalone: true,
-  imports: [ApplicationForm],
+    imports: [ApplicationForm, TranslatePipe],
   templateUrl: './multiply-with-us.html',
   styleUrl: './multiply-with-us.scss',
 })
@@ -33,6 +35,9 @@ export class MultiplyWithUs {
   private readonly contactFormService = inject(ContactFormService);
   private readonly fallbackPopup = inject(FallbackPopupService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly languageService = inject(LanguageService);
+
+  readonly currentLanguage = this.languageService.language()
 
   readonly applicationForm = viewChild(ApplicationForm);
   readonly categories: readonly CategoryOption[] = [
@@ -44,9 +49,6 @@ export class MultiplyWithUs {
   readonly status = signal<LoadingStatus>('loading');
   readonly formOpen = signal(false);
   private readonly items = signal<readonly MultiplyItem[]>([]);
-  readonly activeOption = computed(
-    () => this.categories.find(({ id }) => id === this.activeCategory()) ?? this.categories[0],
-  );
   readonly activeContent = computed(
     () => this.items()[CATEGORY_INDEX[this.activeCategory()]] ?? null,
   );
@@ -84,7 +86,7 @@ export class MultiplyWithUs {
   private loadContent(): void {
     this.status.set('loading');
     this.multiplyService
-      .getMultiply()
+      .getMultiply(this.currentLanguage)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (items) => this.acceptContent(items),

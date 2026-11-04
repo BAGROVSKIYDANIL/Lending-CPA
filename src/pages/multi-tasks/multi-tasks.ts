@@ -11,6 +11,7 @@ import { TasksService, type TasksResponse } from '@entities/task';
 import { CombinedPreloader } from '@shared/lib/preloader';
 import { finalize } from 'rxjs';
 import {ViewportService} from "@shared/services/viewport.service";
+import {LanguageService} from "@shared/i18n";
 
 type LoadingState = 'loading' | 'ready' | 'error';
 
@@ -61,7 +62,11 @@ export class MultiTasks {
 
   readonly state = signal<LoadingState>('loading');
   readonly content = signal<TasksResponse | null>(null);
-  readonly copy = interfaceCopy[this.language];
+  private readonly languageService = inject(LanguageService);
+    readonly currentLanguage = this.languageService.language()
+    readonly copy = computed(() => {
+        return interfaceCopy[this.currentLanguage];
+    });
   readonly viewport = inject(ViewportService)
 
   readonly descriptionPart = computed<readonly descriptionPart[]>(() => {
@@ -85,7 +90,7 @@ export class MultiTasks {
     const finishLoading = this.preloader.begin('api', 'tasks');
 
     this.tasksService
-      .getTasks(this.language)
+      .getTasks(this.currentLanguage)
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(finishLoading))
       .subscribe({
         next: (content) => {
@@ -99,10 +104,5 @@ export class MultiTasks {
         },
         error: () => this.state.set('error'),
       });
-  }
-
-  private get language(): 'en' | 'ru' | 'ua' {
-    const language = this.locale.toLowerCase().split('-')[0];
-    return language === 'ru' || language === 'ua' ? language : 'en';
   }
 }

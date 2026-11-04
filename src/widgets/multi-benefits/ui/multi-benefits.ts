@@ -12,6 +12,7 @@ import { BenefitsService, type BenefitsResponse } from '@entities/benefit';
 import { CombinedPreloader } from '@shared/lib/preloader';
 import { finalize } from 'rxjs';
 import { BenefitsMarquee } from './benefits-marquee';
+import {LanguageService} from "@shared/i18n";
 
 type LoadingState = 'loading' | 'ready' | 'error';
 
@@ -60,11 +61,14 @@ export class MultiBenefits {
   private readonly benefitsService = inject(BenefitsService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly preloader = inject(CombinedPreloader);
-  private readonly locale = inject(LOCALE_ID);
 
   readonly state = signal<LoadingState>('loading');
   readonly content = signal<BenefitsResponse | null>(null);
-  readonly copy = interfaceCopy[this.language];
+    private readonly languageService = inject(LanguageService);
+    readonly currentLanguage = this.languageService.language()
+    readonly copy = computed(() => {
+        return interfaceCopy[this.currentLanguage];
+    });
   readonly titleParts = computed<readonly TitlePart[]>(() => {
     const title = this.content()?.title ?? '';
     return title
@@ -86,7 +90,7 @@ export class MultiBenefits {
     const finishLoading = this.preloader.begin('api', 'benefits');
 
     this.benefitsService
-      .getBenefits(this.language)
+      .getBenefits(this.currentLanguage)
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(finishLoading))
       .subscribe({
         next: (content) => {
@@ -99,10 +103,5 @@ export class MultiBenefits {
         },
         error: () => this.state.set('error'),
       });
-  }
-
-  private get language(): 'en' | 'ru' | 'ua' {
-    const language = this.locale.toLowerCase().split('-')[0];
-    return language === 'ru' || language === 'ua' ? language : 'en';
   }
 }

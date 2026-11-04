@@ -1,7 +1,16 @@
 <div class="languages">
-    <a (click)="languageService.changeLanguage('en')" class="languages__link" [routerLink]="'eng'" target="_self">eng</a>
+    <a (click)="languageService.changeLanguage('en')"
+       class="languages__link"
+       [routerLink]="'/en'"
+       target="_self">eng</a>
     <span class="languages__divider">/</span>
-    <a class="languages__link" [routerLink]="'ua'" target="_self">укр</a>
+    <a (click)="languageService.changeLanguage('ua')"
+       class="languages__link"
+       [routerLink]="'/ua'"
+       target="_self">укр</a>
     <span class="languages__divider">/</span>
-    <a (click)="languageService.changeLanguage('ru')" class="languages__link" [routerLink]="'ru'" target="_self">рус</a>
+    <a (click)="languageService.changeLanguage('ru')"
+       class="languages__link"
+       [routerLink]="'/ru'"
+       target="_self">рус</a>
 </div>
