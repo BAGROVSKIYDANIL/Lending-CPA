@@ -24,6 +24,7 @@
   --grid-height: 107vh;
 
   position: relative;
+  height: 100vh;
   background-image: var(--page-background);
   background-repeat: no-repeat;
 
@@ -48,7 +49,7 @@
   }
 
   @media (min-width: 768px) {
-    --bg-grid-mask: url('public/assets/masks/bg-grid-desk-mask.webp');
+    --bg-grid-mask: url('/assets/masks/bg-grid-desk-mask.webp');
     --page-background: var(--background-hero-desktop);
     --grid-width: 107vw;
     --grid-height: auto;
