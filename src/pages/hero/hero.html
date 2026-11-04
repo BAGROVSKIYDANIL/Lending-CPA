@@ -3,7 +3,7 @@
 } @else {
 <section class="hero container">
   @if (!viewport.isMobile()) {
-  <app-header />
+  <app-header class="hero__header"/>
   }
   <div class="hero__wrapper">
     <h1 class="hero__title title">
@@ -28,7 +28,7 @@
     <button class="button button--3d">get in touch</button>
   </div>
   @if (!viewport.isMobile()) {
-  <app-socials />
+  <app-socials class="hero__socials"/>
   }
 </section>
 }

@@ -255,21 +255,3 @@
     animation: none;
   }
 }
-
-@keyframes slide-in {
-  0% {
-    transform: var(--start-position);
-  }
-  100% {
-    transform: var(--end-position);
-  }
-}
-
-@keyframes slide-from-top {
-  0% {
-    transform: translateY(calc(-1 * var(--header-height) - var(--section-padding-top)));
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
