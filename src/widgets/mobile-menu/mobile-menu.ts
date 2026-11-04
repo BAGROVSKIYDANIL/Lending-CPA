@@ -24,9 +24,11 @@ export class MobileMenu {
 
   open(): void {
     this.menu().nativeElement.showModal();
+    document.body.style.overflow = 'hidden';
   }
 
   close(): void {
     this.menu().nativeElement.close();
+    document.body.style.overflow = '';
   }
 }

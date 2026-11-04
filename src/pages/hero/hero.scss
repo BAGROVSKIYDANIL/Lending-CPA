@@ -2,20 +2,10 @@
 
 .hero {
   --header-height: 39px;
-  --page-padding-top: 10px;
-  --page-padding-bottom: 50px;
-  --page-pading-inline: 16px;
-  --snake-background-size: 393px auto;
 
-  display: grid;
-  grid-template-rows: var(--header-height) 1fr 1fr;
-  gap: 100px;
-  height: 100vh;
+  height: var(--section-height);
   position: relative;
-  overflow: hidden;
   color: var(--color-text-primary);
-  text-align: left;
-  padding: var(--page-padding-top) var(--page-pading-inline) var(--page-padding-bottom);
 
   &::before {
     content: '';
@@ -23,7 +13,7 @@
     inset: 0;
     background-image: url('/assets/images/snake-main-mob.webp');
     background-position: right bottom;
-    background-size: var(--snake-background-size);
+    background-size: 393px auto;
     background-repeat: no-repeat;
     pointer-events: none;
   }
@@ -32,17 +22,28 @@
     max-width: 756px;
   }
 
+  @media (max-width: 767px) {
+    --section-padding-top: 100px;
+  }
+
   @media (min-width: 768px) {
-    --page-padding-top: 30px;
-    --page-pading-inline: 50px;
+    --section-padding-bottom: 50px;
     --header-height: 46px;
-    --snake-background-size: calc(393 * 0.13vw) auto;
+    --section-height: 100vh;
+
+    &::before {
+      background-size: calc(393 * 0.13vw) auto;
+    }
+
+    display: grid;
+    grid-template-rows: var(--header-height) 1fr  auto;
+    align-items: center;
   }
 
   @media (min-width: 1280px) {
       &::before {
         background-image: url('/assets/images/snake-main-desk.webp');
-        background-size: auto calc(100vh - var(--header-height) - var(--page-padding-top) *2);
+        background-size: min(calc(393 * 0.165vw), 970px);
     }
   }
 
@@ -99,13 +100,10 @@
         white-space: nowrap;
       }
     }
+  }
 
-    @media (min-width: 1280px) {
-      font-size: 80px;
-
-      &__wrapper {
-      }
-    }
+  @media (min-width: 1280px) {
+    font-size: 80px;
   }
 
   &__word {

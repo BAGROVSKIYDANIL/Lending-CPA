@@ -6,8 +6,8 @@
             </a>
             <button type="button" (click)="close()" class="mobile-menu__btn" aria-label="close popup">x</button>
         </div>
-        <app-navigation />
-        <app-socials />
+        <app-navigation (linkClick)="close()" />
+        <app-socials (linkClick)="close()" />
         <app-languages />
     </div>
 </dialog>

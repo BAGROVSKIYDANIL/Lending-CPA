@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, output} from '@angular/core';
 
 @Component({
   imports: [],
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './socials.scss',
   templateUrl: './socials.html',
 })
-export class Socials {}
+export class Socials {
+  readonly linkClick = output<void>();
+}

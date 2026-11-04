@@ -55,16 +55,17 @@ a {
 }
 
 .container {
-  padding-inline: var(--page-pading-inline, 16px);
-  padding-top: var(--page-padding-top, 10px);
+  padding-inline: var(--section-pading-inline, 16px);
+  padding-top: var(--section-padding-top, 10px);
+  padding-bottom: var(--section-padding-bottom, 0);
 
   @media (min-width: 768px) {
-    --page-pading-inline: 50px;
-    --page-padding-top: 30px;
+    --section-pading-inline: 50px;
+    --section-padding-top: 30px;
   }
 
   @media (min-width: 1280px) {
-    --page-padding-top: 60px;
+    --section-padding-top: 60px;
   }
 }
 

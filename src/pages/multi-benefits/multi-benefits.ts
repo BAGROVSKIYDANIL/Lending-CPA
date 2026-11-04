@@ -11,8 +11,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BenefitsService, type BenefitsResponse } from '@entities/benefit';
 import { CombinedPreloader } from '@shared/lib/preloader';
 import { finalize } from 'rxjs';
-import { BenefitsMarquee } from './benefits-marquee';
+import { BenefitsMarquee } from '@widgets/multi-benefits/ui/benefits-marquee';
 import {LanguageService} from "@shared/i18n";
+import {ViewportService} from "@shared/services/viewport.service";
 
 type LoadingState = 'loading' | 'ready' | 'error';
 
@@ -62,6 +63,7 @@ export class MultiBenefits {
   private readonly destroyRef = inject(DestroyRef);
   private readonly preloader = inject(CombinedPreloader);
 
+  readonly viewport = inject(ViewportService);
   readonly state = signal<LoadingState>('loading');
   readonly content = signal<BenefitsResponse | null>(null);
     private readonly languageService = inject(LanguageService);
