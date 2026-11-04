@@ -1,16 +1,18 @@
+@let currentProgress = progress();
+
 @if (isVisible()) {
 <div class="preloader" [class.preloader--leaving]="isLeaving()">
   <div class="preloader__content">
-    <span class="preloader__percentage">{{ progress() }}%</span>
+    <span class="preloader__percentage">{{ currentProgress }}%</span>
     <div
       class="preloader__bar"
-      aria-label="Page loading progress: {{ progress() }}%"
+      aria-label="Page loading progress: {{ currentProgress }}%"
       role="progressbar"
       aria-valuemin="0"
       aria-valuemax="100"
-      [attr.aria-valuenow]="progress()"
+      [attr.aria-valuenow]="currentProgress"
     >
-      <span class="preloader__fill" [style.width.%]="progress()"></span>
+      <span class="preloader__fill" [style.width.%]="currentProgress"></span>
     </div>
   </div>
 </div>
