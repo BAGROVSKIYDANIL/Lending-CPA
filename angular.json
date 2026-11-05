@@ -48,7 +48,6 @@
           "options": {
             "index": "index.html",
             "browser": "src/main.ts",
-            "polyfills": ["@angular/localize/init"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -57,8 +56,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"],
-            "i18nMissingTranslation": "error"
+            "styles": ["src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -80,15 +78,6 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
-            },
-            "en-US": {
-              "localize": ["en-US"]
-            },
-            "ru": {
-              "localize": ["ru"]
-            },
-            "ua": {
-              "localize": ["ua"]
             }
           },
           "defaultConfiguration": "production"
@@ -101,34 +90,14 @@
             },
             "development": {
               "buildTarget": "cpa-landing:build:development"
-            },
-            "en-US": {
-              "buildTarget": "cpa-landing:build:development,en-US"
-            },
-            "ru": {
-              "buildTarget": "cpa-landing:build:development,ru"
             }
           },
           "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular/build:extract-i18n"
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
-          }
-        }
-      },
-      "i18n": {
-        "sourceLocale": "en-US",
-        "locales": {
-          "ru": {
-            "translation": "src/locales/messages.ru.xlf"
-          },
-          "ua": {
-            "translation": "src/locales/messages.ua.xlf"
           }
         }
       }

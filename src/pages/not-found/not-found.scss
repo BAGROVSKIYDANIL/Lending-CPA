@@ -93,7 +93,7 @@
     width: 386px;
     aspect-ratio: 386 / 320;
     pointer-events: none;
-    background: url('public/assets/images/snake-main-mob.webp') center / cover no-repeat;
+    background: url('/assets/images/snake-main-mob.webp') center / cover no-repeat;
   }
 
   a:focus-visible,
@@ -116,11 +116,11 @@
       left: 0;
       width: clamp(390px, 50vw, 541px);
       aspect-ratio: 541 / 428;
-      background: url('public/assets/images/snake-404-desk.webp') center / cover no-repeat;
+      background: url('/assets/images/snake-404-desk.webp') center / cover no-repeat;
     }
     &__code {
       img {
-        content:  url(public/assets/images/404-gorizontal.png);
+        content:  url(/assets/images/404-gorizontal.png);
         width: clamp(600px, 78vw, 972px);
         aspect-ratio: 972 / 341;
       }

@@ -1,38 +1,15 @@
 <ul class="nav">
     @if (viewport.isMobile())
-    {
+    {<li class="nav__item">
+        <a [routerLink]="'/'"
+           class="nav__link"
+           target="_self">{{'header.links.main' | translate}}</a>
+    </li>
+    }
+    @let language = languageService.language();
+    @for (route of navRoutes; track route) {
         <li class="nav__item">
-            <a class="nav__link"
-               target="_self"
-               [routerLink]="'/'"
-               (click)="linkClick.emit()">
-                main
-            </a>
+            <a  class="nav__link" target="_self" [routerLink]="['/', language, route.path]">{{'header.links.' + route.label | translate}}</a>
         </li>
     }
-
-    <li class="nav__item">
-            <a class="nav__link"
-               target="_self"
-               [routerLink]="'/tasks'"
-               (click)="linkClick.emit()">
-                team
-            </a>
-    </li>
-    <li class="nav__item">
-        <a class="nav__link"
-           target="_self"
-           [routerLink]="'/benefits'"
-           (click)="linkClick.emit()">
-            benefits
-        </a>
-    </li>
-    <li class="nav__item">
-        <a class="nav__link"
-           target="_self"
-           [routerLink]="'/with-us'"
-           (click)="linkClick.emit()">
-            join us
-        </a>
-    </li>
 </ul>

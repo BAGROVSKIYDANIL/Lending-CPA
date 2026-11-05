@@ -10,11 +10,12 @@ import {
 } from '@angular/core';
 import { ApplicationData, ContactMethod, isValidContact } from '../model/contact-validation';
 import { Select } from '@shared/ui/select';
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-application-form',
   standalone: true,
-  imports: [Select],
+    imports: [Select, TranslatePipe],
   templateUrl: './form.html',
   styleUrl: './form.scss',
 })
@@ -69,7 +70,7 @@ export class ApplicationForm implements AfterViewInit, OnDestroy {
         return {
           type: 'text',
           autocomplete: 'off',
-          placeholder: 'Your Contact*',
+          placeholder: 'contact',
         };
     }
   });

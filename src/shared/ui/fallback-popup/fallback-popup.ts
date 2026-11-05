@@ -1,5 +1,14 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, ElementRef, OnDestroy, effect, inject, signal, viewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  computed,
+  effect,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { FallbackPopupService, type FallbackPopupData } from '@shared/lib/fallback-popup';
 
 @Component({
@@ -12,6 +21,16 @@ export class FallbackPopup implements OnDestroy {
   readonly popup = inject(FallbackPopupService);
   readonly dialog = viewChild<ElementRef<HTMLDialogElement>>('dialog');
   readonly retrySeconds = signal(0);
+  // readonly closeLabel = translate({ en: 'Close', ru: 'Закрыть' });
+  // readonly errorCodeLabel = translate({ en: 'Error code', ru: 'Код ошибки' });
+  // readonly retryingLabel = translate({ en: 'Trying…', ru: 'Повторяем…' });
+  // readonly retryLabel = translate({ en: 'Retry', ru: 'Повторить' });
+  // readonly retryNote = computed(() =>
+  //   translate({
+  //     en: `Retry available in ${this.retrySeconds()} seconds.`,
+  //     ru: `Повтор будет доступен через ${this.retrySeconds()} сек.`,
+  //   }),
+  // );
 
   private readonly document = inject(DOCUMENT);
   private activeId?: symbol;

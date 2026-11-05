@@ -1,20 +1,23 @@
-<section class="multi-benefits container" [attr.aria-label]="copy.eyebrow">
+@let currentCopy = copy();
+<section class="multi-benefits container" [attr.aria-label]="currentCopy.eyebrow">
+  <div class="multi-benefits__grid" aria-hidden="true"></div>
 
   <div class="multi-benefits__container">
+    <p class="multi-benefits__eyebrow">{{ currentCopy.eyebrow }}</p>
       @if (!viewport.isMobile()) {
-          <p class="multi-benefits__eyebrow">{{ copy.eyebrow }}</p>
+          <p class="multi-benefits__eyebrow">{{ currentCopy.eyebrow }}</p>
       }
       @switch (state()) {
           @case ('loading') {
               <div class="multi-benefits__status" role="status">
                   <span class="multi-benefits__loader" aria-hidden="true"></span>
-                  <span>{{ copy.loading }}</span>
+                  <span>{{ currentCopy.loading }}</span>
               </div>
           }
           @case ('error') {
               <div class="multi-benefits__status multi-benefits__status--error" role="alert">
-                  <p>{{ copy.error }}</p>
-                  <button class="multi-benefits__retry" type="button" (click)="load()">{{ copy.retry }}</button>
+                  <p>{{ currentCopy.error }}</p>
+                  <button class="multi-benefits__retry" type="button" (click)="load()">{{ currentCopy.retry }}</button>
               </div>
           }
           @case ('ready') {
