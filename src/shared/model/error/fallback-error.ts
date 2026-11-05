@@ -1,4 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
+// import { translate } from '@shared/lib/i18n';
 
 export type FallbackErrorKind =
   | 'request'
@@ -45,106 +46,139 @@ const parseRetryAfter = (value: string | null): number | undefined => {
   return Math.max(0, Math.ceil((retryAt - Date.now()) / 1000));
 };
 
-export function mapHttpError(
-  error: HttpErrorResponse,
-  options: HttpErrorMappingOptions = {},
-): FallbackError {
-  const code = error.status > 0 ? `HTTP ${error.status}` : undefined;
-
-  if (isAbortError(error.error)) {
-    return {
-      kind: 'cancelled',
-      title: '',
-      message: '',
-      showPopup: false,
-      retryable: false,
-    };
-  }
-
-  if (error.status === 400 || error.status === 422) {
-    return {
-      kind: 'request',
-      title: $localize`:@@fallbackError.request.title:We couldn't process the request`,
-      message: $localize`:@@fallbackError.request.message:Check the entered data and try again.`,
-      code,
-      fieldErrors: options.fieldErrors,
-      showPopup: !hasFieldErrors(options.fieldErrors),
-      retryable: false,
-    };
-  }
-
-  if (error.status === 401 || error.status === 403) {
-    return {
-      kind: 'access',
-      title: $localize`:@@fallbackError.access.title:Access denied`,
-      message: $localize`:@@fallbackError.access.message:You don't have permission to perform this action.`,
-      code,
-      showPopup: true,
-      retryable: false,
-    };
-  }
-
-  if (error.status === 404) {
-    return {
-      kind: 'not-found',
-      title: $localize`:@@fallbackError.notFound.title:Resource not found`,
-      message: $localize`:@@fallbackError.notFound.message:The requested resource is unavailable.`,
-      code,
-      showPopup: true,
-      retryable: false,
-    };
-  }
-
-  if (error.status === 408 || error.status === 504) {
-    return {
-      kind: 'timeout',
-      title: $localize`:@@fallbackError.timeout.title:The request took too long`,
-      message: $localize`:@@fallbackError.timeout.message:The service didn't respond in time. Please try again.`,
-      code,
-      showPopup: true,
-      retryable: true,
-    };
-  }
-
-  if (error.status === 429) {
-    return {
-      kind: 'rate-limit',
-      title: $localize`:@@fallbackError.rateLimit.title:Too many requests`,
-      message: $localize`:@@fallbackError.rateLimit.message:Please wait a little before trying again.`,
-      code,
-      retryAfterSeconds: parseRetryAfter(error.headers.get('Retry-After')),
-      showPopup: true,
-      retryable: true,
-    };
-  }
-
-  if (error.status === 500 || error.status === 502 || error.status === 503) {
-    return {
-      kind: 'server',
-      title: $localize`:@@fallbackError.server.title:Service temporarily unavailable`,
-      message: $localize`:@@fallbackError.server.message:Something went wrong on our side. Please try again.`,
-      code,
-      showPopup: true,
-      retryable: true,
-    };
-  }
-
-  if (error.status === 0) {
-    return {
-      kind: 'network',
-      title: $localize`:@@fallbackError.network.title:Connection problem`,
-      message: $localize`:@@fallbackError.network.message:We couldn't reach the service. Check your connection and try again.`,
-      showPopup: true,
-      retryable: true,
-    };
-  }
-
-  return {
-    kind: 'unknown',
-    title: $localize`:@@fallbackError.unknown.title:Something went wrong`,
-    message: $localize`:@@fallbackError.unknown.message:We couldn't complete the operation. Please try again later.`,
-    code,
-    showPopup: true,
-    retryable: false,
-  };
-}
+// export function mapHttpError(
+//   error: HttpErrorResponse,
+//   options: HttpErrorMappingOptions = {},
+// ): FallbackError {
+//   const code = error.status > 0 ? `HTTP ${error.status}` : undefined;
+//
+//   if (isAbortError(error.error)) {
+//     return {
+//       kind: 'cancelled',
+//       title: '',
+//       message: '',
+//       showPopup: false,
+//       retryable: false,
+//     };
+//   }
+//
+//   if (error.status === 400 || error.status === 422) {
+//     return {
+//       kind: 'request',
+//       title: translate({
+//         en: "We couldn't process the request",
+//         ru: 'Не удалось обработать запрос',
+//       }),
+//       message: translate({
+//         en: 'Check the entered data and try again.',
+//         ru: 'Проверьте введённые данные и попробуйте ещё раз.',
+//       }),
+//       code,
+//       fieldErrors: options.fieldErrors,
+//       showPopup: !hasFieldErrors(options.fieldErrors),
+//       retryable: false,
+//     };
+//   }
+//
+//   if (error.status === 401 || error.status === 403) {
+//     return {
+//       kind: 'access',
+//       title: translate({ en: 'Access denied', ru: 'Доступ запрещён' }),
+//       message: translate({
+//         en: "You don't have permission to perform this action.",
+//         ru: 'У вас нет разрешения на выполнение этого действия.',
+//       }),
+//       code,
+//       showPopup: true,
+//       retryable: false,
+//     };
+//   }
+//
+//   if (error.status === 404) {
+//     return {
+//       kind: 'not-found',
+//       title: translate({ en: 'Resource not found', ru: 'Ресурс не найден' }),
+//       message: translate({
+//         en: 'The requested resource is unavailable.',
+//         ru: 'Запрошенный ресурс недоступен.',
+//       }),
+//       code,
+//       showPopup: true,
+//       retryable: false,
+//     };
+//   }
+//
+//   if (error.status === 408 || error.status === 504) {
+//     return {
+//       kind: 'timeout',
+//       title: translate({
+//         en: 'The request took too long',
+//         ru: 'Запрос занял слишком много времени',
+//       }),
+//       message: translate({
+//         en: "The service didn't respond in time. Please try again.",
+//         ru: 'Сервис не ответил вовремя. Попробуйте ещё раз.',
+//       }),
+//       code,
+//       showPopup: true,
+//       retryable: true,
+//     };
+//   }
+//
+//   if (error.status === 429) {
+//     return {
+//       kind: 'rate-limit',
+//       title: translate({ en: 'Too many requests', ru: 'Слишком много запросов' }),
+//       message: translate({
+//         en: 'Please wait a little before trying again.',
+//         ru: 'Подождите немного перед повторной попыткой.',
+//       }),
+//       code,
+//       retryAfterSeconds: parseRetryAfter(error.headers.get('Retry-After')),
+//       showPopup: true,
+//       retryable: true,
+//     };
+//   }
+//
+//   if (error.status === 500 || error.status === 502 || error.status === 503) {
+//     return {
+//       kind: 'server',
+//       title: translate({
+//         en: 'Service temporarily unavailable',
+//         ru: 'Сервис временно недоступен',
+//       }),
+//       message: translate({
+//         en: 'Something went wrong on our side. Please try again.',
+//         ru: 'На нашей стороне произошла ошибка. Попробуйте ещё раз.',
+//       }),
+//       code,
+//       showPopup: true,
+//       retryable: true,
+//     };
+//   }
+//
+//   if (error.status === 0) {
+//     return {
+//       kind: 'network',
+//       title: translate({ en: 'Connection problem', ru: 'Проблема с подключением' }),
+//       message: translate({
+//         en: "We couldn't reach the service. Check your connection and try again.",
+//         ru: 'Не удалось связаться с сервисом. Проверьте подключение и попробуйте ещё раз.',
+//       }),
+//       showPopup: true,
+//       retryable: true,
+//     };
+//   }
+//
+//   return {
+//     kind: 'unknown',
+//     title: translate({ en: 'Something went wrong', ru: 'Что-то пошло не так' }),
+//     message: translate({
+//       en: "We couldn't complete the operation. Please try again later.",
+//       ru: 'Не удалось завершить операцию. Попробуйте позже.',
+//     }),
+//     code,
+//     showPopup: true,
+//     retryable: false,
+//   };
+// }

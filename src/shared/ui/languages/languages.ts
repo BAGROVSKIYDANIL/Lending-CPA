@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {RouterLink} from "@angular/router";
+import {LanguageService} from "@shared/i18n";
 
 @Component({
   imports: [
@@ -9,4 +10,6 @@ import {RouterLink} from "@angular/router";
   styleUrl: './languages.scss',
   templateUrl: './languages.html',
 })
-export class Languages {}
+export class Languages {
+    readonly languageService = inject(LanguageService);
+}

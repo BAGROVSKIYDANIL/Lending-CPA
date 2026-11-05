@@ -26,7 +26,7 @@
       </button>
       } @else {
       <form class="application-form__form" novalidate (submit)="submit($event)">
-        <p class="application-form__hint">Fields with an asterisk (<span>*</span>) are mandatory</p>
+        <p class="application-form__hint">{{'form.title' | translate}}</p>
         <label class="application-form__field">
           <span class="application-form__sr-only">Your Name (optional)</span>
           <input
@@ -34,7 +34,7 @@
             class="application-form__input"
             name="name"
             autocomplete="name"
-            placeholder="Your Name"
+            placeholder="{{'form.placeholder.name' | translate}}"
             maxlength="100"
             [value]="name()"
             (input)="name.set(nameInput.value)"
@@ -47,7 +47,7 @@
               class="application-form__select"
               controlId="contact-method"
               label="Contact Method (required)"
-              placeholder="Contact Method"
+              placeholder="{{'form.placeholder.contactMethod' | translate}}"
               [required]="true"
               [options]="methods"
               [value]="method()"
@@ -73,7 +73,7 @@
                 required
                 [type]="config.type"
                 [attr.autocomplete]="config.autocomplete"
-                [placeholder]="config.placeholder"
+                [placeholder]="'form.placeholder.' + config.placeholder | translate "
                 maxlength="254"
                 [value]="contact()"
                 (input)="contact.set(contactInput.value)"
@@ -94,7 +94,7 @@
         <p class="application-form__error" role="alert">{{ serverError() }}</p>
         }
         <button class="application-form__button" type="submit" [disabled]="pending()">
-          {{ pending() ? 'Sending…' : 'Submit' }}
+          {{ pending() ? 'Sending…' : 'form.button' | translate }}
         </button>
       </form>
       }
