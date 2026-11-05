@@ -1,8 +1,8 @@
-import {Component, inject} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FallbackPopup } from '@shared/ui/fallback-popup';
-import {Header} from "@widgets/header/header";
-import {ViewportService} from "@shared/services/viewport.service";
+import { ViewportService } from '@shared/services/viewport.service';
+import { Header } from '@widgets/header/header';
 
 @Component({
   selector: 'app-root',
@@ -12,5 +12,5 @@ import {ViewportService} from "@shared/services/viewport.service";
   imports: [RouterOutlet, FallbackPopup, Header],
 })
 export class App {
-  readonly viewport = inject(ViewportService)
+  readonly viewport = inject(ViewportService);
 }

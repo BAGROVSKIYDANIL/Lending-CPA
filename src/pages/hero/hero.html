@@ -1,3 +1,6 @@
+@if (isPreloading()) {
+<app-preloader (completed)="completePreloading()" />
+} @else {
 <section class="hero container">
     @if (!viewport.isMobile()) {
          <app-header />
@@ -22,5 +25,5 @@
     @if (!viewport.isMobile()) {
         <app-socials />
     }
-<!--    <img class="hero__img" src="/assets/images/snake-main-mob.webp" alt="">-->
 </section>
+}
