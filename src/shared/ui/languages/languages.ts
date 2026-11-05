@@ -1,6 +1,5 @@
-import {Component, inject, viewChild} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {MobileMenu} from "@widgets/mobile-menu/mobile-menu";
 import {LanguageService} from "@shared/i18n";
 
 @Component({

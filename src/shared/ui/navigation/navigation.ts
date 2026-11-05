@@ -6,9 +6,9 @@ import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
     imports: [RouterLink, TranslatePipe],
-  selector: 'app-navigation',
-  styleUrl: './navigation.scss',
-  templateUrl: './navigation.html',
+    selector: 'app-navigation',
+    styleUrl: './navigation.scss',
+    templateUrl: './navigation.html',
 })
 export class Navigation {
     readonly viewport = inject(ViewportService);

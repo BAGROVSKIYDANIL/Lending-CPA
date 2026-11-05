@@ -5,7 +5,7 @@
   <div class="multi-benefits__container">
     <p class="multi-benefits__eyebrow">{{ currentCopy.eyebrow }}</p>
       @if (!viewport.isMobile()) {
-          <p class="multi-benefits__eyebrow">{{ copy.eyebrow }}</p>
+          <p class="multi-benefits__eyebrow">{{ currentCopy.eyebrow }}</p>
       }
       @switch (state()) {
           @case ('loading') {
