@@ -1,7 +1,13 @@
 @use '../../shared/styles/base-mixins' as mixins;
 
 :host {
+  --app-shell-height: 100%;
+
   display: block;
+
+  @media (min-width: 768px) {
+    overflow: hidden;
+  }
 }
 
 .multi-tasks {

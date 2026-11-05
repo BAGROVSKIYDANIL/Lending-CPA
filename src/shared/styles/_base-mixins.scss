@@ -22,9 +22,10 @@
   --bg-grid-mask: url('/assets/masks/bg-grid-mob-mask.webp');
   --grid-width: auto;
   --grid-height: 107vh;
+  --app-shell-height: 100vh;
 
   position: relative;
-  height: 100vh;
+  height: var(--app-shell-height);
   background-image: var(--page-background);
   background-repeat: no-repeat;
 

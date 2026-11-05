@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, output} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {ViewportService} from "@shared/services/viewport.service";
 import {LanguageService} from "@shared/i18n";
@@ -11,6 +11,7 @@ import {TranslatePipe} from "@ngx-translate/core";
     templateUrl: './navigation.html',
 })
 export class Navigation {
+    readonly linkClick = output<void>();
     readonly viewport = inject(ViewportService);
     readonly languageService = inject(LanguageService);
     readonly navRoutes = [
