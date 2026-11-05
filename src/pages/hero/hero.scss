@@ -1,7 +1,6 @@
 @use '../../shared/styles/base-mixins' as mixins;
 
 .hero {
-  --header-height: 39px;
 
   height: var(--section-height);
   position: relative;
