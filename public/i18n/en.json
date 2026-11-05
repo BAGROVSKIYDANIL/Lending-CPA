@@ -22,7 +22,8 @@
       "mediaBuyers": "For Media Buyers",
       "businesses": "For Businesses",
       "partners": "For Partners"
-    }
+    },
+    "scrollLink": "SCROLL TO TOP"
   },
   "notFound": {
     "button": "Take me back"

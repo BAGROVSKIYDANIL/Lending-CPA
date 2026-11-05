@@ -19,7 +19,8 @@
       "mediaBuyers": "Медіабаєрам",
       "businesses": "Бізнесам",
       "partners": "Партнерам"
-    }
+    },
+    "scrollLink": "ПРОКРУТИТИ ВГОРУ"
   },
   "notFound": {
     "button": "Повернутися назад"

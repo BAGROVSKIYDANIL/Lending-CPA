@@ -22,7 +22,8 @@
       "mediaBuyers": "Медиабайерам",
       "businesses": "Бизнесам",
       "partners": "Партнёрам"
-    }
+    },
+    "scrollLink": "ПРОКРУТИТЬ ВВЕРХ"
   },
   "notFound": {
     "button": "Вернуться назад"
