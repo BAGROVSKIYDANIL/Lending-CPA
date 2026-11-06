@@ -1,0 +1,59 @@
+:host {
+  display: block;
+}
+
+.landing {
+  min-height: 100svh;
+
+  &__section {
+    min-height: var(--section-height);
+    scroll-margin-top: var(--header-height);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  @media (max-width: 767px) {
+    height: var(--section-height);
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+
+    .landing__section {
+      scroll-margin-top: 0;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &--desktop {
+    position: relative;
+    height: 100svh;
+    overflow: hidden;
+
+    .landing__section {
+      position: absolute;
+      inset: 0;
+      visibility: hidden;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .landing__section--visible {
+      visibility: visible;
+      contain: layout paint;
+      isolation: isolate;
+      pointer-events: auto;
+      z-index: 1;
+    }
+
+    .landing__section--target {
+      z-index: 2;
+    }
+  }
+}
