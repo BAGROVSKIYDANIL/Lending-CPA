@@ -1,7 +1,7 @@
 # CPA Landing
 
 Техническая основа по `writing-block.md`: Angular 22.2.2, standalone-компоненты,
-SCSS, Angular i18n и Feature-Sliced Design. Сборщик — Vite 8 с
+SCSS и Feature-Sliced Design. Сборщик — Vite 8 с
 `@analogjs/vite-plugin-angular`. Корневой компонент пустой.
 
 ## Запуск
@@ -16,21 +16,21 @@ npm start
 Приложение доступно на `http://localhost:4200/`. Пустая страница ожидаема:
 страницы, секции, бизнес-компоненты и демонстрационный контент не создавались.
 
-| Команда                | Назначение                                        |
-| ---------------------- | ------------------------------------------------- |
-| `npm start`            | Разработка на исходной локали                     |
-| `npm run start:ru`     | Разработка на русской локали                      |
-| `npm run build`        | Production-сборка всех локалей                    |
-| `npm run build:source` | Production-сборка исходной локали                 |
-| `npm run typecheck`    | Проверка типов TypeScript                         |
-| `npm run i18n:extract` | Извлечение сообщений в `src/locales/messages.xlf` |
+| Команда                | Назначение                        |
+| ---------------------- | --------------------------------- |
+| `npm start`            | Разработка на исходной локали     |
+| `npm run start:ru`     | Разработка на русской локали      |
+| `npm run start:ua`     | Разработка на украинской локали   |
+| `npm run build`        | Production-сборка всех локалей    |
+| `npm run build:source` | Production-сборка исходной локали |
+| `npm run typecheck`    | Проверка типов TypeScript         |
 
-Локали для начальной конфигурации: `en-US` и `ru`. Детали в
-[src/locales/README.md](src/locales/README.md). Артефакты сборки находятся в
-`dist/cpa-landing/en-US` и `dist/cpa-landing/ru`. `npm run preview` открывает
+Доступные режимы локали: `en-US`, `ru` и `ua`. Vite задаёт выбранную локаль через
+`__APP_LOCALE__`; она используется для API, `LOCALE_ID` и небольшого типизированного
+словаря интерфейса. Артефакты сборки находятся в
+`dist/cpa-landing/en-US`, `dist/cpa-landing/ru` и `dist/cpa-landing/ua`. `npm run preview` открывает
 production-сборку исходной локали. Настройки Vite находятся в `vite.config.ts`.
-Angular CLI и `angular.json` сохранены для извлечения i18n-сообщений;
-команды запуска и сборки используют Vite.
+Angular CLI и `angular.json` сохранены для служебных команд; запуск и сборка используют Vite.
 
 ## Архитектура
 
@@ -47,7 +47,6 @@ src/
     lib/preloader/       CombinedPreloader
     styles/              Глобальная SCSS-база и правила BEM
     ui/                  Будущие общие UI-компоненты
-  locales/               Каталоги Angular i18n
 ```
 
 Направление зависимостей: `app → pages → widgets → features → entities → shared`.
@@ -77,6 +76,10 @@ src/
 слеша, query-параметры — через `HttpParams`. В `app.config.ts` адрес `baseUrl: null`:
 клиент блокирует запросы, пока API не настроен. Реальные API не подключены.
 
+**Fallback popup:** единое окно для клиентских и HTTP-ошибок подключено в корневом shell.
+Примеры вызова, безопасного retry, обработки ошибок полей и интеграции с формой описаны в
+[документации fallback popup](src/shared/lib/fallback-popup/README.md).
+
 ## Статус проверки в текущей среде
 
 Конфигурация переведена на Vite; синтаксис JSON проверен. Установка зависимостей заблокирована средой:
@@ -90,7 +93,6 @@ src/
 ```bash
 npm install
 npm run typecheck
-npm run i18n:extract
 npm run build
 npm start
 ```
@@ -98,3 +100,15 @@ npm start
 ## Linter & Prettier
 
 Для VSCode требуется установка плагинов `ESLint` и `Prettier - Code formatter`.
+
+## API
+
+контракт лежит в 'https://cpa-server-vtel.onrender.com/api-docs'
+
+## Agents
+
+в директории .agents лежат скиллы AI-агента
+
+- code-review: делает ревью кода Angular/Typescipt файлов проекта на функциональность, безопасность, скорость выполнения.
+  По умолчанию выполняет ревью незакомиченных изменений либо выполняет ревью указанных в вызове файлов;
+- angular-service: создает сервисы на основе контракта в Swagger

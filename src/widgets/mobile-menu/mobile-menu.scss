@@ -1,0 +1,41 @@
+@use '../../shared/styles/base-mixins';
+
+.mobile-menu {
+  @include base-mixins.page-background;
+
+  position: fixed;
+  inset: 0;
+  max-width: none;
+  max-height: none;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  background-size: cover;
+  overflow: hidden;
+
+  &__wrapper {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: space-between;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+  &__logo {
+    filter: invert(1);
+  }
+
+  &__btn {
+    color: var(--color-yellow);
+    font-family: var(--font-family-primary), sans-serif;
+    font-size: 24px;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+}

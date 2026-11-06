@@ -1,4 +1,3 @@
-import '@angular/localize/init';
 import './styles.scss';
 import { registerLocaleData } from '@angular/common';
 import ru from '@angular/common/locales/ru';

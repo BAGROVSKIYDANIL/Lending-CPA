@@ -12,7 +12,7 @@ export default defineConfig([
       eslint.configs.recommended,
       tseslint.configs.recommended,
       tseslint.configs.stylistic,
-      angular.configs.tsRecommended
+      angular.configs.tsRecommended,
     ],
     processor: angular.processInlineTemplates,
     rules: {
@@ -37,7 +37,9 @@ export default defineConfig([
   {
     files: ['**/*.html'],
     extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
-    rules: {},
+    rules: {
+      'prettier/prettier': ['error', { parser: 'angular' }],
+    },
   },
   eslintPluginPrettierRecommended,
 ]);

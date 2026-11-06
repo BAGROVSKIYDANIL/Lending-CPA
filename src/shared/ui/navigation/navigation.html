@@ -1,0 +1,21 @@
+<ul class="nav">
+    @if (viewport.isMobile())
+    {
+        <li class="nav__item">
+        <a [routerLink]="'/'"
+           class="nav__link"
+           target="_self"
+           (click)="linkClick.emit()">{{'header.links.main' | translate}}</a>
+    </li>
+    }
+    @let language = languageService.language();
+    @for (route of navRoutes; track route) {
+        <li class="nav__item">
+            <a class="nav__link"
+               target="_self"
+               [routerLink]="['/', language, route.path]"
+               (click)="linkClick.emit()"
+            >{{'header.links.' + route.label | translate}}</a>
+        </li>
+    }
+</ul>
