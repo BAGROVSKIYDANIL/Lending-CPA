@@ -11,6 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   templateUrl: './navigation.html',
 })
 export class Navigation {
+  readonly linkClick = output<void>();
   readonly viewport = inject(ViewportService);
   readonly languageService = inject(LanguageService);
   readonly navRoutes = [
