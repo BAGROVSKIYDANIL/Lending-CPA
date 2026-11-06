@@ -367,7 +367,7 @@
       left: 0;
       pointer-events: none;
       aspect-ratio: 630 / 430;
-      background: url("public/assets/images/snake-join-desk.webp") top / cover no-repeat;
+      background: url('/assets/images/snake-join-desk.webp') top / cover no-repeat;
       opacity: 0;
       animation: fade-in 0.1s ease-out forwards;
       animation-delay: 0.9s;
@@ -404,6 +404,25 @@
     *::after {
       scroll-behavior: auto;
       transition-duration: 0.01ms;
+    }
+  }
+}
+
+:host-context(.landing--desktop) {
+  .multiply {
+    &__body,
+    &__footer,
+    &__snake {
+      animation: none;
+    }
+
+    &__body,
+    &__snake {
+      opacity: 1;
+    }
+
+    &__footer {
+      transform: none;
     }
   }
 }
