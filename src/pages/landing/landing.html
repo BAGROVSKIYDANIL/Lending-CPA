@@ -1,0 +1,38 @@
+<main class="landing" [class.landing--desktop]="!viewport.isMobile()">
+  <div
+    id="hero"
+    class="landing__section"
+    [class.landing__section--visible]="isVisible('hero')"
+    [class.landing__section--target]="isTarget('hero')"
+    [attr.aria-hidden]="!isVisible('hero')"
+  >
+    <app-hero />
+  </div>
+  <div
+    id="team"
+    class="landing__section"
+    [class.landing__section--visible]="isVisible('team')"
+    [class.landing__section--target]="isTarget('team')"
+    [attr.aria-hidden]="!isVisible('team')"
+  >
+    <app-multi-tasks />
+  </div>
+  <div
+    id="benefits"
+    class="landing__section"
+    [class.landing__section--visible]="isVisible('benefits')"
+    [class.landing__section--target]="isTarget('benefits')"
+    [attr.aria-hidden]="!isVisible('benefits')"
+  >
+    <app-multi-benefits />
+  </div>
+  <div
+    id="join"
+    class="landing__section"
+    [class.landing__section--visible]="isVisible('join')"
+    [class.landing__section--target]="isTarget('join')"
+    [attr.aria-hidden]="!isVisible('join')"
+  >
+    <app-multiply-with-us />
+  </div>
+</main>

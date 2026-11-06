@@ -252,3 +252,22 @@
     }
   }
 }
+
+:host-context(.landing--desktop) {
+  .multi-benefits {
+    &__intro,
+    &__cards,
+    &__cards::before {
+      animation: none;
+    }
+
+    &__intro,
+    &__cards {
+      transform: none;
+    }
+
+    &__cards::before {
+      opacity: 1;
+    }
+  }
+}
