@@ -2,6 +2,10 @@
 
 :host {
   display: block;
+
+  @media (min-width: 768px) {
+    overflow: hidden;
+  }
 }
 
 .multi-tasks {
@@ -121,21 +125,34 @@
     grid-template-areas: "heading heading" "intro cards";
     column-gap: 24px;
     height: 100vh;
+
     &__heading {
+      --start-position: translateY(calc(-1 * var(--header-height) - var(--section-padding-top)));
+      --end-position: translateY(0);
+
       grid-area: heading;
       margin-bottom: 30px;
+      transform: var(--start-position);
+      animation: slide-from-top 0.8s ease-out forwards;
     }
 
     &__intro {
+      --start-position: translateX(calc(-100% - var(--section-padding-inline)));
+      --end-position: translateX(0);
+
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       grid-area: intro;
       margin-bottom: 0;
+      transform: var(--start-position);
+      animation: slide-in 0.6s ease-out forwards;
     }
+
     &__text {
       padding-bottom: 0;
     }
+
     &__cards {
       grid-area: cards;
       grid-template-columns: 1fr;
@@ -150,12 +167,24 @@
     }
   }
 
+  @media (767px < width < 1280px) {
+    &__cards {
+      --start-position: translateX(calc(100% + var(--section-padding-inline)));
+      --end-position: translateX(0);
+
+      transform: var(--start-position);
+      animation: slide-in 0.8s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+  }
+
   @media (min-width: 1280px) {
     --section-padding-top: 60px;
 
     &__cards {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: repeat(6, minmax(0, 1fr));
+      container-type: inline-size;
     }
 
     &__card {
@@ -182,6 +211,24 @@
       &:nth-child(5) {
         grid-column: 2;
         grid-row: 5 / span 2;
+      }
+
+      &:nth-child(-n + 2) {
+        --start-position: translateX(calc(100cqw + var(--section-padding-inline)));
+        --end-position: translateX(0);
+
+        transform: var(--start-position);
+        animation: slide-in 0.8s ease-out forwards;
+        animation-delay: 0.5s;
+      }
+
+      &:nth-child(n + 3) {
+        --start-position: translateX(calc(100cqw + var(--section-padding-inline)));
+        --end-position: translateX(0);
+
+        transform: var(--start-position);
+        animation: slide-in 0.8s ease-out forwards;
+        animation-delay: 0.8s;
       }
     }
 

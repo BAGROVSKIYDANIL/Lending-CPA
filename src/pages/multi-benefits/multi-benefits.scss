@@ -182,7 +182,11 @@
     }
 
     &__intro {
+      --start-position: translateX(calc(-100% - var(--section-padding-inline)));
+      --end-position: translateX(0);
+
       grid-area: intro;
+      animation: slide-in 0.8s ease-out forwards;
     }
 
     &__title {
@@ -195,10 +199,14 @@
     }
 
     &__cards {
+      --start-position: translateX(calc(100% + var(--section-padding-inline)));
+      --end-position: translateX(0);
+
       grid-area: cards;
       align-self: end;
       margin-top: 0;
       position: relative;
+      animation: slide-in 0.8s ease-out forwards;
 
       &::before {
         content: '';
@@ -211,6 +219,9 @@
         background-size: cover;
         background-position: center;
         transform: rotateY(180deg);
+        opacity: 0;
+        animation: fade-in 0.2s ease-out forwards;
+        animation-delay: 0.8s;
       }
     }
 

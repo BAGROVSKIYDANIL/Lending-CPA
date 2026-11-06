@@ -1,0 +1,61 @@
+@keyframes slide-in {
+  0% {
+    transform: var(--start-position);
+  }
+  100% {
+    transform: var(--end-position);
+  }
+}
+
+@keyframes slide-from-top {
+  0% {
+    transform: translateY(calc(-1 * var(--header-height) - var(--section-padding-top)));
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes word-scroll {
+  0%, 30% {
+    transform: translateY(0);
+  }
+
+  31%, 33% {
+    transform: translateY(-35%);
+  }
+
+  34%, 63% {
+    transform: translateY(-33%);
+  }
+
+  64%, 66% {
+    transform: translateY(-68%);
+  }
+
+  67%, 96% {
+    transform: translateY(-66%);
+  }
+
+  97% {
+    transform: translateY(2%);
+  }
+
+  98% {
+    transform: translateY(-2%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

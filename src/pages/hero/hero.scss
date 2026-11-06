@@ -1,7 +1,6 @@
 @use '../../shared/styles/base-mixins' as mixins;
 
 .hero {
-  --header-height: 39px;
 
   height: var(--section-height);
   position: relative;
@@ -34,12 +33,36 @@
 
     &::before {
       background-size: calc(393 * 0.13vw) auto;
+      opacity: 0;
+      animation: fade-in 0.3s ease-out forwards;
     }
 
     display: grid;
     grid-template-rows: var(--header-height) 1fr  auto;
     align-items: center;
+
+    &__header {
+      opacity: 0;
+      animation: fade-in 0.3s ease-out forwards;
+    }
+
+    &__wrapper {
+      --start-position: translateX(-100%);
+      --end-position: translateX(0);
+
+      transform: translateX(-100%);
+      animation: slide-in 0.3s ease-out forwards;
+    }
+
+    &__socials {
+      --start-position: translateY(calc(100% + var(--section-padding-bottom)));
+      --end-position: translateY(0);
+
+      transform: var(--start-position);
+      animation: slide-in 0.3s ease-out forwards;
+    }
   }
+
 
   @media (min-width: 1280px) {
       &::before {
@@ -109,39 +132,5 @@
 
   &__word {
     color: var(--color-text-secondary);
-  }
-}
-
-@keyframes word-scroll {
-  0%, 30% {
-    transform: translateY(0);
-  }
-
-  31%, 33% {
-    transform: translateY(-35%);
-  }
-
-  34%, 63% {
-    transform: translateY(-33%);
-  }
-
-  64%, 66% {
-    transform: translateY(-68%);
-  }
-
-  67%, 96% {
-    transform: translateY(-66%);
-  }
-
-  97% {
-    transform: translateY(2%);
-  }
-
-  98% {
-    transform: translateY(-2%);
-  }
-
-  100% {
-    transform: translateY(0);
   }
 }

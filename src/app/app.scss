@@ -1,4 +1,3 @@
-// Application shell. Future classes follow block__element--modifier (BEM).
 @use '../shared/styles/base-mixins' as mixins;
 
 .app-shell {
@@ -6,6 +5,8 @@
 
   --header-height: 39px;
   --section-height: calc(100vh - var(--header-height));
+
+  min-height: 100svh;
 }
 
 :root.is-preloading .app-shell > app-header {
