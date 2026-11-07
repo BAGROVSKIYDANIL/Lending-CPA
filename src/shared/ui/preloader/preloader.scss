@@ -13,9 +13,9 @@
 
   &__content {
     position: absolute;
-    bottom: 60px;
-    left: 16px;
-    right: 16px;
+    bottom: calc(60px + var(--safe-area-bottom));
+    left: calc(16px + var(--safe-area-left));
+    right: calc(16px + var(--safe-area-right));
     display: grid;
     justify-items: center;
     gap: 30px;

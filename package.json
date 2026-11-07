@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "vite",
+    "start host": "vite --host",
     "start:ru": "vite --mode ru",
     "start:ua": "vite --mode ua",
     "build": "vite build && vite build --mode ru",

@@ -3,10 +3,13 @@
 .app-shell {
   @include mixins.page-background;
 
-  --header-height: 39px;
-  --section-height: calc(100vh - var(--header-height));
+  --header-content-height: 39px;
+  --header-height: calc(var(--header-content-height) + var(--safe-area-top));
+  --section-height: calc(100dvh - var(--header-height) - var(--safe-area-bottom));
 
-  min-height: 100svh;
+  min-height: 100dvh;
+  padding-inline: var(--safe-area-left) var(--safe-area-right);
+  padding-bottom: var(--safe-area-bottom);
 }
 
 :root.is-preloading .app-shell > app-header {

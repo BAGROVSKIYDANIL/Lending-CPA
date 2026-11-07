@@ -6,6 +6,8 @@
   font-size: 32px;
   text-decoration: underline;
   text-transform: uppercase;
+  text-align: center;
+  display: block;
   color: var(--link-color);
 
   @media (min-width: 768px) {
@@ -58,5 +60,11 @@
       background-position: center;
       left: -15px;
     }
+  }
+}
+
+@mixin link-size-tablet {
+  @media (768px <= width < 920px) {
+    font-size: clamp(14px, 2.05vw, var(--font-size-primary));
   }
 }
