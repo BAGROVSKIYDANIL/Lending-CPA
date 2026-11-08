@@ -134,3 +134,24 @@
     color: var(--color-text-secondary);
   }
 }
+
+:host-context(.landing--desktop) {
+  .hero {
+    &::before,
+    &__header,
+    &__wrapper,
+    &__socials {
+      animation: none;
+    }
+
+    &::before,
+    &__header {
+      opacity: 1;
+    }
+
+    &__wrapper,
+    &__socials {
+      transform: none;
+    }
+  }
+}

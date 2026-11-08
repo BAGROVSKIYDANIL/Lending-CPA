@@ -58,6 +58,9 @@ src/
 Стили компонента — отдельный `.scss` рядом с компонентом. Правила классов BEM
 описаны в [src/shared/styles/README.md](src/shared/styles/README.md).
 
+Устройство, подключение и расширение полноэкранной навигации описаны в
+[документации Section Navigation Engine](src/shared/lib/section-navigation/README.md).
+
 ## Инфраструктура
 
 **Animation Layer:** `ANIMATION_LAYER` задаёт контракт запуска, завершения и отмены.

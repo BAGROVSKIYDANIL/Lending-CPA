@@ -4,7 +4,7 @@
   align-items: center;
   height: var(--header-height);
   padding-inline: 16px;
-  padding-top: 10px;
+  padding-top: calc(10px + var(--safe-area-top));
 
   &__logo {
     display: block;
@@ -31,6 +31,7 @@
 
   @media (min-width: 768px) {
     padding-inline: unset;
+    padding-top: 10px;
 
     &__img {
       width: 45px;

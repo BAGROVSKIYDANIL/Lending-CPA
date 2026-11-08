@@ -15,6 +15,7 @@
 
   &__link {
     @include mixins.navigation-link;
+    @include mixins.link-size-tablet;
 
   }
 

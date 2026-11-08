@@ -3,9 +3,9 @@
 }
 
 .fallback-popup {
-  width: min(520px, calc(100vw - 32px));
+  width: min(520px, calc(100vw - 32px - var(--safe-area-left) - var(--safe-area-right)));
   max-width: none;
-  max-height: calc(100dvh - 32px);
+  max-height: calc(100dvh - 32px - var(--safe-area-top) - var(--safe-area-bottom));
   margin: auto;
   padding: 54px 42px 40px;
   overflow-y: auto;
