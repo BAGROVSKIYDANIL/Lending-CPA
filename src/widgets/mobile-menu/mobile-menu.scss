@@ -4,11 +4,15 @@
   @include base-mixins.page-background;
 
   position: fixed;
-  inset: 0;
+  inset:
+          var(--safe-area-top)
+          var(--safe-area-right)
+          var(--safe-area-bottom)
+          var(--safe-area-left);
   max-width: none;
   max-height: none;
-  width: 100vw;
-  height: 100vh;
+  width: auto;
+  height: auto;
   border: none;
   background-size: cover;
   overflow: hidden;

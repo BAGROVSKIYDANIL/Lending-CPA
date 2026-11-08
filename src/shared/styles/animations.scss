@@ -59,3 +59,36 @@
     opacity: 1;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes bg-grid-dance {
+  0%, 16% {
+    mask-position: 10vw -10vh;
+  }
+  24%, 40% {
+    mask-position: -65vw 22vh;
+  }
+  48%, 64% {
+    mask-position: 25vw 60vh;
+  }
+  72%, 88% {
+    mask-position: -65vw 22vh;
+  }
+  100% {
+    mask-position: 10vw -10vh;
+  }
+}

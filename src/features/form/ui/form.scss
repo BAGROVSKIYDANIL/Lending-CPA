@@ -3,9 +3,9 @@
 }
 
 .application-form {
-  width: min(560px, calc(100vw - 32px));
+  width: min(560px, calc(100vw - 32px - var(--safe-area-left) - var(--safe-area-right)));
   max-width: none;
-  max-height: calc(100dvh - 32px);
+  max-height: calc(100dvh - 32px - var(--safe-area-top) - var(--safe-area-bottom));
   margin: auto;
   padding: 60px 30px;
   overflow-y: auto;

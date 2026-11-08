@@ -13,7 +13,8 @@
   justify-content: center;
 
   &__link {
-  @include mixins.navigation-link;
+    @include mixins.navigation-link;
+    @include mixins.link-size-tablet;
 
     }
 

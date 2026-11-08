@@ -1,12 +1,12 @@
 import { provideHttpClient } from '@angular/common/http';
 import {
-    ApplicationConfig,
-    LOCALE_ID,
-    provideBrowserGlobalErrorListeners,
-    provideAppInitializer,
-    inject
+  ApplicationConfig,
+  LOCALE_ID,
+  provideBrowserGlobalErrorListeners,
+  provideAppInitializer,
+  inject,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { API_CONFIG } from '@shared/api';
 import { routes } from './app.routes';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
@@ -28,7 +28,7 @@ if (!apiHeaderName || !apiHeaderValue) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(routes, withInMemoryScrolling({ anchorScrolling: 'enabled' })),
     { provide: LOCALE_ID, useValue: __APP_LOCALE__ },
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(),
@@ -40,23 +40,23 @@ export const appConfig: ApplicationConfig = {
         localeMap: { 'en-US': 'en' },
       },
     },
-      provideTranslateService({
-          loader: provideTranslateHttpLoader({
-              prefix: '/i18n/',
-              suffix: '.json',
-          }),
-          fallbackLang: 'en',
-          lang: 'en',
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: '/i18n/',
+        suffix: '.json',
       }),
-      provideAppInitializer(() => {
-          const translate = inject(TranslateService);
-          const languageService = inject(LanguageService);
+      fallbackLang: 'en',
+      lang: 'en',
+    }),
+    provideAppInitializer(() => {
+      const translate = inject(TranslateService);
+      const languageService = inject(LanguageService);
 
-          translate.addLangs(['en', 'ru', 'ua']);
+      translate.addLangs(['en', 'ru', 'ua']);
 
-          return firstValueFrom(
-              translate.use(languageService.getInitialLanguage())
-          ).then(() => undefined);
-      }),
+      return firstValueFrom(translate.use(languageService.getInitialLanguage())).then(
+        () => undefined,
+      );
+    }),
   ],
 };

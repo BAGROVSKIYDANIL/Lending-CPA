@@ -1,18 +1,21 @@
-import {Component, effect, ElementRef, inject, viewChild} from '@angular/core';
+import { Component, effect, ElementRef, inject, viewChild } from '@angular/core';
 import { Navigation } from '@shared/ui/navigation/navigation';
-import {Socials} from "@shared/ui/socials/socials";
-import {Languages} from "@shared/ui/languages/languages";
-import {ViewportService} from "@shared/services/viewport.service";
+import { Socials } from '@shared/ui/socials/socials';
+import { Languages } from '@shared/ui/languages/languages';
+import { ViewportService } from '@shared/services/viewport.service';
+import { RouterLink } from '@angular/router';
+import { LanguageService } from '@shared/i18n';
 
 @Component({
   selector: 'app-mobile-menu',
-  imports: [Navigation, Socials, Languages],
+  imports: [Navigation, Socials, Languages, RouterLink],
   templateUrl: './mobile-menu.html',
   styleUrl: './mobile-menu.scss',
 })
 export class MobileMenu {
   readonly menu = viewChild.required<ElementRef<HTMLDialogElement>>('menu');
   readonly viewport = inject(ViewportService);
+  readonly language = inject(LanguageService).language;
 
   constructor() {
     effect(() => {
