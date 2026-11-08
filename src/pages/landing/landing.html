@@ -24,7 +24,7 @@
     [class.landing__section--target]="isTarget('benefits')"
     [attr.aria-hidden]="!isVisible('benefits')"
   >
-    <app-multi-benefits />
+    <app-multi-benefits [class.is-section-visible]="isVisible('benefits')" />
   </div>
   <div
     id="join"

@@ -260,14 +260,3 @@
   }
 }
 
-:host-context(.landing--desktop) {
-  .multi-tasks {
-    &__heading,
-    &__intro,
-    &__cards,
-    &__card {
-      animation: none;
-      transform: none;
-    }
-  }
-}
