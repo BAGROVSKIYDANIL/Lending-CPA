@@ -259,7 +259,7 @@
       display: grid;
       grid-template-rows: auto 1fr;
       row-gap: 60px;
-      min-height: calc(100svh - 102px);
+      min-height: calc(100svh - 84px);
       justify-content: initial;
       flex: initial;
     }
@@ -361,7 +361,7 @@
 
     &__snake {
       position: absolute;
-      bottom: 0;
+      bottom: -24px;
 
       width: min(42vw, 630px);
       left: 0;
@@ -375,11 +375,6 @@
   }
 
   @media (min-width: 1200px) {
-    &__layout {
-
-      min-height: calc(100svh - 102px)
-    }
-
     &__tab.button--arrow {
       font-size: clamp(28px, 2vh, 32px);
     }
@@ -408,21 +403,3 @@
   }
 }
 
-:host-context(.landing--desktop) {
-  .multiply {
-    &__body,
-    &__footer,
-    &__snake {
-      animation: none;
-    }
-
-    &__body,
-    &__snake {
-      opacity: 1;
-    }
-
-    &__footer {
-      transform: none;
-    }
-  }
-}

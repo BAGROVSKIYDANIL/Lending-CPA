@@ -1,4 +1,3 @@
-
 @use '../../shared/styles/base-mixins';
 
 :host {
@@ -10,7 +9,6 @@
 
   height: var(--section-height);
   color: var(--color-white);
-  overflow: hidden;
 
   &__eyebrow {
     margin: 0;
@@ -89,7 +87,9 @@
     font-weight: var(--font-weight-medium);
     letter-spacing: -0.02em;
     background-color: var(--color-purple-main);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
 
     &:hover {
       background-color: var(--color-yellow);
@@ -167,9 +167,10 @@
       display: grid;
       grid-template-columns: 1fr 42%;
       grid-template-rows: auto 1fr auto;
-      grid-template-areas: 'eyebrow eyebrow'
-                         'intro cards'
-                         'status status';
+      grid-template-areas:
+        'eyebrow eyebrow'
+        'intro cards'
+        'status status';
       gap: 60px 32px;
       align-content: stretch;
       padding-bottom: 45px;
@@ -220,8 +221,7 @@
         background-position: center;
         transform: rotateY(180deg);
         opacity: 0;
-        animation: fade-in 0.2s ease-out forwards;
-        animation-delay: 0.8s;
+        animation: none;
       }
     }
 
@@ -245,29 +245,33 @@
   }
 }
 
+@keyframes benefits-snake-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(-24px, 12px, 0) rotateY(180deg) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotateY(180deg) scale(1);
+  }
+}
+
+@media (min-width: 768px) {
+  :host(.is-section-visible) .multi-benefits__cards::before {
+    animation: benefits-snake-enter 0.3s cubic-bezier(0.22, 1, 0.36, 1) 0.48s both;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .multi-benefits {
     &__loader {
       animation: none;
     }
   }
-}
 
-:host-context(.landing--desktop) {
-  .multi-benefits {
-    &__intro,
-    &__cards,
-    &__cards::before {
-      animation: none;
-    }
-
-    &__intro,
-    &__cards {
-      transform: none;
-    }
-
-    &__cards::before {
-      opacity: 1;
-    }
+  :host(.is-section-visible) .multi-benefits__cards::before {
+    opacity: 1;
+    animation: none;
   }
 }
