@@ -1,6 +1,1 @@
-export {
-  MultiplyService,
-  type MultiplyItem,
-  type MultiplyLanguage,
-  type MultiplySteps,
-} from './multiply.service';
+export { MultiplyService, type MultiplyLanguage } from './multiply.service';

@@ -12,7 +12,8 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TasksService, type TasksResponse } from '@entities/task';
 import { CombinedPreloader } from '@shared/lib/preloader';
-import { finalize, type Subscription } from 'rxjs';
+import { FallbackPopupService } from '@shared/lib/fallback-popup';
+import { finalize,firstValueFrom, type Subscription } from 'rxjs';
 import { ViewportService } from '@shared/services/viewport.service';
 import { LanguageService, type Language } from '@shared/i18n';
 import {
@@ -125,7 +126,7 @@ export class MultiTasks {
   private readonly tasksService = inject(TasksService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly preloader = inject(CombinedPreloader);
-  private readonly locale = inject(LOCALE_ID);
+  private readonly fallbackPopup = inject(FallbackPopupService);
   private activeRequest?: Subscription;
 
   readonly state = signal<LoadingState>('loading');
@@ -176,7 +177,22 @@ export class MultiTasks {
           this.content.set(content);
           this.state.set('ready');
         },
-        error: () => this.state.set('error'),
+        error: (error: unknown) => {
+          this.state.set('error');
+          this.fallbackPopup.showError(error, {
+            owner: this.destroyRef,
+            retry: () => this.reload(),
+          });
+        },
       });
+  }
+
+  private async reload(): Promise<void> {
+    this.state.set('loading');
+    const content = await firstValueFrom(this.tasksService.getTasks(this.currentLanguage()));
+    if (!content.description || content.tiles.length === 0)
+      throw new Error('Empty tasks response.');
+    this.content.set(content);
+    this.state.set('ready');
   }
 }

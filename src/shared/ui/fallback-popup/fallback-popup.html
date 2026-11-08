@@ -7,12 +7,9 @@
   (cancel)="$event.preventDefault(); close()"
 >
   @if (popup.state(); as state) {
-    <button
-      class="fallback-popup__close"
-      type="button"
-      (click)="close()"
-    >
+    <button class="fallback-popup__close" type="button" (click)="close()">
       <span aria-hidden="true">x</span>
+      <span class="fallback-popup__visually-hidden">{{ 'fallback.close' | translate }}</span>
     </button>
 
     <div class="fallback-popup__icon" aria-hidden="true">!</div>
@@ -21,12 +18,14 @@
 
     @if (state.data.code) {
       <p class="fallback-popup__code">
-<!--        <span>{{ errorCodeLabel }}</span-->
+        <span>{{ 'fallback.errorCode' | translate }}</span
         >: {{ state.data.code }}
       </p>
     }
     @if (retrySeconds() > 0) {
-<!--      <p class="fallback-popup__retry-note" aria-live="polite">{{ retryNote() }}</p>-->
+      <p class="fallback-popup__retry-note" aria-live="polite">
+        {{ 'fallback.retryNote' | translate: { seconds: retrySeconds() } }}
+      </p>
     }
 
     <div class="fallback-popup__actions">
@@ -35,7 +34,7 @@
         type="button"
         (click)="close()"
       >
-<!--        <span>{{ closeLabel }}</span>-->
+        <span>{{ 'fallback.close' | translate }}</span>
       </button>
       @if (state.data.retry) {
         <button
@@ -45,9 +44,9 @@
           (click)="retry()"
         >
           @if (state.status === 'retrying') {
-<!--            <span>{{ retryingLabel }}</span>-->
+            <span>{{ 'fallback.retrying' | translate }}</span>
           } @else {
-<!--            <span>{{ retryLabel }}</span>-->
+            <span>{{ 'fallback.retry' | translate }}</span>
           }
         </button>
       }

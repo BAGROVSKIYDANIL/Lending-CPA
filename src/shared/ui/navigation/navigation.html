@@ -19,6 +19,7 @@
         target="_self"
         [routerLink]="['/', language]"
         [fragment]="route.fragment"
+        (click)="linkClick.emit()"
         >{{ 'header.links.' + route.label | translate }}</a
       >
     </li>

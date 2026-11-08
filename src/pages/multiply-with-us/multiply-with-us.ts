@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,6 +14,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MultiplyService, type MultiplyItem } from '@entities/multiply';
 import { ApplicationForm, ContactFormService, type ApplicationData } from '@features/form';
 import { FallbackPopupService } from '@shared/lib/fallback-popup';
+import { RequestValidationError } from '@shared/lib/validation';
 import { firstValueFrom, type Subscription } from 'rxjs';
 import { LanguageService, type Language } from '@shared/i18n';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -206,15 +206,7 @@ export class MultiplyWithUs {
 
   private handleContentError(error: unknown): void {
     this.status.set('error');
-    if (error instanceof HttpErrorResponse) {
-      this.fallbackPopup.showHttpError(error, {
-        owner: this.destroyRef,
-        retry: () => this.reloadContent(),
-      });
-      return;
-    }
-
-    this.fallbackPopup.showClientError({
+    this.fallbackPopup.showError(error, {
       owner: this.destroyRef,
       retry: () => this.reloadContent(),
     });
@@ -227,12 +219,11 @@ export class MultiplyWithUs {
   }
 
   private handleFormError(error: unknown): void {
-    this.applicationForm()?.fail('');
-    if (error instanceof HttpErrorResponse) {
-      this.fallbackPopup.showHttpError(error, { owner: this.destroyRef });
+    if (error instanceof RequestValidationError) {
+      this.applicationForm()?.applyValidationErrors(error.fieldErrors);
       return;
     }
-
-    this.fallbackPopup.showClientError({ owner: this.destroyRef });
+    this.applicationForm()?.fail();
+    this.fallbackPopup.showError(error, { owner: this.destroyRef });
   }
 }

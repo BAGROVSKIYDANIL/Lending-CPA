@@ -1,24 +1,18 @@
 import { inject, Injectable } from '@angular/core';
 import { ApiClient, type ApiLanguage } from '@shared/api';
-import { Observable } from 'rxjs';
+import { validateResponse } from '@shared/lib/validation';
+import { map, type Observable } from 'rxjs';
+import { multiplyResponseSchema, type MultiplyResponse } from '../model';
 
 export type MultiplyLanguage = ApiLanguage;
-
-export interface MultiplySteps {
-  readonly step_1: string;
-  readonly step_2: string;
-}
-
-export interface MultiplyItem {
-  readonly title: string;
-  readonly steps: MultiplySteps;
-}
 
 @Injectable({ providedIn: 'root' })
 export class MultiplyService {
   private readonly api = inject(ApiClient);
 
-  getMultiply(language?: MultiplyLanguage): Observable<readonly MultiplyItem[]> {
-    return this.api.get<readonly MultiplyItem[]>('multiply', { locale: language });
+  getMultiply(language?: MultiplyLanguage): Observable<MultiplyResponse> {
+    return this.api
+      .get<unknown>('multiply', { locale: language })
+      .pipe(map((response) => validateResponse(multiplyResponseSchema, response)));
   }
 }

@@ -11,7 +11,8 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BenefitsService, type BenefitsResponse } from '@entities/benefit';
 import { CombinedPreloader } from '@shared/lib/preloader';
-import { finalize, type Subscription } from 'rxjs';
+import { FallbackPopupService } from '@shared/lib/fallback-popup';
+import { finalize, firstValueFrom, type Subscription } from 'rxjs';
 import { BenefitsMarquee } from '@widgets/multi-benefits/ui/benefits-marquee';
 import { LanguageService, type Language } from '@shared/i18n';
 import { ViewportService } from '@shared/services/viewport.service';
@@ -137,6 +138,7 @@ export class MultiBenefits {
   private readonly destroyRef = inject(DestroyRef);
   private readonly preloader = inject(CombinedPreloader);
   private activeRequest?: Subscription;
+  private readonly fallbackPopup = inject(FallbackPopupService);
 
   readonly viewport = inject(ViewportService);
   readonly state = signal<LoadingState>('loading');
@@ -184,7 +186,23 @@ export class MultiBenefits {
           this.content.set(content);
           this.state.set('ready');
         },
-        error: () => this.state.set('error'),
+        error: (error: unknown) => {
+          this.state.set('error');
+          this.fallbackPopup.showError(error, {
+            owner: this.destroyRef,
+            retry: () => this.reload(),
+          });
+        },
       });
+  }
+
+  private async reload(): Promise<void> {
+    this.state.set('loading');
+    const content = await firstValueFrom(this.benefitsService.getBenefits(this.currentLanguage()));
+    if (!content.title || !content.description || content.benefits.length === 0) {
+      throw new Error('Empty benefits response.');
+    }
+    this.content.set(content);
+    this.state.set('ready');
   }
 }
