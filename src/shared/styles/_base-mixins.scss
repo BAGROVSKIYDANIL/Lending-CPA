@@ -43,8 +43,8 @@
     background-position: center;
     mask-image: var(--bg-grid-mask);
     mask-repeat: no-repeat;
-    mask-size: auto 107vh;
-    mask-position: -72px center;
+    mask-size: 100vw auto;
+    mask-position: 10vw -10vh;
     opacity: 0.2;
     pointer-events: none;
   }
@@ -59,6 +59,7 @@
       background-size: cover;
       background-position: center;
       left: -15px;
+      animation: bg-grid-dance 24s linear infinite;
     }
   }
 }

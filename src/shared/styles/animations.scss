@@ -74,3 +74,21 @@
     scroll-behavior: auto !important;
   }
 }
+
+@keyframes bg-grid-dance {
+  0%, 16% {
+    mask-position: 10vw -10vh;
+  }
+  24%, 40% {
+    mask-position: -65vw 22vh;
+  }
+  48%, 64% {
+    mask-position: 25vw 60vh;
+  }
+  72%, 88% {
+    mask-position: -65vw 22vh;
+  }
+  100% {
+    mask-position: 10vw -10vh;
+  }
+}
