@@ -4,5 +4,5 @@ export {
   type FallbackPopupState,
   type FallbackPopupStatus,
   type ShowFallbackPopupOptions,
-  type ShowHttpErrorOptions,
+  type ShowErrorOptions,
 } from './fallback-popup.service';

@@ -9,10 +9,11 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BenefitsService, type BenefitsResponse } from '@entities/benefit';
 import { CombinedPreloader } from '@shared/lib/preloader';
-import { finalize } from 'rxjs';
+import { FallbackPopupService } from '@shared/lib/fallback-popup';
+import { finalize, firstValueFrom } from 'rxjs';
 import { BenefitsMarquee } from '@widgets/multi-benefits/ui/benefits-marquee';
-import {LanguageService} from "@shared/i18n";
-import {ViewportService} from "@shared/services/viewport.service";
+import { LanguageService } from '@shared/i18n';
+import { ViewportService } from '@shared/services/viewport.service';
 
 type LoadingState = 'loading' | 'ready' | 'error';
 
@@ -61,15 +62,16 @@ export class MultiBenefits {
   private readonly benefitsService = inject(BenefitsService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly preloader = inject(CombinedPreloader);
+  private readonly fallbackPopup = inject(FallbackPopupService);
 
   readonly viewport = inject(ViewportService);
   readonly state = signal<LoadingState>('loading');
   readonly content = signal<BenefitsResponse | null>(null);
-    private readonly languageService = inject(LanguageService);
-    readonly currentLanguage = this.languageService.language()
-    readonly copy = computed(() => {
-        return interfaceCopy[this.currentLanguage];
-    });
+  private readonly languageService = inject(LanguageService);
+  readonly currentLanguage = this.languageService.language();
+  readonly copy = computed(() => {
+    return interfaceCopy[this.currentLanguage];
+  });
   readonly titleParts = computed<readonly TitlePart[]>(() => {
     const title = this.content()?.title ?? '';
     return title
@@ -102,7 +104,23 @@ export class MultiBenefits {
           this.content.set(content);
           this.state.set('ready');
         },
-        error: () => this.state.set('error'),
+        error: (error: unknown) => {
+          this.state.set('error');
+          this.fallbackPopup.showError(error, {
+            owner: this.destroyRef,
+            retry: () => this.reload(),
+          });
+        },
       });
+  }
+
+  private async reload(): Promise<void> {
+    this.state.set('loading');
+    const content = await firstValueFrom(this.benefitsService.getBenefits(this.currentLanguage));
+    if (!content.title || !content.description || content.benefits.length === 0) {
+      throw new Error('Empty benefits response.');
+    }
+    this.content.set(content);
+    this.state.set('ready');
   }
 }

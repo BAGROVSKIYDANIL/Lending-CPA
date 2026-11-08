@@ -4,14 +4,16 @@ import {
   DestroyRef,
   LOCALE_ID,
   inject,
-  signal, computed,
+  signal,
+  computed,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TasksService, type TasksResponse } from '@entities/task';
 import { CombinedPreloader } from '@shared/lib/preloader';
-import { finalize } from 'rxjs';
-import {ViewportService} from "@shared/services/viewport.service";
-import {LanguageService} from "@shared/i18n";
+import { FallbackPopupService } from '@shared/lib/fallback-popup';
+import { finalize, firstValueFrom } from 'rxjs';
+import { ViewportService } from '@shared/services/viewport.service';
+import { LanguageService } from '@shared/i18n';
 
 type LoadingState = 'loading' | 'ready' | 'error';
 
@@ -58,26 +60,27 @@ export class MultiTasks {
   private readonly tasksService = inject(TasksService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly preloader = inject(CombinedPreloader);
+  private readonly fallbackPopup = inject(FallbackPopupService);
   private readonly locale = inject(LOCALE_ID);
 
   readonly state = signal<LoadingState>('loading');
   readonly content = signal<TasksResponse | null>(null);
   private readonly languageService = inject(LanguageService);
-    readonly currentLanguage = this.languageService.language()
-    readonly copy = computed(() => {
-        return interfaceCopy[this.currentLanguage];
-    });
-  readonly viewport = inject(ViewportService)
+  readonly currentLanguage = this.languageService.language();
+  readonly copy = computed(() => {
+    return interfaceCopy[this.currentLanguage];
+  });
+  readonly viewport = inject(ViewportService);
 
   readonly descriptionPart = computed<readonly descriptionPart[]>(() => {
     const title = this.content()?.description ?? '';
     return title
-        .split(/(in-house team|своя команда)/gi)
-        .filter(Boolean)
-        .map((text) => ({
-          text,
-          highlighted: /^(in-house team|своя команда)$/i.test(text),
-        }));
+      .split(/(in-house team|своя команда)/gi)
+      .filter(Boolean)
+      .map((text) => ({
+        text,
+        highlighted: /^(in-house team|своя команда)$/i.test(text),
+      }));
   });
 
   constructor() {
@@ -102,7 +105,22 @@ export class MultiTasks {
           this.content.set(content);
           this.state.set('ready');
         },
-        error: () => this.state.set('error'),
+        error: (error: unknown) => {
+          this.state.set('error');
+          this.fallbackPopup.showError(error, {
+            owner: this.destroyRef,
+            retry: () => this.reload(),
+          });
+        },
       });
+  }
+
+  private async reload(): Promise<void> {
+    this.state.set('loading');
+    const content = await firstValueFrom(this.tasksService.getTasks(this.currentLanguage));
+    if (!content.description || content.tiles.length === 0)
+      throw new Error('Empty tasks response.');
+    this.content.set(content);
+    this.state.set('ready');
   }
 }

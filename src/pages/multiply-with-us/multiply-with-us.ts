@@ -1,12 +1,12 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, DestroyRef, computed, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MultiplyService, type MultiplyItem } from '@entities/multiply';
 import { ApplicationForm, ContactFormService, type ApplicationData } from '@features/form';
 import { FallbackPopupService } from '@shared/lib/fallback-popup';
+import { RequestValidationError } from '@shared/lib/validation';
 import { firstValueFrom } from 'rxjs';
-import {LanguageService} from "@shared/i18n";
-import {TranslatePipe} from "@ngx-translate/core";
+import { LanguageService } from '@shared/i18n';
+import { TranslatePipe } from '@ngx-translate/core';
 
 type MultiplyCategory = 'mediaBuyers' | 'businesses' | 'partners';
 type LoadingStatus = 'loading' | 'loaded' | 'error';
@@ -26,7 +26,7 @@ const CATEGORY_INDEX: Readonly<Record<MultiplyCategory, number>> = {
 @Component({
   selector: 'app-multiply-with-us',
   standalone: true,
-    imports: [ApplicationForm, TranslatePipe],
+  imports: [ApplicationForm, TranslatePipe],
   templateUrl: './multiply-with-us.html',
   styleUrl: './multiply-with-us.scss',
 })
@@ -37,7 +37,7 @@ export class MultiplyWithUs {
   private readonly destroyRef = inject(DestroyRef);
   private readonly languageService = inject(LanguageService);
 
-  readonly currentLanguage = this.languageService.language()
+  readonly currentLanguage = this.languageService.language();
 
   readonly applicationForm = viewChild(ApplicationForm);
   readonly categories: readonly CategoryOption[] = [
@@ -107,15 +107,7 @@ export class MultiplyWithUs {
 
   private handleContentError(error: unknown): void {
     this.status.set('error');
-    if (error instanceof HttpErrorResponse) {
-      this.fallbackPopup.showHttpError(error, {
-        owner: this.destroyRef,
-        retry: () => this.reloadContent(),
-      });
-      return;
-    }
-
-    this.fallbackPopup.showClientError({
+    this.fallbackPopup.showError(error, {
       owner: this.destroyRef,
       retry: () => this.reloadContent(),
     });
@@ -123,17 +115,16 @@ export class MultiplyWithUs {
 
   private async reloadContent(): Promise<void> {
     this.status.set('loading');
-    const items = await firstValueFrom(this.multiplyService.getMultiply());
+    const items = await firstValueFrom(this.multiplyService.getMultiply(this.currentLanguage));
     this.acceptContent(items);
   }
 
   private handleFormError(error: unknown): void {
-    this.applicationForm()?.fail('');
-    if (error instanceof HttpErrorResponse) {
-      this.fallbackPopup.showHttpError(error, { owner: this.destroyRef });
+    if (error instanceof RequestValidationError) {
+      this.applicationForm()?.applyValidationErrors(error.fieldErrors);
       return;
     }
-
-    this.fallbackPopup.showClientError({ owner: this.destroyRef });
+    this.applicationForm()?.fail();
+    this.fallbackPopup.showError(error, { owner: this.destroyRef });
   }
 }

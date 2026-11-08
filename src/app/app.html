@@ -1,6 +1,7 @@
 <div class="app-shell">
-    @if (viewport.isMobile()) {
-        <app-header />
-    }
-    <router-outlet></router-outlet>
+  @if (viewport.isMobile()) {
+    <app-header />
+  }
+  <router-outlet></router-outlet>
 </div>
+<app-fallback-popup />
