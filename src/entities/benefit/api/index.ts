@@ -1,1 +1,1 @@
-export { BenefitsService, type BenefitsLanguage, type BenefitsResponse } from './benefits.service';
+export { BenefitsService, type BenefitsLanguage } from './benefits.service';
