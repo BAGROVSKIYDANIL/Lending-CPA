@@ -1,28 +1,33 @@
 import { inject, Injectable } from '@angular/core';
 import { ApiClient } from '@shared/api';
-import { Observable } from 'rxjs';
-import { ApplicationData, type ContactMethod } from '../model/contact-validation';
-
-type ContactApiMethod = 'telegram' | 'whatsapp' | 'email';
-
-interface ContactFormRequest {
-  readonly name: string;
-  readonly method: ContactApiMethod;
-  readonly contact: string;
-}
+import { emptyResponseSchema, validateRequest, validateResponse } from '@shared/lib/validation';
+import { defer, map, type Observable } from 'rxjs';
+import { type ApplicationData, type ContactMethod } from '../model/contact-validation';
+import {
+  contactFormRequestSchema,
+  type ContactApiMethod,
+  type ContactFormRequest,
+} from '../model/contact-form.schema';
 
 @Injectable({ providedIn: 'root' })
 export class ContactFormService {
   private readonly api = inject(ApiClient);
 
   submit(data: ApplicationData): Observable<void> {
-    const request: ContactFormRequest = {
-      name: data.name,
-      method: this.toApiMethod(data.method),
-      contact: data.contact,
-    };
+    return defer(() => {
+      const request = validateRequest(contactFormRequestSchema, {
+        name: data.name,
+        method: this.toApiMethod(data.method),
+        contact: data.contact,
+      });
 
-    return this.api.post<void, ContactFormRequest>('form', request, { localized: false });
+      return this.api.post<unknown, ContactFormRequest>('form', request, { localized: false }).pipe(
+        map((response) => {
+          validateResponse(emptyResponseSchema, response);
+          return undefined;
+        }),
+      );
+    });
   }
 
   private toApiMethod(method: ContactMethod): ContactApiMethod {

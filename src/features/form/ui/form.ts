@@ -8,14 +8,19 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { ApplicationData, ContactMethod, isValidContact } from '../model/contact-validation';
+import {
+  applicationDataSchema,
+  type ApplicationData,
+  type ContactMethod,
+} from '../model/contact-validation';
 import { Select } from '@shared/ui/select';
-import {TranslatePipe} from "@ngx-translate/core";
+import { formatZodErrors, type ValidationFieldErrors } from '@shared/lib/validation';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-application-form',
   standalone: true,
-    imports: [Select, TranslatePipe],
+  imports: [Select, TranslatePipe],
   templateUrl: './form.html',
   styleUrl: './form.scss',
 })
@@ -32,19 +37,14 @@ export class ApplicationForm implements AfterViewInit, OnDestroy {
   readonly pending = signal(false);
   readonly success = signal(false);
   readonly serverError = signal('');
+  readonly validationErrors = signal<ValidationFieldErrors>({});
+  readonly methodError = computed(() => {
+    if (!this.attempted()) return '';
+    return this.validationErrors()['method'] ?? '';
+  });
   readonly contactError = computed(() => {
     if (!this.attempted() && !this.touched()) return '';
-    if (!this.contact().trim()) return 'Please enter your contact.';
-    const method = this.method();
-    if (!method || isValidContact(method, this.contact())) return '';
-    switch (method) {
-      case 'Email':
-        return 'Enter a valid email address, for example name@example.com.';
-      case 'Telegram':
-        return 'Enter a Telegram username (5–32 characters) or a https://t.me/ link.';
-      case 'WhatsApp':
-        return 'Enter a phone number with country code, for example +373 60123456.';
-    }
+    return this.validationErrors()['contact'] ?? '';
   });
   readonly contactInputConfig = computed(() => {
     switch (this.method()) {
@@ -89,7 +89,27 @@ export class ApplicationForm implements AfterViewInit, OnDestroy {
   selectMethod(value: string): void {
     if (this.methods.includes(value as ContactMethod)) this.method.set(value as ContactMethod);
     else this.method.set('');
+    this.clearValidationError('method');
+    this.clearValidationError('contact');
     this.serverError.set('');
+    if (this.touched()) this.validateContact();
+  }
+
+  updateName(value: string): void {
+    this.name.set(value);
+    this.clearValidationError('name');
+    this.serverError.set('');
+  }
+
+  updateContact(value: string): void {
+    this.contact.set(value);
+    this.clearValidationError('contact');
+    this.serverError.set('');
+  }
+
+  touchContact(): void {
+    this.touched.set(true);
+    this.validateContact();
   }
 
   submit(event: Event): void {
@@ -97,30 +117,78 @@ export class ApplicationForm implements AfterViewInit, OnDestroy {
     if (this.pending()) return;
     this.attempted.set(true);
     this.serverError.set('');
-    const method = this.method();
-    if (!method || this.contactError()) {
-      this.dialog()
-        .nativeElement.querySelector<HTMLElement>(method ? '[name="contact"]' : '#contact-method')
-        ?.focus();
+    const result = applicationDataSchema.safeParse({
+      name: this.name(),
+      method: this.method(),
+      contact: this.contact(),
+    });
+
+    if (!result.success) {
+      this.applyValidationErrors(formatZodErrors(result.error.issues));
       return;
     }
+
+    this.validationErrors.set({});
     this.pending.set(true);
-    this.submitted.emit({ name: this.name().trim(), method, contact: this.contact().trim() });
+    this.submitted.emit(result.data);
   }
 
-  /** Call only after the API has accepted the application. */
   complete(): void {
     this.pending.set(false);
     this.success.set(true);
   }
 
-  fail(message = 'Unable to send your application. Please try again.'): void {
+  fail(message = 'validation.requestFailed'): void {
     this.pending.set(false);
     this.serverError.set(message);
+  }
+
+  applyValidationErrors(errors: ValidationFieldErrors): void {
+    this.pending.set(false);
+    this.attempted.set(true);
+    this.validationErrors.set(errors);
+    this.focusFirstInvalidField();
   }
 
   close(): void {
     this.dialog().nativeElement.close();
     this.closed.emit();
+  }
+
+  private validateContact(): void {
+    const result = applicationDataSchema.safeParse({
+      name: this.name(),
+      method: this.method(),
+      contact: this.contact(),
+    });
+    const contactError = result.success
+      ? undefined
+      : formatZodErrors(result.error.issues)['contact'];
+
+    this.validationErrors.update((errors) => {
+      const next = { ...errors };
+      if (contactError) next['contact'] = contactError;
+      else delete next['contact'];
+      return next;
+    });
+  }
+
+  private clearValidationError(field: string): void {
+    this.validationErrors.update((errors) => {
+      if (!(field in errors)) return errors;
+      const next = { ...errors };
+      delete next[field];
+      return next;
+    });
+  }
+
+  private focusFirstInvalidField(): void {
+    const errors = this.validationErrors();
+    const selector = errors['method']
+      ? '#contact-method'
+      : errors['contact']
+        ? '[name="contact"]'
+        : null;
+    if (selector) this.dialog().nativeElement.querySelector<HTMLElement>(selector)?.focus();
   }
 }
