@@ -1,0 +1,73 @@
+{
+  "header": {
+    "menu": "menu",
+    "links": {
+      "main": "Main",
+      "team": "Team",
+      "benefits": "Benefits",
+      "join-us": "Join us"
+    }
+  },
+  "hero": {
+    "title": {
+      "first": "practice",
+      "second": "makes"
+    },
+    "description": "We provide effective solutions, tested and refined on our own products and ad budgets",
+    "button": "Get in Touch"
+  },
+  "join": {
+    "button": "Join the team",
+    "groupButtons": {
+      "mediaBuyers": "For Media Buyers",
+      "businesses": "For Businesses",
+      "partners": "For Partners"
+    },
+    "scrollLink": "SCROLL TO TOP"
+  },
+  "notFound": {
+    "button": "Take me back"
+  },
+  "form": {
+    "title": "Fields with an asterisk (*) are mandatory",
+    "placeholder": {
+      "name": "Your Name",
+      "contactMethod": "Contact Method",
+      "contact": "Your Contact*"
+    },
+    "button": "Submit",
+    "sending": "Sending…"
+  },
+  "validation": {
+    "required": "This field is required.",
+    "invalidEmail": "Enter a valid email address.",
+    "requestFailed": "The request could not be sent. Please try again."
+  },
+  "fallback": {
+    "requestTitle": "We couldn't process the request",
+    "requestMessage": "Check the entered data and try again.",
+    "accessTitle": "Access denied",
+    "accessMessage": "You don't have permission to perform this action.",
+    "notFoundTitle": "Resource not found",
+    "notFoundMessage": "The requested resource is unavailable.",
+    "timeoutTitle": "The request took too long",
+    "timeoutMessage": "The service didn't respond in time. Please try again.",
+    "rateLimitTitle": "Too many requests",
+    "rateLimitMessage": "Please wait a little before trying again.",
+    "serverTitle": "Service temporarily unavailable",
+    "serverMessage": "Something went wrong on our side. Please try again.",
+    "networkTitle": "Connection problem",
+    "networkMessage": "We couldn't reach the service. Check your connection and try again.",
+    "unknownTitle": "Something went wrong",
+    "unknownMessage": "We couldn't complete the operation. Please try again later.",
+    "invalidResponseTitle": "Unexpected server response",
+    "invalidResponseMessage": "The service returned data in an unsupported format. Please try again.",
+    "clientTitle": "Something went wrong",
+    "clientMessage": "The operation couldn't be completed. Please try again.",
+    "close": "Close",
+    "errorCode": "Error code",
+    "retryNote": "Retry available in {{seconds}} seconds.",
+    "retrying": "Trying…",
+    "retry": "Retry"
+  }
+}

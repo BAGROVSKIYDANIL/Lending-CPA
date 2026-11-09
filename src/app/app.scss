@@ -1,9 +1,17 @@
-// Application shell. Future classes follow block__element--modifier (BEM).
-.hero {
-  height: 100vh;
-  background-image: linear-gradient(rgb(86, 0, 128), rgb(86, 0, 128));
+@use '../shared/styles/base-mixins' as mixins;
 
-  @media (min-width: 768px) {
-    background-image: linear-gradient(111.06deg, rgb(220, 132, 0) -3.49%, rgb(86, 0, 128) 49.69%, rgb(34, 0, 50) 91.86%);
-  }
+.app-shell {
+  @include mixins.page-background;
+
+  --header-content-height: 39px;
+  --header-height: calc(var(--header-content-height) + var(--safe-area-top));
+  --section-height: calc(100dvh - var(--header-height) - var(--safe-area-bottom));
+
+  min-height: 100dvh;
+  padding-inline: var(--safe-area-left) var(--safe-area-right);
+  padding-bottom: var(--safe-area-bottom);
+}
+
+:root.is-preloading .app-shell > app-header {
+  visibility: hidden;
 }

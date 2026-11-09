@@ -1,0 +1,55 @@
+<dialog
+  #dialog
+  class="fallback-popup"
+  aria-modal="true"
+  aria-labelledby="fallback-popup-title"
+  aria-describedby="fallback-popup-message"
+  (cancel)="$event.preventDefault(); close()"
+>
+  @if (popup.state(); as state) {
+    <button class="fallback-popup__close" type="button" (click)="close()">
+      <span aria-hidden="true">x</span>
+      <span class="fallback-popup__visually-hidden">{{ 'fallback.close' | translate }}</span>
+    </button>
+
+    <div class="fallback-popup__icon" aria-hidden="true">!</div>
+    <h2 id="fallback-popup-title" class="fallback-popup__title">{{ state.data.title }}</h2>
+    <p id="fallback-popup-message" class="fallback-popup__message">{{ state.data.message }}</p>
+
+    @if (state.data.code) {
+      <p class="fallback-popup__code">
+        <span>{{ 'fallback.errorCode' | translate }}</span
+        >: {{ state.data.code }}
+      </p>
+    }
+    @if (retrySeconds() > 0) {
+      <p class="fallback-popup__retry-note" aria-live="polite">
+        {{ 'fallback.retryNote' | translate: { seconds: retrySeconds() } }}
+      </p>
+    }
+
+    <div class="fallback-popup__actions">
+      <button
+        class="fallback-popup__button fallback-popup__button--secondary"
+        type="button"
+        (click)="close()"
+      >
+        <span>{{ 'fallback.close' | translate }}</span>
+      </button>
+      @if (state.data.retry) {
+        <button
+          class="fallback-popup__button fallback-popup__button--primary"
+          type="button"
+          [disabled]="state.status === 'retrying' || retrySeconds() > 0"
+          (click)="retry()"
+        >
+          @if (state.status === 'retrying') {
+            <span>{{ 'fallback.retrying' | translate }}</span>
+          } @else {
+            <span>{{ 'fallback.retry' | translate }}</span>
+          }
+        </button>
+      }
+    </div>
+  }
+</dialog>

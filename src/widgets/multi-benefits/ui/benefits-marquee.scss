@@ -1,0 +1,61 @@
+.benefits-marquee {
+  --marquee-gap: clamp(28px, 6vw, 88px);
+
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  overflow: hidden;
+  border-block: 2px solid var(--color-yellow);
+  color: var(--color-yellow);
+  transform: rotate(1deg);
+
+  &__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: benefits-marquee 24s linear infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation-play-state: paused;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  &__group {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: var(--marquee-gap);
+    padding-right: var(--marquee-gap);
+  }
+
+  &__text {
+    flex: none;
+    padding-block: 8px 10px;
+    font-family: var(--font-family-primary), sans-serif;
+    font-size: clamp(36px, 9.4vw, 72px);
+    font-weight: var(--font-weight-light);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    white-space: nowrap;
+
+    @media (min-width: 768px) {
+      padding-block: 12px 15px;
+    }
+  }
+
+  &__icon {
+    flex: none;
+    width: clamp(42px, 9vw, 72px);
+    height: auto;
+    filter: brightness(0) saturate(100%) invert(89%) sepia(38%)
+    saturate(580%) hue-rotate(348deg) brightness(106%)
+    contrast(103%);
+  }
+}
+
+@keyframes benefits-marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
