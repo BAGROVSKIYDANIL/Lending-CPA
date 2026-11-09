@@ -14,7 +14,13 @@
     "preview": "vite preview",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test:e2e": "playwright test",
+    "typecheck:e2e": "tsc --project tsconfig.e2e.json --noEmit",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report"
   },
   "private": true,
   "type": "module",
@@ -38,6 +44,7 @@
     "@angular/cli": "~22.2.0",
     "@angular/compiler-cli": "22.2.2",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.58.2",
     "@types/node": "^26.6.5",
     "angular-eslint": "22.5.0",
     "eslint": "^10.9.1",

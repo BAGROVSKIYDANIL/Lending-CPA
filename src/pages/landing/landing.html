@@ -1,4 +1,12 @@
-<main class="landing" [class.landing--desktop]="!viewport.isMobile()">
+<main
+  class="landing"
+  data-testid="landing"
+  [class.landing--desktop]="!viewport.isMobile()"
+  [attr.data-active-section]="navigation.activeSection()"
+  [attr.data-target-section]="navigation.targetSection()"
+  [attr.data-transition-direction]="navigation.direction()"
+  [attr.data-transitioning]="navigation.isAnimating()"
+>
   <div
     id="hero"
     class="landing__section"
