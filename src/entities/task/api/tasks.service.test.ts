@@ -8,7 +8,13 @@ describe('TasksService', () => {
     const get = jasmine.createSpy().and.returnValue(of(null));
     TestBed.configureTestingModule({ providers: [{ provide: ApiClient, useValue: { get } }] });
     let failed = false;
-    TestBed.inject(TasksService).getTasks('en').subscribe({ error: () => { failed = true; } });
+    TestBed.inject(TasksService)
+      .getTasks('en')
+      .subscribe({
+        error: () => {
+          failed = true;
+        },
+      });
     expect(get).toHaveBeenCalledWith('tasks', { locale: 'en' });
     expect(failed).toBeTrue();
   });

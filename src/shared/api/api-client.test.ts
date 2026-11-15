@@ -9,7 +9,21 @@ describe('ApiClient', () => {
   let api: ApiClient;
   let http: HttpTestingController;
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [provideHttpClient(), provideHttpClientTesting(), { provide: LOCALE_ID, useValue: 'en-US' }, { provide: API_CONFIG, useValue: { baseUrl: 'https://example.test/', headers: { 'X-Test': 'value' }, localeMap: { 'en-US': 'en' } } }] });
+    TestBed.configureTestingModule({
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: LOCALE_ID, useValue: 'en-US' },
+        {
+          provide: API_CONFIG,
+          useValue: {
+            baseUrl: 'https://example.test/',
+            headers: { 'X-Test': 'value' },
+            localeMap: { 'en-US': 'en' },
+          },
+        },
+      ],
+    });
     api = TestBed.inject(ApiClient);
     http = TestBed.inject(HttpTestingController);
   });

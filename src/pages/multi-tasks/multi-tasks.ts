@@ -3,7 +3,6 @@ import {
   Component,
   DestroyRef,
   ElementRef,
-  LOCALE_ID,
   inject,
   signal,
   computed,
@@ -13,7 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TasksService, type TasksResponse } from '@entities/task';
 import { CombinedPreloader } from '@shared/lib/preloader';
 import { FallbackPopupService } from '@shared/lib/fallback-popup';
-import { finalize,firstValueFrom, type Subscription } from 'rxjs';
+import { finalize, firstValueFrom, type Subscription } from 'rxjs';
 import { ViewportService } from '@shared/services/viewport.service';
 import { LanguageService, type Language } from '@shared/i18n';
 import {

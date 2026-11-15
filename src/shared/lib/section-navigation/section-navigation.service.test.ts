@@ -9,7 +9,12 @@ describe('SectionNavigationService', () => {
     engine.enter.and.resolveTo(true);
     engine.transition.and.resolveTo(true);
     const router = jasmine.createSpyObj('router', ['navigate']);
-    TestBed.configureTestingModule({ providers: [{ provide: SectionTransitionEngine, useValue: engine }, { provide: Router, useValue: router }] });
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: SectionTransitionEngine, useValue: engine },
+        { provide: Router, useValue: router },
+      ],
+    });
     const service = TestBed.inject(SectionNavigationService);
     service.next();
     expect(engine.transition).not.toHaveBeenCalled();
@@ -18,7 +23,10 @@ describe('SectionNavigationService', () => {
     expect(engine.transition).not.toHaveBeenCalled();
     service.next();
     expect(service.targetSection()).toBe('team');
-    expect(router.navigate).toHaveBeenCalledWith([], { fragment: 'team', queryParamsHandling: 'preserve' });
+    expect(router.navigate).toHaveBeenCalledWith([], {
+      fragment: 'team',
+      queryParamsHandling: 'preserve',
+    });
     await Promise.resolve();
     expect(service.activeSection()).toBe('team');
     service.disable();

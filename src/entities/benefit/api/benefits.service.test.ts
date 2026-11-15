@@ -8,7 +8,13 @@ describe('BenefitsService', () => {
     const get = jasmine.createSpy().and.returnValue(of(null));
     TestBed.configureTestingModule({ providers: [{ provide: ApiClient, useValue: { get } }] });
     let failed = false;
-    TestBed.inject(BenefitsService).getBenefits('ua').subscribe({ error: () => { failed = true; } });
+    TestBed.inject(BenefitsService)
+      .getBenefits('ua')
+      .subscribe({
+        error: () => {
+          failed = true;
+        },
+      });
     expect(get).toHaveBeenCalledWith('benefits', { locale: 'ua' });
     expect(failed).toBeTrue();
   });

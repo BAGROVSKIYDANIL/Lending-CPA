@@ -12,13 +12,18 @@ describe('MultiBenefits', () => {
   it('loads content, highlights the title, and releases the preloader', async () => {
     const response = new Subject<{ title: string; description: string; benefits: string[] }>();
     const finish = jasmine.createSpy();
-    await TestBed.configureTestingModule({ imports: [MultiBenefits], providers: [
-      { provide: BenefitsService, useValue: { getBenefits: () => response } },
-      { provide: LanguageService, useValue: { language: signal('en') } },
-      { provide: ViewportService, useValue: { isMobile: signal(true) } },
-      { provide: CombinedPreloader, useValue: { begin: () => finish } },
-      { provide: FallbackPopupService, useValue: { showError: jasmine.createSpy() } },
-    ] }).overrideComponent(MultiBenefits, { set: { template: '' } }).compileComponents();
+    await TestBed.configureTestingModule({
+      imports: [MultiBenefits],
+      providers: [
+        { provide: BenefitsService, useValue: { getBenefits: () => response } },
+        { provide: LanguageService, useValue: { language: signal('en') } },
+        { provide: ViewportService, useValue: { isMobile: signal(true) } },
+        { provide: CombinedPreloader, useValue: { begin: () => finish } },
+        { provide: FallbackPopupService, useValue: { showError: jasmine.createSpy() } },
+      ],
+    })
+      .overrideComponent(MultiBenefits, { set: { template: '' } })
+      .compileComponents();
     const fixture = TestBed.createComponent(MultiBenefits);
     fixture.detectChanges();
     expect(fixture.componentInstance.state()).toBe('loading');

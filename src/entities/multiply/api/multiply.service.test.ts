@@ -8,7 +8,13 @@ describe('MultiplyService', () => {
     const get = jasmine.createSpy().and.returnValue(of(null));
     TestBed.configureTestingModule({ providers: [{ provide: ApiClient, useValue: { get } }] });
     let failed = false;
-    TestBed.inject(MultiplyService).getMultiply('ru').subscribe({ error: () => { failed = true; } });
+    TestBed.inject(MultiplyService)
+      .getMultiply('ru')
+      .subscribe({
+        error: () => {
+          failed = true;
+        },
+      });
     expect(get).toHaveBeenCalledWith('multiply', { locale: 'ru' });
     expect(failed).toBeTrue();
   });

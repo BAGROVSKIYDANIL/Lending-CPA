@@ -6,7 +6,9 @@ import { FallbackPopupService } from './fallback-popup.service';
 describe('FallbackPopupService', () => {
   let service: FallbackPopupService;
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [{ provide: TranslateService, useValue: { instant: (key: string) => key } }] });
+    TestBed.configureTestingModule({
+      providers: [{ provide: TranslateService, useValue: { instant: (key: string) => key } }],
+    });
     service = TestBed.inject(FallbackPopupService);
   });
   it('does not let an old close callback dismiss a newer popup', () => {
@@ -25,7 +27,9 @@ describe('FallbackPopupService', () => {
     expect(service.state()).toBeNull();
   });
   it('suppresses field errors and retains retry for server errors', () => {
-    service.showHttpError(new HttpErrorResponse({ status: 422 }), { fieldErrors: { name: 'Required' } });
+    service.showHttpError(new HttpErrorResponse({ status: 422 }), {
+      fieldErrors: { name: 'Required' },
+    });
     expect(service.state()).toBeNull();
     const retry = () => {};
     service.showHttpError(new HttpErrorResponse({ status: 503 }), { retry });

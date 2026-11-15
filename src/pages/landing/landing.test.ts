@@ -8,12 +8,22 @@ import { Landing } from './landing';
 describe('Landing', () => {
   it('shows all sections on mobile and only active sections on desktop', async () => {
     const mobile = signal(true);
-    const navigation = { visibleSections: signal(['hero']), targetSection: signal('team'), disable: jasmine.createSpy() };
-    await TestBed.configureTestingModule({ imports: [Landing], providers: [provideRouter([]),
-      { provide: ViewportService, useValue: { isMobile: mobile } },
-      { provide: SectionNavigationService, useValue: navigation },
-      { provide: SectionTransitionEngine, useValue: {} },
-    ] }).overrideComponent(Landing, { set: { template: '' } }).compileComponents();
+    const navigation = {
+      visibleSections: signal(['hero']),
+      targetSection: signal('team'),
+      disable: jasmine.createSpy(),
+    };
+    await TestBed.configureTestingModule({
+      imports: [Landing],
+      providers: [
+        provideRouter([]),
+        { provide: ViewportService, useValue: { isMobile: mobile } },
+        { provide: SectionNavigationService, useValue: navigation },
+        { provide: SectionTransitionEngine, useValue: {} },
+      ],
+    })
+      .overrideComponent(Landing, { set: { template: '' } })
+      .compileComponents();
     const fixture = TestBed.createComponent(Landing);
     expect(fixture.componentInstance.isVisible('join')).toBeTrue();
     mobile.set(false);

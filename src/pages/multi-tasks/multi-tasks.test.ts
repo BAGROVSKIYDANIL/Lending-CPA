@@ -10,15 +10,23 @@ import { MultiTasks } from './multi-tasks';
 
 describe('MultiTasks', () => {
   it('loads tasks and highlights the in-house team', async () => {
-    const response = new Subject<{ description: string; tiles: { title: string; text: string }[] }>();
+    const response = new Subject<{
+      description: string;
+      tiles: { title: string; text: string }[];
+    }>();
     const finish = jasmine.createSpy();
-    await TestBed.configureTestingModule({ imports: [MultiTasks], providers: [
-      { provide: TasksService, useValue: { getTasks: () => response } },
-      { provide: LanguageService, useValue: { language: signal('en') } },
-      { provide: ViewportService, useValue: { isMobile: signal(true) } },
-      { provide: CombinedPreloader, useValue: { begin: () => finish } },
-      { provide: FallbackPopupService, useValue: { showError: jasmine.createSpy() } },
-    ] }).overrideComponent(MultiTasks, { set: { template: '' } }).compileComponents();
+    await TestBed.configureTestingModule({
+      imports: [MultiTasks],
+      providers: [
+        { provide: TasksService, useValue: { getTasks: () => response } },
+        { provide: LanguageService, useValue: { language: signal('en') } },
+        { provide: ViewportService, useValue: { isMobile: signal(true) } },
+        { provide: CombinedPreloader, useValue: { begin: () => finish } },
+        { provide: FallbackPopupService, useValue: { showError: jasmine.createSpy() } },
+      ],
+    })
+      .overrideComponent(MultiTasks, { set: { template: '' } })
+      .compileComponents();
     const fixture = TestBed.createComponent(MultiTasks);
     fixture.detectChanges();
     response.next({ description: 'in-house team', tiles: [{ title: 'One', text: 'Text' }] });

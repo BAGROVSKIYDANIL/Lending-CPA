@@ -5,43 +5,48 @@
       <div class="multiply__visual">
         <div class="multiply__tabs" aria-label="Collaboration type">
           @for (category of categories; track category.id) {
-          <button
-            class="multiply__tab button button--arrow"
-            [class.multiply__tab--active]="activeCategory() === category.id"
-            type="button"
-            [attr.aria-pressed]="activeCategory() === category.id"
-            (click)="selectCategory(category.id)"
-          >
-            {{ 'join.groupButtons.' + category.id | translate}}
-          </button>
+            <button
+              class="multiply__tab button button--arrow"
+              [class.multiply__tab--active]="activeCategory() === category.id"
+              type="button"
+              [attr.aria-pressed]="activeCategory() === category.id"
+              (click)="selectCategory(category.id)"
+            >
+              {{ 'join.groupButtons.' + category.id | translate }}
+            </button>
           }
         </div>
         <div class="multiply__snake"></div>
       </div>
       <div class="multiply__content">
         <div class="multiply__card" aria-live="polite" [attr.aria-busy]="status() === 'loading'">
-          @switch (status()) { @case ('loading') {
-          <p class="multiply__state" role="status">Loading…</p>
-          } @case ('error') {
-          <div class="multiply__state">
-            <p class="multiply__state-message">Content is temporarily unavailable.</p>
-            <button class="multiply__retry" type="button" (click)="retry()">Try again</button>
-          </div>
-          } @case ('loaded') { @let content = activeContent();
-          <div class="multiply__card-content">
-            <p class="multiply__copy">{{ content?.steps?.step_1 }}</p>
-            <span class="multiply__down-arrow" aria-hidden="true"></span>
-            <p class="multiply__copy">{{ content?.steps?.step_2 }}</p>
-            <span class="multiply__down-arrow" aria-hidden="true"></span>
-            <button
-              class="multiply__cta button button--3d button-3d"
-              type="button"
-              (click)="openForm()"
-            >
-              {{ 'join.button' | translate }}
-            </button>
-          </div>
-          } }
+          @switch (status()) {
+            @case ('loading') {
+              <p class="multiply__state" role="status">Loading…</p>
+            }
+            @case ('error') {
+              <div class="multiply__state">
+                <p class="multiply__state-message">Content is temporarily unavailable.</p>
+                <button class="multiply__retry" type="button" (click)="retry()">Try again</button>
+              </div>
+            }
+            @case ('loaded') {
+              @let content = activeContent();
+              <div class="multiply__card-content">
+                <p class="multiply__copy">{{ content?.steps?.step_1 }}</p>
+                <span class="multiply__down-arrow" aria-hidden="true"></span>
+                <p class="multiply__copy">{{ content?.steps?.step_2 }}</p>
+                <span class="multiply__down-arrow" aria-hidden="true"></span>
+                <button
+                  class="multiply__cta button button--3d button-3d"
+                  type="button"
+                  (click)="openForm()"
+                >
+                  {{ 'join.button' | translate }}
+                </button>
+              </div>
+            }
+          }
         </div>
       </div>
     </div>
@@ -67,6 +72,6 @@
   </footer>
 
   @if (formOpen()) {
-  <app-application-form (closed)="closeForm()" (submitted)="submitApplication($event)" />
+    <app-application-form (closed)="closeForm()" (submitted)="submitApplication($event)" />
   }
 </section>

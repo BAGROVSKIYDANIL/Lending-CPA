@@ -8,7 +8,9 @@ describe('LanguageService', () => {
   it('falls back for invalid saved languages and persists changes', async () => {
     const currentLang = signal('en');
     const use = jasmine.createSpy().and.returnValue(of({}));
-    TestBed.configureTestingModule({ providers: [{ provide: TranslateService, useValue: { currentLang, use } }] });
+    TestBed.configureTestingModule({
+      providers: [{ provide: TranslateService, useValue: { currentLang, use } }],
+    });
     const service = TestBed.inject(LanguageService);
     spyOn(localStorage, 'getItem').and.returnValue('invalid');
     const save = spyOn(localStorage, 'setItem');
