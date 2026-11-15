@@ -4,5 +4,10 @@
     "types": ["node", "@playwright/test"],
     "noEmit": true
   },
-  "include": ["playwright.config.ts", "e2e/**/*.ts"]
+  "include": [
+    "playwright.config.ts",
+    "playwright.performance.config.ts",
+    "e2e/**/*.ts",
+    "performance/**/*.ts"
+  ]
 }
