@@ -1,7 +1,5 @@
-import { localEnvironment } from './environment.local';
-
 export const environment = {
-    production: false,
-    apiUrl: 'https://cpa-server-vtel.onrender.com',
-    ...localEnvironment,
+  production: false,
+  apiUrl: import.meta.env['VITE_API_URL'] ?? 'https://cpa-server-vtel.onrender.com',
+  apiHeader: import.meta.env['VITE_API_HEADER'] ?? '',
 };
