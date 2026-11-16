@@ -20,12 +20,12 @@ export class LanguageService {
     return saved && isLanguage(saved) ? saved : DEFAULT_LANGUAGE;
   }
 
-    async changeLanguage(lang: Language): Promise<void> {
-        if (this.language() === lang) return;
+  async changeLanguage(lang: Language): Promise<void> {
+    if (this.language() === lang) return;
 
-        await firstValueFrom(this.translate.use(lang));
+    await firstValueFrom(this.translate.use(lang));
 
-        localStorage.setItem('language', lang);
-        document.documentElement.lang = lang;
-    }
+    localStorage.setItem('language', lang);
+    document.documentElement.lang = lang;
+  }
 }
