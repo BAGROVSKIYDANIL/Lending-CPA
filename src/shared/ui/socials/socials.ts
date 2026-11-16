@@ -1,4 +1,4 @@
-import {Component, output} from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
   imports: [],
