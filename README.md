@@ -16,14 +16,17 @@ npm start
 Приложение доступно на `http://localhost:4200/`. Пустая страница ожидаема:
 страницы, секции, бизнес-компоненты и демонстрационный контент не создавались.
 
-| Команда                | Назначение                        |
-| ---------------------- | --------------------------------- |
-| `npm start`            | Разработка на исходной локали     |
-| `npm run start:ru`     | Разработка на русской локали      |
-| `npm run start:ua`     | Разработка на украинской локали   |
-| `npm run build`        | Production-сборка всех локалей    |
-| `npm run build:source` | Production-сборка исходной локали |
-| `npm run typecheck`    | Проверка типов TypeScript         |
+| Команда                   | Назначение                        |
+| ------------------------- | --------------------------------- |
+| `npm start`               | Разработка на исходной локали     |
+| `npm run start:ru`        | Разработка на русской локали      |
+| `npm run start:ua`        | Разработка на украинской локали   |
+| `npm run build`           | Production-сборка всех локалей    |
+| `npm run build:source`    | Production-сборка исходной локали |
+| `npm run typecheck`       | Проверка типов TypeScript         |
+| `npm run test:e2e`        | E2E-тесты Playwright с API-моками |
+| `npm run unit-tests`      | запуск юнит-тестов                |
+| `npm run test:performance`| Оптимизационные тесты             |
 
 Доступные режимы локали: `en-US`, `ru` и `ua`. Vite задаёт выбранную локаль через
 `__APP_LOCALE__`; она используется для API, `LOCALE_ID` и небольшого типизированного
@@ -31,6 +34,11 @@ npm start
 `dist/cpa-landing/en-US`, `dist/cpa-landing/ru` и `dist/cpa-landing/ua`. `npm run preview` открывает
 production-сборку исходной локали. Настройки Vite находятся в `vite.config.ts`.
 Angular CLI и `angular.json` сохранены для служебных команд; запуск и сборка используют Vite.
+
+API URL и header читаются из `VITE_API_URL` и `VITE_API_HEADER`. Скопируйте
+`.env.example` в `.env` и замените placeholder; `.env` не коммитится.
+Подробная E2E-матрица, mock/live-режимы и troubleshooting описаны в
+[e2e/README.md](e2e/README.md).
 
 ## Архитектура
 

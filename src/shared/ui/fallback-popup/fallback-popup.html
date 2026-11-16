@@ -18,8 +18,7 @@
 
     @if (state.data.code) {
       <p class="fallback-popup__code">
-        <span>{{ 'fallback.errorCode' | translate }}</span
-        >: {{ state.data.code }}
+        <span>{{ 'fallback.errorCode' | translate }}</span>: {{ state.data.code }}
       </p>
     }
     @if (retrySeconds() > 0) {

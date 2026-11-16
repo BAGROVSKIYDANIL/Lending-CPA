@@ -9,7 +9,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import {ViewportService} from "@shared/services/viewport.service";
+import { ViewportService } from '@shared/services/viewport.service';
 
 const FAKE_PROGRESS = 75;
 const FAKE_PROGRESS_DURATION = 2000;
@@ -47,49 +47,49 @@ export class Preloader implements AfterViewInit {
   }
 
   private initPageLoading(): () => void {
-      this.pageLoaded = this.document.readyState === 'complete';
-      this.document.documentElement.classList.add('is-preloading');
+    this.pageLoaded = this.document.readyState === 'complete';
+    this.document.documentElement.classList.add('is-preloading');
 
-      const onLoad = (): void => {
-        this.pageLoaded = true;
-      };
+    const onLoad = (): void => {
+      this.pageLoaded = true;
+    };
 
-      window.addEventListener('load', onLoad, { once: true });
+    window.addEventListener('load', onLoad, { once: true });
 
-      return onLoad;
-    }
+    return onLoad;
+  }
 
   private registerCleanup(onLoad: () => void): void {
-      this.destroyRef.onDestroy(() => {
-        window.removeEventListener('load', onLoad);
-        this.document.documentElement.classList.remove('is-preloading');
+    this.destroyRef.onDestroy(() => {
+      window.removeEventListener('load', onLoad);
+      this.document.documentElement.classList.remove('is-preloading');
 
-        if (this.animationFrame) cancelAnimationFrame(this.animationFrame);
-        if (this.leaveTimeout) clearTimeout(this.leaveTimeout);
-      });
-    }
+      if (this.animationFrame) cancelAnimationFrame(this.animationFrame);
+      if (this.leaveTimeout) clearTimeout(this.leaveTimeout);
+    });
+  }
 
   private startProgressAnimation(): void {
-      const startedAt = performance.now();
+    const startedAt = performance.now();
 
-      const animate = (now: number): void => {
-        const elapsed = now - startedAt;
-        const elapsedRatio = Math.min(1, elapsed / FAKE_PROGRESS_DURATION);
-        const easedRatio = 1 - (1 - elapsedRatio) ** 3;
-        const fakeProgress = FAKE_PROGRESS * easedRatio;
+    const animate = (now: number): void => {
+      const elapsed = now - startedAt;
+      const elapsedRatio = Math.min(1, elapsed / FAKE_PROGRESS_DURATION);
+      const easedRatio = 1 - (1 - elapsedRatio) ** 3;
+      const fakeProgress = FAKE_PROGRESS * easedRatio;
 
-        this.progress.set(Math.round(fakeProgress));
+      this.progress.set(Math.round(fakeProgress));
 
-        if (elapsed < FAKE_PROGRESS_DURATION || !this.pageLoaded) {
-          this.animationFrame = requestAnimationFrame(animate);
-          return;
-        }
+      if (elapsed < FAKE_PROGRESS_DURATION || !this.pageLoaded) {
+        this.animationFrame = requestAnimationFrame(animate);
+        return;
+      }
 
-        this.animateFinalProgress(now);
-      };
+      this.animateFinalProgress(now);
+    };
 
-      this.animationFrame = requestAnimationFrame(animate);
-    }
+    this.animationFrame = requestAnimationFrame(animate);
+  }
 
   private animateFinalProgress(startedAt: number): void {
     const animate = (now: number): void => {
