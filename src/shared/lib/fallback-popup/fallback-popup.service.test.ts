@@ -31,7 +31,7 @@ describe('FallbackPopupService', () => {
       fieldErrors: { name: 'Required' },
     });
     expect(service.state()).toBeNull();
-    const retry = () => {};
+    const retry = jasmine.createSpy('retry');
     service.showHttpError(new HttpErrorResponse({ status: 503 }), { retry });
     expect(service.state()?.data.retry).toBe(retry);
   });

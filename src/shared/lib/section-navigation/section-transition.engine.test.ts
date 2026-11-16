@@ -27,7 +27,7 @@ describe('SectionTransitionEngine', () => {
         new Promise<void>((resolve) => {
           finish = resolve;
         }),
-      leave: async () => {},
+      leave: jasmine.createSpy('leave').and.resolveTo(),
       reset: jasmine.createSpy(),
     };
     engine.register('hero', controller);
