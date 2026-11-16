@@ -3,7 +3,11 @@
 
   position: fixed;
   inset: 0;
-  pointer-events: none;
+  z-index: 1000;
+  background-image: var(--page-background, var(--background-hero-mobile));
+  background-repeat: no-repeat;
+  background-size: cover;
+  pointer-events: auto;
   opacity: 1;
   transition: opacity 0.2s ease;
 
