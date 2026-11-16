@@ -73,6 +73,8 @@
     font-family: var(--font-family-primary), sans-serif;
     font-size: 28px;
     line-height: 1;
+    overflow-wrap: anywhere;
+    hyphens: auto;
     text-transform: uppercase;
     margin-bottom: 10px;
   }
