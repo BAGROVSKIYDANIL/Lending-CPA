@@ -17,7 +17,7 @@
     "lint:fix": "ng lint --fix",
     "format": "prettier --write .",
     "test:e2e": "playwright test",
-    "test:performance": "npm run build:source && playwright test --config playwright.performance.config.ts",
+    "test:performance": "vite build --mode e2e && playwright test --config playwright.performance.config.ts",
     "typecheck:e2e": "tsc --project tsconfig.e2e.json --noEmit",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
